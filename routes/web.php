@@ -6,12 +6,13 @@ use App\Http\Controllers\Library_controller;
 
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 // http://127.0.0.1:8000/index
-Route::get('/index', [Library_controller::class, 'index']);
+Route::get('/index', [Library_controller::class, 'homepage']);
+
 
 // for search bar
 // http://127.0.0.1:8000/search
@@ -39,3 +40,4 @@ Route::get('/Guidelines', [BackendController::class, 'guidelines'])->name('backe
 Route::get('/Author', [BackendController::class, 'author'])->name('backend.author');
 // http://127.0.0.1:8000/DigitalNews
 Route::get('/DigitalNews', [BackendController::class, 'digitalNews'])->name('backend.digitalNews');
+
