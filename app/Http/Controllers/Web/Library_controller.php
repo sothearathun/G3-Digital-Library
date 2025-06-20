@@ -1,13 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web;
 use Illuminate\Support\Facades\DB;  
 
+// for pathing purposes
+use App\Http\Controllers\Controller;
+// for pathing purposes
 
 use Illuminate\Http\Request;
 
 class Library_controller extends Controller
-{
+{   
     public function homepage() 
     {
         $TrendingBook = DB::table('books')->get();
