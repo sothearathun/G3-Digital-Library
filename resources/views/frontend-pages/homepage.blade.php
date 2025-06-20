@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digitales - Homepage</title>
+    <title>Digitales</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     
 
 
     <!-- css sheet -->
-    <link rel="stylesheet" href="{{ asset('css/css_homepage.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/homepage.css') }}">
 
 </head>
 <body>
