@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\BackendController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Library_controller;
+use App\Http\Controllers\Web\Library_controller;
 
 
 
@@ -10,8 +10,8 @@ use App\Http\Controllers\Library_controller;
 //     return view('welcome');
 // });
 
-// http://127.0.0.1:8000/index
-Route::get('/index', [Library_controller::class, 'homepage']);
+// http://127.0.0.1:8000/homepage
+Route::get('/homepage', [Library_controller::class, 'homepage']);
 
 
 // for search bar
@@ -40,4 +40,22 @@ Route::get('/Guidelines', [BackendController::class, 'guidelines'])->name('backe
 Route::get('/Author', [BackendController::class, 'author'])->name('backend.author');
 // http://127.0.0.1:8000/DigitalNews
 Route::get('/DigitalNews', [BackendController::class, 'digitalNews'])->name('backend.digitalNews');
+
+
+
+// http://127.0.0.1:8000/profile
+Route::get('/profile', [Library_controller::class, 'profile']);
+
+// http://127.0.0.1:8000/search_page
+Route::get('/search_page', [Library_controller::class, 'search_page']);
+
+
+
+
+    
+
+
+
+
+
 

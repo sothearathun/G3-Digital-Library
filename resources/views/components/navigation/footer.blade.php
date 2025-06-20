@@ -1,0 +1,154 @@
+<style>
+    
+/* Footer Styles */
+footer {
+    background: linear-gradient(135deg, #333 0%, #555 100%);
+    color: #fff;
+    padding: 60px 20px 40px; /* Added horizontal padding to the main footer */
+    font-family: 'Roboto', sans-serif;
+}
+
+footer .container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 30px; /* Reduced gap for better flow */
+    margin-bottom: 40px;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 150px; /* Adjusted min-width for better wrapping */
+}
+
+/* Ensure logo section has enough space */
+.footer-section.logo {
+    flex-basis: 200px; /* Give logo a fixed base width */
+}
+
+.footer-section h4 {
+    margin-bottom: 15px; /* Slightly reduced margin */
+    font-size: 1.2em; /* Slightly smaller font size */
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    color: #fff;
+}
+
+.footer-section.logo h4 {
+    font-size: 1.5em;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px; /* Slightly reduced margin */
+}
+
+.footer-section ul li a {
+    text-decoration: none;
+    color: #ccc;
+    transition: color 0.3s ease;
+    font-size: 0.9em; /* Slightly smaller font size */
+    display: block;
+}
+
+.footer-section ul li a:hover {
+    color: #fff;
+}
+
+.newsletter-signup {
+    flex-basis: 300px; /* Give newsletter signup a base width */
+}
+
+.newsletter-signup h4 {
+    margin-bottom: 15px;
+}
+
+.newsletter-signup form {
+    display: flex; /* Align input and button */
+    border-radius: 25px;
+    overflow: hidden;
+    max-width: 100%; /* Ensure it fits within its container */
+}
+
+.newsletter-signup input {
+    flex-grow: 1;
+    padding: 10px 15px;
+    border: none;
+    outline: none;
+    font-size: 0.9em;
+    color: #333;
+}
+
+.newsletter-signup button {
+    padding: 10px 20px;
+    background-color: #fff;
+    color: #333;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.newsletter-signup button:hover {
+    background-color: #f0f0f0;
+    color: #000;
+}
+
+.footer-bottom {
+    margin-top: 30px; /* Slightly reduced margin */
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1); /* Even lighter border */
+    text-align: center;
+    color: #aaa; /* Even lighter text color */
+    font-size: 0.8em;
+}
+</style>
+        <!-- Footer Component -->
+<footer>
+    <div class="container footer-content">
+        <div class="footer-section logo">
+            <h4>DIGITALES</h4>
+        </div>
+        <div class="footer-section">
+            <h4>Navigation</h4>
+            <ul>
+                <li><a href="#">Homepage</a></li>
+                <li><a href="#">Categories</a></li>
+                <li><a href="#">Authors</a></li>
+                <li><a href="#">New Releases</a></li>
+                <li><a href="#">About Us</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Help Center</h4>
+            <ul>
+                <li><a href="#">View Profile</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">FAQs</a></li>
+                <li><a href="#">Terms & Conditions</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+            </ul>
+        </div>
+        <div class="newsletter-signup">
+            <h4>Join Our Newsletter</h4>
+            <form action="#" method="post">
+                <input type="email" placeholder="Enter your email" required>
+                <button type="submit">Join</button>
+            </form>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 Digitales. All rights reserved.</p>
+    </div>
+</footer>
