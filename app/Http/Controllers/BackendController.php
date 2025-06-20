@@ -19,7 +19,7 @@ class BackendController extends Controller
         return view('backend.userRecords');
     }
     public function statistics(){
-        return view('backend.publish');
+        return view('backend.statistics');
     }
     public function guidelines(){
         return view('backend.guidelines');
