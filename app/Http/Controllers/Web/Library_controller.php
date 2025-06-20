@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
-use Illuminate\Support\Facades\DB;  
+namespace App\Http\Controllers\Web;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;  
 
 
 use Illuminate\Http\Request;
@@ -13,7 +14,7 @@ class Library_controller extends Controller
         $TrendingBook = DB::table('books')->get();
         $Author_pic_name = DB::table('authors')->get();
 
-        return view('homepage', [
+        return view('frontend-pages/homepage', [
 
             'v_TrendingBook' => $TrendingBook,
             'v_authors' => $Author_pic_name

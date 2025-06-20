@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Library_controller;
+use App\Http\Controllers\Web\Library_controller;
 
 
 
@@ -10,7 +10,7 @@ Route::get('/', function () {
 });
 
 // http://127.0.0.1:8000/index
-Route::get('/index', [Library_controller::class, 'homepage']);
+Route::get('/homepage', [Library_controller::class, 'homepage']);
 
 
 // for search bar

@@ -15,7 +15,7 @@
 <body>
     
     <!-- Header page -->
-    @include('Header_Footer.header')
+    @include('components/navigation.header')
     
 
     <div class="container">
@@ -201,7 +201,7 @@
     </div>
 
     <!-- footer page -->
-    @include('Header_Footer.footer')
+    @include('components/navigation.footer')
 
 
     <!-- js for swiping book functions -->
