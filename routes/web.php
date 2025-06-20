@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BackendController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\Library_controller;
@@ -25,21 +26,21 @@ Route::get('/search', [Library_controller::class, 'search'])->name('books.search
 // BACKEND
 // //analytics
 // http://127.0.0.1:8000/toAnalytics
-Route::get('/toAnalytics', [BackendController::class, 'analytics'])->name('backend.analytics');
+Route::get('/toAnalytics', [AdminController::class, 'analytics'])->name('admin.analytics');
 // http://127.0.0.1:8000/toPublish
-Route::get('/toPublish', [BackendController::class, 'publish'])->name('backend.publish');
+Route::get('/toPublish', [AdminController::class, 'publish'])->name('admin.publishs');
 // http://127.0.0.1:8000/BookPublished
-Route::get('/BookPublished', [BackendController::class, 'bookPublished'])->name('backend.bookPublished');
+Route::get('/BookPublished', [AdminController::class, 'bookPublished'])->name('admin.booksPublished');
 // http://127.0.0.1:8000/UserRecords
-Route::get('/UserRecords', [BackendController::class, 'userRecords'])->name('backend.userRecords');
+Route::get('/UserRecords', [AdminController::class, 'userRecords'])->name('admin.userRecord');
 // http://127.0.0.1:8000/Statistics
-Route::get('/Statistics', [BackendController::class, 'statistics'])->name('backend.statistics');
+Route::get('/Statistics', [AdminController::class, 'statistics'])->name('admin.statistic');
 // http://127.0.0.1:8000/Guidelines
-Route::get('/Guidelines', [BackendController::class, 'guidelines'])->name('backend.guidelines');
+Route::get('/Guidelines', [AdminController::class, 'guidelines'])->name('admin.guideline');
 // http://127.0.0.1:8000/Author
-Route::get('/Author', [BackendController::class, 'author'])->name('backend.author');
+Route::get('/Author', [AdminController::class, 'author'])->name('admin.authors');
 // http://127.0.0.1:8000/DigitalNews
-Route::get('/DigitalNews', [BackendController::class, 'digitalNews'])->name('backend.digitalNews');
+Route::get('/DigitalNews', [AdminController::class, 'digitalNews'])->name('admin.digitalsNews');
 
 
 

@@ -87,14 +87,14 @@
   <div class="sidebar">
     <h2>DIGITALES admin</h2>
     <ul>
-      <li><a href="{{ route('backend.analytics') }}">📊 Analytics</a></li>
-      <li><a href="{{ route('backend.publish') }}">🚀 Publish Books</a></li>
-      <li><a href="{{ route('backend.bookPublished') }}">✅ Books Published</a></li>
-      <li><a href="{{ route('backend.userRecords') }}">📝 Users Records</a></li>
-      <li><a href="{{ route('backend.statistics') }}">📈 Book Statistics</a></li>
-      <li><a href="{{ route('backend.guidelines') }}">💡 Guidelines</a></li>
-      <li style="background-color: #cbd5f1"><a href="{{ route('backend.author') }}">🧑 Author</a></li>
-      <li><a href="{{ route('backend.digitalNews') }}">📰 Digital News</a></li>
+      <li><a href="{{ route('admin.analytics') }}">📊 Analytics</a></li>
+      <li><a href="{{ route('admin.publishs') }}">🚀 Publish Books</a></li>
+      <li><a href="{{ route('admin.booksPublished') }}">✅ Books Published</a></li>
+      <li><a href="{{ route('admin.userRecord') }}">📝 Users Records</a></li>
+      <li><a href="{{ route('admin.statistic') }}">📈 Book Statistics</a></li>
+      <li><a href="{{ route('admin.guideline') }}">💡 Guidelines</a></li>
+      <li style="background-color: #cbd5f1; color: blue"><a style="color: blue;" href="{{ route('admin.authors') }}">🧑 Author</a></li>
+      <li><a href="{{ route('admin.digitalsNews') }}">📰 Digital News</a></li>
     </ul>
   </div>
 

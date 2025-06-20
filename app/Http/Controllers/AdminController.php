@@ -4,30 +4,30 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class BackendController extends Controller
+class AdminController extends Controller
 {
     public function analytics(){
-        return view('backend.analytics');
+        return view('admin.analytics');
     }
     public function publish(){
-        return view('backend.publish');
+        return view('admin.publishs');
     }
     public function bookPublished(){
-        return view('backend.bookPublished');
+        return view('admin.booksPublished');
     }
     public function userRecords(){
-        return view('backend.userRecords');
+        return view('admin.userRecord');
     }
     public function statistics(){
-        return view('backend.statistics');
+        return view('admin.statistic');
     }
     public function guidelines(){
-        return view('backend.guidelines');
+        return view('admin.guideline');
     }
     public function author(){
-        return view('backend.author');
+        return view('admin.authors');
     }
     public function digitalNews(){
-        return view('backend.digitalNews');
+        return view('admin.digitalsNews');
     }
 }
