@@ -15,8 +15,7 @@
 <body>
     
     <!-- Header page -->
-    @include('components/navigation.header')
-    
+    <x-navigation.header/>
 
     <div class="container">
         <!-- Hero Section Component -->
@@ -201,7 +200,7 @@
     </div>
 
     <!-- footer page -->
-    @include('components/navigation.footer')
+    <x-navigation.footer/>
 
 
     <!-- js for swiping book functions -->
