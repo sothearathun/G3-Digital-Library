@@ -104,6 +104,7 @@
       background-color: #eee;
       border-radius: 20px;
       padding: 5px 15px;
+      cursor: pointer;
     }
     .tag.selected {
       background-color: #e0e7ff;
@@ -140,7 +141,7 @@
       <div class="form-right upload-section">
         <h3>Upload Book Covers</h3>
         <input type="file" />
-        <img src="layer/9780091816971.jpg" alt="Book Cover">
+        <img src="" alt="Book Cover">
         <h3>Upload PDF</h3>
         <input type="file" />
       </div>
