@@ -3,13 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digitales</title>
+    <title>Digitales - Homepage</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     
 
 
     <!-- css sheet -->
-    <link rel="stylesheet" href="{{ asset('css/homepage.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/css_homepage.css') }}">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
+
 
 </head>
 <body>
@@ -35,14 +40,11 @@
             </div>
         </section>
 
+<br><br><br>
+        <!-- search bar -->
+            @include('components.navigation.search')
 
-        <!-- Search Bar Component -->
-        <section class="search-bar-section">
-            <form action="#" method="GET" class="search-form"> 
-                <input type="text" name="query" placeholder="Search for books, authors, or genres..." aria-label="Search">
-                <button type="submit">Search</button>
-            </form>
-        </section>
+
 
         <!-- Trending Books  -->
         <h2 class="section-header">TRENDING BOOKS</h2>
