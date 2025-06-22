@@ -12,7 +12,8 @@
     <link rel="stylesheet" href="{{ asset('css/search_page.css') }}">
     </head>
 <body>
-    @include('components.navigation.header')
+    <!-- @include('components.navigation.header') -->
+    <x-navigation.header/>
 
     {{-- Search Page Content --}}
     <main class="container search-page-wrapper">
