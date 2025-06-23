@@ -4,6 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Publish Book</title>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -71,7 +74,7 @@
 <body>
 
   <h3>Publish Books</h3>
-  <form method="post" enctype="multipart/form-data">
+  <form action="/processPublish" method="post" enctype="multipart/form-data">
     @csrf
 
     <label for="book_title">Book Title</label>
@@ -97,19 +100,19 @@
     <label for="released_date">Released Date</label>
     <input type="date" name="released_date" id="released_date">
 
-    <label for="book_genres">Genres</label>
-    <div class="checkbox-group">
-      <label><input type="checkbox" name="book_genres[]" value="fiction">Fiction</label>
-      <label><input type="checkbox" name="book_genres[]" value="non-fiction">Non-Fiction</label>
-      <label><input type="checkbox" name="book_genres[]" value="mystery">Mystery</label>
-      <label><input type="checkbox" name="book_genres[]" value="fantasy">Fantasy</label>
-      <label><input type="checkbox" name="book_genres[]" value="romance">Romance</label>
-      <label><input type="checkbox" name="book_genres[]" value="science-fiction">Science-Fiction</label>
-      <label><input type="checkbox" name="book_genres[]" value="historical">Historical</label>
-      <label><input type="checkbox" name="book_genres[]" value="thriller">Thriller</label>
-      <label><input type="checkbox" name="book_genres[]" value="biography">Biography</label>
-      <label><input type="checkbox" name="book_genres[]" value="self-help">Self-Help</label>
-    </div>
+  <label for="book_genres">Genres (Select at least one) *</label>
+      <div class="checkbox-group">
+          @foreach($v_genres as $genre)
+              <label>
+                  <input type="checkbox" name="book_genres[]" value="{{ $genre->genre_name }}">
+                  {{ $genre->genre_name }}
+                  <!-- @if($genre->genre_status == 'popular-genre')
+                      <span class="badge">Popular</span>
+                  @endif -->
+              </label>
+          @endforeach
+      </div>
+
 
     <label for="file_path">File Path</label>
     <input type="file" name="file_path" id="file_path">

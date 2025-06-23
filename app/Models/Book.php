@@ -11,6 +11,35 @@ class Book extends Model
 {
     use HasFactory;
 
-    
+    protected $table = 'books';
+    protected $primaryKey = 'book_id';
+
+    protected $fillable = [
+        'book_title',
+        'description',
+        'total_pages',
+        'bookk_categories',
+        'author_name',
+        'released_date',
+        'book_genres',
+        'book_cover',
+        'file_path',
+        'file_format'
+    ];
+
+    protected $casts = [
+        'created_at',
+        'updated_at'
+    ];
+
+    // relationship
+    public function genres()
+    {
+        return $this->belongsToMany(Genres::class);
+    }
+    public function authors()
+    {
+        return $this->belongsToMany(Author::class);
+    }
 
 }

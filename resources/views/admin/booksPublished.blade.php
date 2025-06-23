@@ -135,9 +135,36 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                      
-                    </tr>
+                    
+                      @forelse ($v_bookPublished as $book)
+                        <tr>
+                            <td>
+                                <img src="{{ asset($book->book_cover) }}" class="book-cover" alt="Book Cover">
+                            </td>
+                            <td>{{ $book->book_title }}</td>
+                            <td>{{ $book->author_name }}</td>
+                            <td class="description">{{ $book->description }}</td>
+                            <td>{{ $book->total_pages }}</td>
+                            <td>{{ $book->book_categories }}</td>
+                            <td class="genres">
+                                @if($book->book_genres)
+                                    @foreach(explode(',', $book->book_genres) as $genre)
+                                        <span class="genre-tag">{{ trim($genre) }}</span>
+                                    @endforeach
+                                @endif
+                            </td>
+                            <td>{{ $book->released_date }}</td>
+                            <td>
+                                <a href="#" class="btn btn-sm btn-primary">View</a>
+                                <a href="#" class="btn btn-sm btn-warning">Edit</a>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="9" class="no-books">No books published yet.</td>
+                        </tr>
+                    @endforelse
+                    
                 </tbody>
             </table>
         </div>

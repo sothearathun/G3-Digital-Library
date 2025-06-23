@@ -8,8 +8,12 @@ use App\Http\Controllers\Admin\AdminController;
 // //analytics
 // http://127.0.0.1:8000/toAnalytics
 Route::get('/toAnalytics', [AdminController::class, 'analytics'])->name('admin.analytics');
-// http://127.0.0.1:8000/toPublish
-Route::get('/toPublish', [AdminController::class, 'publish'])->name('admin.publishs');
+
+// http://127.0.0.1:8000/publishBookForm
+Route::get('/publishBookForm', [AdminController::class, 'publishBookForm'])->name('admin.publish');
+// http://127.0.0.1:8000/processPublish
+Route::post('/processPublish', [AdminController::class, 'processPublish']);
+
 // http://127.0.0.1:8000/BookPublished
 Route::get('/BookPublished', [AdminController::class, 'bookPublished'])->name('admin.booksPublished');
 // http://127.0.0.1:8000/UserRecords
