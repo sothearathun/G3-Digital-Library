@@ -31,18 +31,14 @@
                 <a href="" class="explore-button">Explore New Fantasy</a>
             </div>
             <div class="hero-image">
-                @if(isset($v_TrendingBook[0]))
-                    <img src="{{ asset($v_TrendingBook[0]->cover_image) }}" alt="Book Cover">
-                @else
-                    <img src="" alt="Book Cover">
-                @endif
+                <img src="{{ asset('uploads/hero_image/hero_image.jpg') }}" alt="">
                 <small>Image credits: Wikimedia Commons</small>
             </div>
         </section>
 
 <br><br><br>
         <!-- search bar -->
-            @include('components.navigation.search')
+        <x-navigation.search/>
 
 
 
@@ -52,28 +48,8 @@
             <div class="book-carousel">
                 <div class="book-carousel-track" id="bookCarouselTrack">
 
-
-                    <!-- begin of Book loops-->
-                    @foreach($v_TrendingBook as $tb) 
-                    <div class="book-item">
-                        <a href="{{ url('viewbook?id=' . $tb->book_id) }}">
-                            <img src="{{ asset($tb->cover_image) }}" alt="Book Cover">
-                        </a>
-                        
-                        <div class="book-details">
-                            <h3>{{$tb->book_title}}</h3>
-                            <p>{{$tb->description}}</p>
-                            <div class="book-meta">
-                                 <span>⭐ 4.5</span>             <!--not sure which table to get data from yet -->
-                                <span>❤️ 120</span>              <!--not sure which table to get data from yet -->
-                                <span>💬 30</span>               <!--not sure which table to get data from yet -->
-                                <span>📖 {{$tb->page_count}}</span>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
-                    <!-- end of Book loops-->
                     
+
                 </div>
             </div>
 
@@ -88,32 +64,11 @@
 
         <!-- ill have to rework so it match the user fav genre -->
         <!-- Books Recommanded for you   -->
-        <h2 class="section-header">BOOKS RECOMMANDED FOR YOU</h2>
+        <h2 class="section-header">BOOKS RECOMMENDED FOR YOU</h2>
         <div class="book-carousel-container">
             <div class="book-carousel">
                 <div class="book-carousel-track" id="bookCarouselTrack">
 
-
-                    <!-- begin of Book loops-->
-                    @foreach($v_TrendingBook as $tb) 
-                    <div class="book-item">
-                        <a href="{{ url('viewbook?id=' . $tb->book_id) }}">
-                            <img src="{{ asset($tb->cover_image) }}" alt="Book Cover">
-                        </a>
-                        
-                        <div class="book-details">
-                            <h3>{{$tb->book_title}}</h3>
-                            <p>{{$tb->description}}</p>
-                            <div class="book-meta">
-                                 <span>⭐ 4.5</span>             <!--not sure which table to get data from yet -->
-                                <span>❤️ 120</span>              <!--not sure which table to get data from yet -->
-                                <span>💬 30</span>               <!--not sure which table to get data from yet -->
-                                <span>📖 {{$tb->page_count}}</span>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
-                    <!-- end of Book loops-->
                     
                 </div>
             </div>
@@ -134,26 +89,6 @@
                 <div class="book-carousel-track" id="bookCarouselTrack">
 
 
-                    <!-- begin of Book loops-->
-                    @foreach($v_TrendingBook as $tb) 
-                    <div class="book-item">
-                        <a href="{{ url('viewbook?id=' . $tb->book_id) }}">
-                            <img src="{{ asset($tb->cover_image) }}" alt="Book Cover">
-                        </a>
-                        
-                        <div class="book-details">
-                            <h3>{{$tb->book_title}}</h3>
-                            <p>{{$tb->description}}</p>
-                            <div class="book-meta">
-                                 <span>⭐ 4.5</span>             <!--not sure which table to get data from yet -->
-                                <span>❤️ 120</span>              <!--not sure which table to get data from yet -->
-                                <span>💬 30</span>               <!--not sure which table to get data from yet -->
-                                <span>📖 {{$tb->page_count}}</span>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
-                    <!-- end of Book loops-->
                     
                 </div>
             </div>
@@ -172,17 +107,7 @@
         <h2 class="section-header">POPULAR AUTHORS OF THE YEAR</h2>
         <div class="popular-authors">
 
-        
-            @foreach ($v_authors as $v_a)
-            <!-- looping for author profile and name -->
-            <div class="author-card">
-                <img src="{{ asset ($v_a->profile_picture) }}" alt="Author Image">
-                <p>{{$v_a->author_name}}</p>
-            </div>
-            <!-- looping for author profile and name -->
-            @endforeach
 
-            <!-- will have to figure out how to display only popular author -->
         </div>
 
 
@@ -192,21 +117,7 @@
                     <!-- dont see any cover img for news in the DB, so will have to talk with my team leader regarding this  -->
         <h2 class="section-header">DIGITALES NEWS</h2>
         <div class="digitales-news">
-            <div class="news-card">
-                <img src="" alt="News Image">
-                <h4>The Future of Digital Reading</h4>
-                <p>Explore how AI and immersive technologies are revolutionizing the way we experience books.</p>
-            </div>
-            <div class="news-card">
-                <img src="" alt="News Image">
-                <h4>Best Sellers of 2025</h4>
-                <p>Discover the most popular books that have captured readers' hearts this year.</p>
-            </div>
-            <div class="news-card">
-                <img src="" alt="News Image">
-                <h4>Author Spotlight Series</h4>
-                <p>Meet the rising stars in contemporary literature and learn about their creative journey.</p>
-            </div>
+            
         </div>
     </div>
 

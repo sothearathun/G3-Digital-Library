@@ -49,4 +49,5 @@
     </div>
   </div>
 </body>
+<script src="{{ asset('js/admin/digitalesNews.js') }}"></script>
 </html>

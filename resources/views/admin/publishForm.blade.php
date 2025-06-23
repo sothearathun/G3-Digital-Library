@@ -35,7 +35,7 @@
       <option value="newly-added">Newly Added</option>
     </select>
 
-    
+
     <label for="author_name">Author Name</label>
     <input type="text" name="author_name" id="author_name" placeholder="Enter Author Name">
 
@@ -60,13 +60,17 @@
     <input type="file" name="file_path" id="file_path">
 
     <label for="book_cover">Book Cover</label>
-<input type="file" name="book_cover" id="book_cover" accept="image/*">
+      <input type="file" name="book_cover" id="book_cover" accept="image/*">
 
-<div id="book_cover_preview" style="width: 200px; height: 200px; border: 1px solid #ccc; margin-top: 10px;"></div>
+      <div id="book_cover_preview" style="width: 200px; height: 200px; border: 1px solid #ccc; margin-top: 10px;"></div>
 
     <button type="submit">Publish Book</button>
   </form>
 </div>
+
+<!-- update form -->
+
+
 
 </body>
 <script src="{{ asset('js/admin/publishForm.js') }}"></script>
