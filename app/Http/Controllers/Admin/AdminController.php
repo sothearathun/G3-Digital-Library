@@ -12,11 +12,14 @@ class AdminController extends Controller
         return view('admin.analytics');
     }
 
+
+
+    
     public function publishBookForm(){
 
         $genres = DB::table('genres')->get();
 
-        return view('admin.publishs',
+        return view('admin.publishForm',
          [
             'v_genres' => $genres
         ]

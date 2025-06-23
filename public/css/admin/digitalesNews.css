@@ -1,0 +1,14 @@
+/* digitalsNews.blade.php */
+    .news-pic {
+      width: 60px;
+      height: 90px;
+      border-radius: 4px;
+    }
+    .delete-btn {
+      background-color: #e5e7eb;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+/* /digitalsNews.blade.php */

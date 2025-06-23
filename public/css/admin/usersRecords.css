@@ -1,0 +1,14 @@
+/* userRecord.blade.php */    
+.interaction-btn {
+      background-color: #e5e7eb;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 10px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .interaction-btn:hover {
+      background-color: #d1d5db;
+    } 
+/* /userRecord.blade.php */

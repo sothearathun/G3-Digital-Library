@@ -4,24 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>DIGITALES Admin Dashboard</title>
-  <link rel="stylesheet" href="{{ asset('css/admin.css') }}"> 
+  <link rel="stylesheet" href="{{ asset('css/admin/usersRecords.css') }}"> 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
-  <div class="sidebar">
-    <h2>DIGITALES admin</h2>
-    <ul>
-      <li><a href="{{ route('admin.analytics') }}">📊 Analytics</a></li>
-      <li><a href="{{ route('admin.publishs') }}">🚀 Publish Books</a></li>
-      <li><a href="{{ route('admin.booksPublished') }}">✅ Books Published</a></li>
-      <li style="background-color: #cbd5f1; color: blue"><a style="color: blue;" href="{{ route('admin.userRecord') }}">📝 Users Records</a></li>
-      <li><a href="{{ route('admin.statistic') }}">📈 Book Statistics</a></li>
-      <li><a href="{{ route('admin.guideline') }}">💡 Guidelines</a></li>
-      <li><a href="{{ route('admin.authors') }}">🧑 Author</a></li>
-      <li><a href="{{ route('admin.digitalsNews') }}">📰 Digital News</a></li>
-    </ul>
-  </div>
+
+<x-navigation.admin-sidebar/>
 
    <div class="content">
     <h2>📖 User Records</h2>

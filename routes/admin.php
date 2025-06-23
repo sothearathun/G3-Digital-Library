@@ -10,7 +10,7 @@ use App\Http\Controllers\Admin\AdminController;
 Route::get('/toAnalytics', [AdminController::class, 'analytics'])->name('admin.analytics');
 
 // http://127.0.0.1:8000/publishBookForm
-Route::get('/publishBookForm', [AdminController::class, 'publishBookForm'])->name('admin.publish');
+Route::get('/publishBookForm', [AdminController::class, 'publishBookForm'])->name('publishBookForm');
 // http://127.0.0.1:8000/processPublish
 Route::post('/processPublish', [AdminController::class, 'processPublish']);
 

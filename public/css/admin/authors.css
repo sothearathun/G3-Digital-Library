@@ -1,0 +1,48 @@
+
+
+/* authors */
+.main-content {
+      flex: 1;
+      padding: 20px;
+      background-color: #fff;
+      position: relative;
+    }
+    .main-content h1 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 24px;
+    }
+    .table {
+      margin-top: 40px;
+      background-color: #f6f6f6;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 12px;
+      text-align: left;
+    }
+    th {
+      background-color: #e5e7eb;
+    }
+    tr:nth-child(even) {
+      background-color: #fdfdfd;
+    }
+    .author-pic {
+      width: 60px;
+      height: 60px;
+      border-radius: 4px;
+    }
+    .see-books-btn {
+      background-color: #e5e7eb;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+/* /authors */

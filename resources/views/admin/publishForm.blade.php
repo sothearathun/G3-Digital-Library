@@ -6,74 +6,14 @@
   <title>Publish Book</title>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
-
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 30px;
-      background-color: #f8f8f8;
-    }
-
-    h3 {
-      color: #333;
-      margin-bottom: 20px;
-    }
-
-    form {
-      background-color: #fff;
-      padding: 25px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      max-width: 600px;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 6px;
-      font-weight: bold;
-    }
-
-    input[type="text"],
-    input[type="number"],
-    input[type="date"],
-    input[type="file"],
-    select {
-      width: 100%;
-      padding: 8px 10px;
-      margin-bottom: 16px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      box-sizing: border-box;
-    }
-
-    input[type="checkbox"] {
-      margin-right: 5px;
-    }
-
-    .checkbox-group label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: normal;
-    }
-
-    button[type="submit"] {
-      background-color: #4CAF50;
-      color: white;
-      padding: 10px 18px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-
-    button[type="submit"]:hover {
-      background-color: #45a049;
-    }
-  </style>
+  <link rel="stylesheet" href="{{ asset('css/admin/publishForm.css') }}">
 </head>
 
 <body>
 
+<x-navigation.admin-sidebar/>
+
+<div class="content-area">
   <h3>Publish Books</h3>
   <form action="/processPublish" method="post" enctype="multipart/form-data">
     @csrf
@@ -125,23 +65,8 @@
 
     <button type="submit">Publish Book</button>
   </form>
+</div>
 
 </body>
-
-<script>
-  const bookCoverInput = document.getElementById('book_cover');
-  const bookCoverPreview = document.getElementById('book_cover_preview');
-
-  bookCoverInput.addEventListener('change', (e) => {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-
-    reader.onload = (event) => {
-      bookCoverPreview.style.backgroundImage = `url(${event.target.result})`;
-    };
-
-    reader.readAsDataURL(file);
-  });
-</script>
-
+<script src="{{ asset('js/admin/publishForm.js') }}"></script>
 </html>
