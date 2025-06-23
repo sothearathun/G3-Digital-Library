@@ -3,7 +3,7 @@
 <footer>
     <div class="container footer-content">
         <div class="footer-section logo">
-            <h4>DIGITALES</h4>
+            <h3>DIGITALES</h3>
         </div>
         <div class="footer-section">
             <h4>Navigation</h4>

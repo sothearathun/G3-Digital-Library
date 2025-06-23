@@ -24,12 +24,13 @@ footer .container {
     min-width: 150px; /* Adjusted min-width for better wrapping */
 }
 
+
 /* Ensure logo section has enough space */
 .footer-section.logo {
     flex-basis: 200px; /* Give logo a fixed base width */
 }
 
-.footer-section h4 {
+.footer-section h3 {
     margin-bottom: 15px; /* Slightly reduced margin */
     font-size: 1.2em; /* Slightly smaller font size */
     font-family: 'Playfair Display', serif;

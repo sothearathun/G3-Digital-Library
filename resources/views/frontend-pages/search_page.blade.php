@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
 
 
-    <link rel="stylesheet" href="{{ asset('css/search_page.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/web/search_page.css') }}">
     </head>
 <body>
     <x-navigation.header/>
@@ -17,21 +17,8 @@
     {{-- Search Page Content --}}
     <main class="container search-page-wrapper">
 
-        {{--  Search Bar --}}
-        <!-- 
-        <section class="main-search-section">
-            <h1 class="visually-hidden">Book Search</h1> {{-- Hidden heading for accessibility --}}
-            <form action="{{ route('books.search') }}" method="GET" class="main-search-form" role="search">
-                <label for="main-search-input" class="visually-hidden">Search for books, authors, genres</label>
-                <input type="text" id="main-search-input" name="query" placeholder="Explore Your Fantasy" aria-label="Search for books, authors, or genres" value="{{ request('query') }}">
-                <button type="submit" class="search-icon-button" aria-label="Perform search">
-                    <i class="fas fa-search" aria-hidden="true"></i>
-                </button>
-            </form>
-        </section> 
-        -->
-        
-        @include('components.home.search')
+    {{--  Search Bar --}}
+    <x-home.search-bar/>
 
 
 <br>

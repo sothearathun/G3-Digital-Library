@@ -14,7 +14,7 @@ class Author extends Model
 
     protected $fillable = [
         'author_name',
-        'author_category',
+        'author_categories',
         'author_image',
     ];
 

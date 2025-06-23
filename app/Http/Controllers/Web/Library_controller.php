@@ -13,14 +13,24 @@ class Library_controller extends Controller
 {   
     public function homepage() 
     {
-        $TrendingBook = DB::table('books')->get();
-        $Author_pic_name = DB::table('authors')->get();
 
-        return view('frontend-pages\homepage', [
+        $trending_books = DB::select("select * from `books` where `book_categories` = 'trending' order by `book_id` desc limit 3;");
+        $best_selling_books = DB::select("select * from `books` where `book_categories` = 'best-selling' order by `book_id` desc limit 3;");
+        $newly_added_books = DB::select("select * from `books` where `book_categories` = 'newly-added' order by `book_id` desc limit 3;");
 
-            'v_TrendingBook' => $TrendingBook,
-            'v_authors' => $Author_pic_name
-        ]); 
+        $popular_authors = DB::select("select * from `authors` where `author_categories` = 'popular-author' order by `author_id` desc limit 3;");
+
+        $digitales_news = DB::select("select * from `digitales_news` order by `news_id` desc limit 3;");
+
+        return view('frontend-pages\homepage', 
+        [
+            'v_trending_books' => $trending_books,
+            'v_best_selling_books' => $best_selling_books,
+            'v_newly_added_books' => $newly_added_books,
+            'v_popular_authors' => $popular_authors,
+            'v_digitales_news' => $digitales_news
+        ]
+        );
     }
 
     public function profile() 

@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="{{ asset('css/web/hero_section.css') }}">
+
 <section class="hero-section">
     <div class="hero-quote">
         <strong>"Nothing contributes so much to tranquillize the mind as a steady purpose — a point on which the soul may fix its intellectual eye."</strong>
