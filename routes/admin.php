@@ -7,7 +7,7 @@ use App\Http\Controllers\Admin\AdminController;
 // BACKEND
 // //analytics
 // http://127.0.0.1:8000/toAnalytics
-Route::get('/toAnalytics', [AdminController::class, 'analytics'])->name('admin.analytics');
+Route::get('/Analytics', [AdminController::class, 'analytics'])->name('Analytics');
 
 // http://127.0.0.1:8000/publishBookForm
 Route::get('/publishBookForm', [AdminController::class, 'publishBookForm'])->name('publishBookForm');
@@ -15,14 +15,21 @@ Route::get('/publishBookForm', [AdminController::class, 'publishBookForm'])->nam
 Route::post('/processPublish', [AdminController::class, 'processPublish']);
 
 // http://127.0.0.1:8000/BookPublished
-Route::get('/BookPublished', [AdminController::class, 'bookPublished'])->name('admin.booksPublished');
+Route::get('/BooksPublished', [AdminController::class, 'booksPublished'])->name('BooksPublished');
+
 // http://127.0.0.1:8000/UserRecords
-Route::get('/UserRecords', [AdminController::class, 'userRecords'])->name('admin.userRecord');
+Route::get('/UsersRecords', [AdminController::class, 'usersRecords'])->name('UsersRecords');
 // http://127.0.0.1:8000/Statistics
-Route::get('/Statistics', [AdminController::class, 'statistics'])->name('admin.statistic');
+Route::get('/Statistics', [AdminController::class, 'statistics'])->name('Statistics');
 // http://127.0.0.1:8000/Guidelines
-Route::get('/Guidelines', [AdminController::class, 'guidelines'])->name('admin.guideline');
+Route::get('/Guidelines', [AdminController::class, 'guidelines'])->name('Guidelines');
 // http://127.0.0.1:8000/Author
-Route::get('/Author', [AdminController::class, 'author'])->name('admin.authors');
+Route::get('/Authors', [AdminController::class, 'authors'])->name('Authors');
+
+
+// http://127.0.0.1:8000/publishBookForm
+Route::get('/publishNewsForm', [AdminController::class, 'publishNewsForm'])->name('publishNewsForm');
+// http://127.0.0.1:8000/processPublish
+Route::post('/processPublishNews', [AdminController::class, 'processPublishNews']);
 // http://127.0.0.1:8000/DigitalNews
-Route::get('/DigitalNews', [AdminController::class, 'digitalNews'])->name('admin.digitalsNews');
+Route::get('/DigitalesNews', [AdminController::class, 'digitalesNews'])->name('DigitalesNews');

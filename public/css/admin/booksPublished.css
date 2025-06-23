@@ -7,13 +7,13 @@ body {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    margin-left: 200px;
+    margin-left: 210px;
 }
 
 h2 {
     color: #333;
     margin-bottom: 20px;
-    text-align: center;
+    /* text-align: center; */
 }
 
 .table-container {

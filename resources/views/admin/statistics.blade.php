@@ -34,7 +34,7 @@
               <tr>
 
                 <td>001</td>
-                <td><img src="https://covers.openlibrary.org/b/id/10958362-L.jpg" class="author-pic" alt="Author"></td>
+                <td><img src="https://covers.openlibrary.org/b/id/10958362-L.jpg" class="book_cover" alt="book_cover" style="width: 100px;"></td>
                 <td>Before the coffee gets cold</td>
 
                 <td>5/5</td>

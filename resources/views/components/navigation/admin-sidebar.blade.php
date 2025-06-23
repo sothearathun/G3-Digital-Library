@@ -5,13 +5,13 @@
 <div class="sidebar">
     <h2>DIGITALES admin</h2>
     <ul>
-      <li><a href="{{ route('admin.analytics') }}">📊 Analytics</a></li>
+      <li><a href="{{ route('Analytics') }}">📊 Analytics</a></li>
       <li><a href="{{ route('publishBookForm') }}">🚀 Publish Books</a></li>
-      <li><a href="{{ route('admin.booksPublished') }}">✅ Books Published</a></li>
-      <li><a href="{{ route('admin.userRecord') }}">📝 Users Records</a></li>
-      <li><a href="{{ route('admin.statistic') }}">📈 Book Statistics</a></li>
-      <li><a href="{{ route('admin.guideline') }}">💡 Guidelines</a></li>
-      <li><a href="{{ route('admin.authors') }}">🧑 Author</a></li>
-      <li><a href="{{ route('admin.digitalsNews') }}">📰 Digital News</a></li>
+      <li><a href="{{ route('BooksPublished') }}">✅ Books Published</a></li>
+      <li><a href="{{ route('Authors') }}">🧑 Authors</a></li>
+      <li><a href="{{ route('DigitalesNews') }}">📰 Digital News</a></li>
+      <li><a href="{{ route('UsersRecords') }}">📝 Users Records</a></li>
+      <li><a href="{{ route('Statistics') }}">📈 Book Statistics</a></li>
+      <li><a href="{{ route('Guidelines') }}">💡 Guidelines</a></li>
     </ul>
   </div>

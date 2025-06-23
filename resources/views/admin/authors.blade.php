@@ -20,22 +20,24 @@
         <thead>
           <tr>
             <th>ID</th>
-            <th>Author</th>
+            <th>Author Image</th>
             <th>Name</th>
-            <th>Genre</th>
+            <th>Category</th>
             <th>Total Books</th>
-            <th>Actions</th>
+            <!-- <th>Actions</th> -->
           </tr>
         </thead>
         <tbody>
+          @foreach($v_authors as $authors)
           <tr>
-            <td>001</td>
-            <td><img src="https://covers.openlibrary.org/b/id/10958362-L.jpg" class="author-pic" alt="Author"></td>
-            <td>J.K Rowling</td>
-            <td>Romance, Comedy, Thriller</td>
-            <td>233</td>
-            <td><button class="see-books-btn">See all books</button></td>
+            <td>{{ $authors->author_id }}</td>
+            <td>{{ $authors->author_image }}</td>
+            <td>{{ $authors->author_name }}</td>
+            <td>{{ $authors->author_category }}</td>
+            <!-- how to count books associated with an author -->
+            <td> {{ $authors->books_count }} </td>
           </tr>
+          @endforeach
         </tbody>
       </table>
     </div>

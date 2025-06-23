@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Book;
+use App\Models\Author;
+use App\Models\Digitales_News;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -14,7 +16,7 @@ class AdminController extends Controller
 
 
 
-    
+
     public function publishBookForm(){
 
         $genres = DB::table('genres')->get();
@@ -27,23 +29,16 @@ class AdminController extends Controller
     }
     public function processPublish(Request $request){
 
+        $author = Author::findOrCreateByName($request->author_name);
+
         $publish_book = new Book();
 
         $publish_book->book_title = $request->book_title;
         $publish_book->description = $request->description;
         $publish_book->total_pages = $request->total_pages;
         $publish_book->book_categories = $request->book_categories;
-        $publish_book->author_name = $request->author_name;
+        $publish_book->author_name = $author->author_name;
         $publish_book->released_date = $request->released_date;
-        
-        // $publish_book->book_cover = $request->book_cover;
-        // $publish_book->file_path = $request->file_path;
-        // $publish_book->file_format = $request->file_format;
-        // $publish_book->created_at = $request->created_at;
-        // $publish_book->updated_at = $request->updated_at;
-
-        // $chooseGenres = $request->input('book_genres');
-        // $publish_book->book_genres = implode(',', $chooseGenres);
 
         if ($request->hasFile('book_cover')) {
             $bookCover = $request->file('book_cover');
@@ -74,7 +69,7 @@ class AdminController extends Controller
 
         return redirect('/BookPublished');
     }
-    public function bookPublished(){
+    public function booksPublished(){
 
         $bookPublished = DB::select("select * from `books` order by `book_id` desc");
 
@@ -90,19 +85,65 @@ class AdminController extends Controller
 
 
 
-    public function userRecords(){
-        return view('admin.userRecord');
+    public function usersRecords(){
+        return view('admin.usersRecords');
     }
     public function statistics(){
-        return view('admin.statistic');
+        return view('admin.statistics');
     }
     public function guidelines(){
-        return view('admin.guideline');
+        return view('admin.guidelines');
     }
-    public function author(){
-        return view('admin.authors');
+    public function authors(){
+
+        $authors = DB::table('authors')
+        ->select('authors.*', DB::raw('(SELECT COUNT(*) FROM books WHERE books.author_name = authors.author_name) as books_count'))
+        ->orderBy('author_id', 'desc')
+        ->get();
+
+        return view('admin.authors',
+        [
+            'v_authors' => $authors
+        ]
+    );
     }
-    public function digitalNews(){
-        return view('admin.digitalsNews');
+
+    public function publishNewsForm(){
+
+        return view('admin.publishNewsForm',
+
+    );
+    }
+
+    public function processPublishNews(Request $request){
+
+        $publish_news = new Digitales_News();
+
+        $publish_news->news_title = $request->news_title;
+        $publish_news->news_des = $request->news_des;
+        $publish_news->news_link = $request->news_link;
+
+        if ($request->hasFile('news_cover')) {
+            $newsCover = $request->file('news_cover');
+            $coverName = time() . '_cover.' . $newsCover->getClientOriginalExtension();
+            $newsCover->move(public_path('uploads/news_covers'), $coverName);
+            $publish_news->news_cover = 'uploads/news_covers/' . $coverName;
+        }
+
+        $publish_news->save();
+
+        return redirect('/DigitalesNews');
+
+    }
+
+    public function digitalesNews(){
+        $newsPublished = DB::select("select * from `digitales_news` order by `news_id` desc");
+
+
+        return view('admin.digitalesNews',
+        [
+            'v_news' => $newsPublished
+        ]
+    );
     }
 }

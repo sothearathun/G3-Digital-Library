@@ -50,7 +50,7 @@
                             </td>
                             <td>{{ $book->released_date }}</td>
                             <td>
-                                <a href="#" class="btn btn-sm btn-primary">View</a>
+                                <a href="{{ asset($book->file_path) }}" class="btn btn-sm btn-primary">View</a>
                                 <a href="#" class="btn btn-sm btn-warning">Edit</a>
                             </td>
                         </tr>
