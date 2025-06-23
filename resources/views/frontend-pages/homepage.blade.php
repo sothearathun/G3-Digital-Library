@@ -56,7 +56,10 @@
                     <!-- begin of Book loops-->
                     @foreach($v_TrendingBook as $tb) 
                     <div class="book-item">
-                        <img src="{{ asset($tb->cover_image) }}" alt="Book Cover">
+                        <a href="{{ url('viewbook?id=' . $tb->book_id) }}">
+                            <img src="{{ asset($tb->cover_image) }}" alt="Book Cover">
+                        </a>
+                        
                         <div class="book-details">
                             <h3>{{$tb->book_title}}</h3>
                             <p>{{$tb->description}}</p>
@@ -94,7 +97,10 @@
                     <!-- begin of Book loops-->
                     @foreach($v_TrendingBook as $tb) 
                     <div class="book-item">
-                        <img src="{{ asset($tb->cover_image) }}" alt="Book Cover">
+                        <a href="{{ url('viewbook?id=' . $tb->book_id) }}">
+                            <img src="{{ asset($tb->cover_image) }}" alt="Book Cover">
+                        </a>
+                        
                         <div class="book-details">
                             <h3>{{$tb->book_title}}</h3>
                             <p>{{$tb->description}}</p>
@@ -118,11 +124,11 @@
             
             <div class="carousel-indicators" id="carouselIndicators"></div>
         </div>
-        <!-- Books Recommanded for you   -->
+        <!-- Newly Added Books for you   -->
         
         <!-- ill have to rework so it show book based on upload time/date -->
         <!-- Newly added book   -->
-        <h2 class="section-header">BOOKS RECOMMANDED FOR YOU</h2>
+        <h2 class="section-header">NEWLY ADDED BOOKS</h2>
         <div class="book-carousel-container">
             <div class="book-carousel">
                 <div class="book-carousel-track" id="bookCarouselTrack">
@@ -131,12 +137,15 @@
                     <!-- begin of Book loops-->
                     @foreach($v_TrendingBook as $tb) 
                     <div class="book-item">
-                        <img src="{{ asset($tb->cover_image) }}" alt="Book Cover">
+                        <a href="{{ url('viewbook?id=' . $tb->book_id) }}">
+                            <img src="{{ asset($tb->cover_image) }}" alt="Book Cover">
+                        </a>
+                        
                         <div class="book-details">
                             <h3>{{$tb->book_title}}</h3>
                             <p>{{$tb->description}}</p>
                             <div class="book-meta">
-                                <span>⭐ 4.5</span>             <!--not sure which table to get data from yet -->
+                                 <span>⭐ 4.5</span>             <!--not sure which table to get data from yet -->
                                 <span>❤️ 120</span>              <!--not sure which table to get data from yet -->
                                 <span>💬 30</span>               <!--not sure which table to get data from yet -->
                                 <span>📖 {{$tb->page_count}}</span>
