@@ -32,5 +32,52 @@ class Library_controller extends Controller
     {
          return view('frontend-pages\search_page');
     }
+
+    public function viewbook(Request $request) 
+    {
+        // return view('frontend-pages\viewbook');
+        
+        $bookId = $request->query('id');
+
+        $book = DB::table('books')
+            ->join('authors', 'books.author_id', '=', 'authors.author_id')
+            ->select('books.*', 'authors.author_name')
+            ->where('books.book_id', $bookId)
+            ->first();
+
+        if (!$book) {
+            abort(404, 'Book not found');
+        }
+
+        return view('frontend-pages\viewbook', ['book' => $book]);
+    }
+
+    public function aboutus() 
+    {
+         return view('frontend-pages\aboutus');
+    }
+
+    public function faq() 
+    {
+        //  return view('frontend-pages\FAQ');
+
+        $faqs = DB::table('faq')
+            ->where('is_published', 1)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('frontend-pages\FAQ', ['faqs' => $faqs]);
+    }
+
+    public function terms_conditions() 
+    {
+        // return view('frontend-pages\terms_conditions');
+        
+        $terms = DB::table('terms_conditions')->orderBy('tc_id')->get();
+
+        return view('frontend-pages.terms_conditions', [
+            'terms' => $terms
+        ]);
+    }
     
 }
