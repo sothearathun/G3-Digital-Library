@@ -6,7 +6,7 @@
     <title>Profile</title>
 
     <!-- style sheet -->
-    <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/web/profile.css') }}">
 </head>
 <body>
     <!-- header -->

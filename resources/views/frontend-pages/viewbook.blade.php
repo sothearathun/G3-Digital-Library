@@ -8,7 +8,7 @@
 
 
     <!-- style sheet -->
-    <link rel="stylesheet" href="{{ asset('css/viewbook.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/web/viewbook.css') }}">
 </head>
 <body>
 

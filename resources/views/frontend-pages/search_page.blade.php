@@ -31,7 +31,7 @@
         </section> 
         -->
         
-        @include('components.navigation.search')
+        @include('components.home.search')
 
 
 <br>

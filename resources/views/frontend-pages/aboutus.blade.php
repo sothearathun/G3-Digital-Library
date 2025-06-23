@@ -13,7 +13,7 @@ this page will be static since we wont really be editing much or often
 
 
     <!-- style sheet -->
-    <link rel="stylesheet" href="{{ asset('css/aboutus.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/web/aboutus.css') }}">
 </head>
 <body>
 

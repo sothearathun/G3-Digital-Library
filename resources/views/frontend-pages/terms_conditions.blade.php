@@ -7,7 +7,7 @@
     <title>Terms and Conditions</title>
 
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="{{ asset('css/terms.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/web/terms.css') }}">
 </head>
 <body>
 

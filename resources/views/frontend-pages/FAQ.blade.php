@@ -8,7 +8,7 @@
 
 
     <!-- style sheet -->
-    <link rel="stylesheet" href="{{ asset('css/FAQ.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/web/FAQ.css') }}">
 </head>
 <body>
 

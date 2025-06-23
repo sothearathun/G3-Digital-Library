@@ -1,4 +1,23 @@
-/* might have to delete the file but idk, it kinda unless here, since the view page yg path pi css in public ng */
+/*Base Styles & Layout */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+/*Base Styles & Layout */
 
 
 /* General Body and Container Styles (as in previous responses) */
