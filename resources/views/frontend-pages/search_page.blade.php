@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="{{ asset('css/search_page.css') }}">
     </head>
 <body>
-    <!-- @include('components.navigation.header') -->
     <x-navigation.header/>
 
     {{-- Search Page Content --}}
