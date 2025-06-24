@@ -52,7 +52,7 @@
                             <td>
                                 <a href="{{ asset($book->file_path) }}" class="btn btn-sm btn-primary">View</a>
                                 
-                                <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                                <a href="{{ route('processDeleteBook', ['book_id' => $book->book_id]) }}" class="btn btn-sm btn-danger">Delete</a>
                             </td>
                         </tr>
                     @empty

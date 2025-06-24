@@ -3,7 +3,8 @@
         <div class="book-carousel-track" id="bookCarouselTrack" style="display: flex; flex-wrap: nowrap; overflow-x: auto;">
         
         @foreach($books as $book) 
-        <div class="book-item">
+        <div class="book-item" onclick="location.href=`{{ route('viewbook', ['book_id' => $book->book_id]) }}`" style="cursor: pointer;">
+            {{-- Book Cover Image --}}
             <img src="{{ asset($book->book_cover) }}" alt="Book Cover">
             <div class="book-details">
                 <h3>{{ $book->book_title }}</h3>

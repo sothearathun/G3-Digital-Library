@@ -38,17 +38,17 @@ this page will be static since we wont really be editing much or often
                 <div class="mission-item">
                     <div class="mission-icon">🎯</div>
                     <h3>Dynamic Digital Library</h3>
-                    <p>Understanding the fundamentals of our platform is crucial for success. We believe that to achieve excellence, you need to continue learning and get high score.</p>
+                    <p>Our mission is to provide a dynamic digital library that caters to the diverse needs of our community.</p>
                 </div>
                 <div class="mission-item">
                     <div class="mission-icon">📈</div>
                     <h3>Connect with Community</h3>
-                    <p>Understanding the dynamics of growth and development is key to our mission. We focus on continuous improvement and aim to achieve the highest standards.</p>
+                    <p>We believe in fostering a sense of community and collaboration among our users.</p>
                 </div>
                 <div class="mission-item">
                     <div class="mission-icon">⭐</div>
                     <h3>Enhance Reading Experience</h3>
-                    <p>Understanding the importance of excellence in everything we do. We strive to maintain the highest quality and deliver exceptional results to our community.</p>
+                    <p>We are committed to improving the reading experience for our users.</p>
                 </div>
             </div>
         </section>
@@ -63,15 +63,15 @@ this page will be static since we wont really be editing much or often
                 <h3>Developer Team</h3>
                 <div class="team-grid">
                     <div class="team-member">
-                        <img src="img/AboutUs_Profile/image.png" alt="J.K ROWLING" class="member-photo">
+                        <img src="img/AboutUs_Profile/image.png" alt="Sotheara Thun" class="member-photo">
                         <div class="member-name">Sotheara Thun</div>
                     </div>
                     <div class="team-member">
-                        <img src="img/AboutUs_Profile/image.png" alt="J.K ROWLING" class="member-photo">
+                        <img src="img/AboutUs_Profile/image.png" alt="Kimleng Huot" class="member-photo">
                         <div class="member-name">Kimleng Huot</div>
                     </div>
                     <div class="team-member">
-                        <img src="img/AboutUs_Profile/image.png" alt="J.K ROWLING" class="member-photo">
+                        <img src="img/AboutUs_Profile/image.png" alt="Kakada Huot" class="member-photo">
                         <div class="member-name">Kakada Huot</div>
                     </div>
                 </div>

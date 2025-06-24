@@ -151,6 +151,11 @@
             font-size: 1.5rem;
         }
 
+        .under-divider{
+            display: flex;
+            gap: 30px;
+        }
+
         .related-books {
             margin-bottom: 50px;
         }

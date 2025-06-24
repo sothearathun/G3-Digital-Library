@@ -13,6 +13,9 @@ Route::get('/Analytics', [AdminController::class, 'analytics'])->name('Analytics
 Route::get('/publishBookForm', [AdminController::class, 'publishBookForm'])->name('publishBookForm');
 // http://127.0.0.1:8000/processPublish
 Route::post('/processPublish', [AdminController::class, 'processPublish']);
+// http://127.0.0.1:8000/processDeleteBook/{book_id}
+Route::match(['get', 'post'], '/processDeleteBook/{book_id}', [AdminController::class, 'processDeleteBook'])->name('processDeleteBook');
+
 
 // http://127.0.0.1:8000/BookPublished
 Route::get('/BooksPublished', [AdminController::class, 'booksPublished'])->name('BooksPublished');

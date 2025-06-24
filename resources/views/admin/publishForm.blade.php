@@ -24,6 +24,9 @@
     <label for="description">Book Description</label>
     <input type="text" name="description" id="description" placeholder="Enter Book Description">
 
+    <label for="prologue">Book Prologue</label>
+    <textarea name="prologue" id="prologue" placeholder="Enter Book Prologue"></textarea>
+
     <label for="total_pages">Total Pages</label>
     <input type="number" name="total_pages" id="total_pages" placeholder="Enter Total Pages">
 

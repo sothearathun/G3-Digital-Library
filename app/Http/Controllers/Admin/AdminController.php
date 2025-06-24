@@ -67,7 +67,7 @@ class AdminController extends Controller
 
         $publish_book->save();
 
-        return redirect('/BookPublished');
+        return redirect('/BooksPublished');
     }
     public function booksPublished(){
 
@@ -79,6 +79,15 @@ class AdminController extends Controller
             'v_bookPublished' => $bookPublished
         ]
     );
+    }
+    public function processDeleteBook(Request $request){
+
+        // get the book_id from the route parameter
+        $bookId = $request->route('book_id');
+        Book::where('book_id', $bookId)->delete();
+
+        // Redirect back to the books published page
+        return redirect('/BooksPublished');
     }
 
 

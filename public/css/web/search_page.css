@@ -51,6 +51,50 @@ a:hover {
     text-decoration: underline;
 }
 
+/* dropdown checkbox */
+.dropdown-checkbox {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-toggle {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    display: none;
+}
+
+.dropdown-menu label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.dropdown-menu input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.dropdown-checkbox:hover .dropdown-menu {
+    display: block;
+    z-index: 1000; /* Ensure dropdown appears above other content */
+}
+
+.dropdown-checkbox .dropdown-menu:hover {
+    display: block;
+}
+/* dropdown checkbox */
+
+
 /* Visually Hidden for accessibility */
 .visually-hidden {
     position: absolute;
@@ -179,6 +223,14 @@ a:hover {
 .search-page-wrapper {
     padding-top: 40px; /* Add some top padding below the header */
     padding-bottom: 60px; /* Add padding at the bottom before footer */
+     opacity: 0;
+    transform: translateY(100px);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+
+}
+.search-page-wrapper.show {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* Main Search Section (at the top of the search page) */

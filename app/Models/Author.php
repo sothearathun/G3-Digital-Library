@@ -16,6 +16,7 @@ class Author extends Model
         'author_name',
         'author_categories',
         'author_image',
+        'author_bio_link'
     ];
 
     // relationship

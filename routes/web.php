@@ -22,11 +22,13 @@ Route::get('/search', [Library_controller::class, 'search'])->name('books.search
 Route::get('/profile', [Library_controller::class, 'profile']);
 
 // http://127.0.0.1:8000/search_page
-Route::get('/search_page', [Library_controller::class, 'search_page']);
+Route::get('/search_page', [Library_controller::class, 'search_page'])->name('search_page');
 
 
-// http://127.0.0.1:8000/viewbook
-Route::get('/viewbook', [Library_controller::class, 'viewbook']);
+// http://127.0.0.1:8000/viewbook/{book_id}
+Route::get('/viewbook/{book_id}', [Library_controller::class, 'viewbook'])->name('viewbook');
+// http://127.0.0.1:8000/readbook/{book_id}
+Route::get('/readbook/{book_id}', [Library_controller::class, 'readbook'])->name('readbook');
 
 // http://127.0.0.1:8000/aboutus
 Route::get('/aboutus', [Library_controller::class, 'aboutus'])->name('aboutus');
