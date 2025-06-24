@@ -18,6 +18,10 @@
 
 </head>
 <body>
+
+    <!-- login page -->
+    <x-login_signup.log_sign/>
+
     
     <!-- Header page -->
     <x-navigation.header/>
