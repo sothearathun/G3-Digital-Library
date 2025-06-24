@@ -10,7 +10,7 @@ Route::get('/', function () {
 });
 
 // http://127.0.0.1:8000/homepage
-Route::get('/homepage', [Library_controller::class, 'homepage']);
+Route::get('/homepage', [Library_controller::class, 'homepage'])->name('homepage');
 
 
 // for search bar
@@ -29,7 +29,7 @@ Route::get('/search_page', [Library_controller::class, 'search_page']);
 Route::get('/viewbook', [Library_controller::class, 'viewbook']);
 
 // http://127.0.0.1:8000/aboutus
-Route::get('/aboutus', [Library_controller::class, 'aboutus']);
+Route::get('/aboutus', [Library_controller::class, 'aboutus'])->name('aboutus');
 
 // http://127.0.0.1:8000/faq
 Route::get('/faq', [Library_controller::class, 'faq']);

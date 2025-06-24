@@ -33,7 +33,7 @@
             <td>{{ $authors->author_id }}</td>
             <td>{{ $authors->author_image }}</td>
             <td>{{ $authors->author_name }}</td>
-            <td>{{ $authors->author_category }}</td>
+            <td>{{ $authors->author_categories }}</td>
             <!-- how to count books associated with an author -->
             <td> {{ $authors->books_count }} </td>
           </tr>

@@ -2,10 +2,10 @@
 
 <header>
     <div class="header-content">
-        <a href="#" class="logo">DIGITALES</a>
+        <a href="{{ route('homepage') }}" class="logo">DIGITALES</a>
         <nav>
             <ul>
-                <li><a href="#">About</a></li>
+                <li><a href="{{ route('aboutus') }}">About</a></li>
 
                 <!-- drop down menu -->
                 <li class="dropdown">
