@@ -51,7 +51,7 @@
                             <td>{{ $book->released_date }}</td>
                             <td>
                                 <a href="{{ asset($book->file_path) }}" class="btn btn-sm btn-primary">View</a>
-                                
+                                <a href="{{ route('editBookForm', ['book_id' => $book->book_id]) }}" class="btn btn-sm btn-warning">Edit</a>
                                 <a href="{{ route('processDeleteBook', ['book_id' => $book->book_id]) }}" class="btn btn-sm btn-danger">Delete</a>
                             </td>
                         </tr>
