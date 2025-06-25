@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Web;
-use Illuminate\Support\Facades\DB;  
+use Illuminate\Support\Facades\DB;
+use App\Models\Reading_Progress;  
 
 // for pathing purposes
 use App\Http\Controllers\Controller;
@@ -73,7 +74,19 @@ class Library_controller extends Controller
         // Fetch the book details from the database
         $book = DB::table('books')->where('book_id', $bookId)->first();
         
-        return view('frontend-pages\readbook', ['book' => $book]);
+        return view('frontend-pages\readbook', [
+            'book' => $book
+        ]);
+    }
+    public function storeReadingProgress(Request $request) {
+        
+        $readingProgress = new Reading_Progress();
+        $reading_progress = Reading_Progress::findOrCreateByID($request->progress_id);
+
+        $readingProgress->book_id = $request->book_id;
+        $readingProgress->user_id = $request->user_id;
+        $readingProgress->save();
+
     }
 
 
