@@ -222,3 +222,51 @@
                 gap: 30px;
             }
         }
+
+        /* dark mode */
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+body.dark-mode .terms-wrapper {
+    background-color: #1e1e1e;
+    box-shadow: 0 6px 16px rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode .terms-title,
+body.dark-mode .term-subtitle,
+body.dark-mode .term-text,
+body.dark-mode h2,
+body.dark-mode .d_mode{
+    color: #e0e0e0;
+}
+
+body.dark-mode header {
+    background-color: #1e1e1e;
+    box-shadow: 0 2px 10px rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode nav ul li a {
+    color: #ccc;
+}
+
+body.dark-mode nav ul li a:hover {
+    color: #fff;
+}
+
+body.dark-mode .mega-menu {
+    background-color: #2c2c2c;
+}
+
+body.dark-mode .genres a:hover,
+body.dark-mode .genres p:hover,
+body.dark-mode .side-menu p:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffcc00;
+}
+
+body.dark-mode .profile-dropdown {
+    background-color: #333;
+}
+/* dark mode */
