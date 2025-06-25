@@ -29,6 +29,8 @@ Route::get('/search_page', [Library_controller::class, 'search_page'])->name('se
 Route::get('/viewbook/{book_id}', [Library_controller::class, 'viewbook'])->name('viewbook');
 // http://127.0.0.1:8000/readbook/{book_id}
 Route::get('/readbook/{book_id}', [Library_controller::class, 'readbook'])->name('readbook');
+// http://127.0.0.1:8000/readbook/{book_id}
+Route::match(['get', 'post'], '/storeReadingProgress', [Library_controller::class, 'storeReadingProgress'])->name('storeReadingProgress');
 
 // http://127.0.0.1:8000/aboutus
 Route::get('/aboutus', [Library_controller::class, 'aboutus'])->name('aboutus');

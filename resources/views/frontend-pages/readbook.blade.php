@@ -20,6 +20,7 @@
       <div class="progress-sidebar">
 
         <!-- Reading Progress -->
+         <!-- use js -->
         <div class="progress-section">
           <div class="section-title">
             <div class="section-icon">📊</div>
@@ -32,30 +33,27 @@
           
           
           <div class="controls-grid">
-            
-            <button class="btn btn-success" onclick="markCurrentPage()">Save Progress</button>
-            
+
+         <button class="btn btn-success" onclick="window.location.href=`{{ URL::to(route('storeReadingProgress')) }}`">Save Progress</button>
+
           </div>
         </div>
 
         <!-- Reading Statistics -->
         <div class="progress-section">
           <div class="section-title">
-            <div class="section-icon">📈</div>
+            <div class="section-icon"></div>
             Statistics
           </div>
           <div class="stats-grid">
             <div class="stat-card">
               <div class="stat-label">Current Page</div>
-              <div class="stat-value" id="currentPageStat">1</div>
+              <!-- load current page from database, then js handles track page -->
+              <div class="stat-value" id="currentPageStat">{{ $reading_progress->current_page }}</div>
             </div>
             <div class="stat-card">
               <div class="stat-label">Total Pages</div>
               <div class="stat-value" id="totalPagesStat">{{ $book->total_pages }}</div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-label">Pages Remaining</div>
-              <div class="stat-value" id="remainingPagesStat"></div>
             </div>
           </div>
         </div>

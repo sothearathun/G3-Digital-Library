@@ -7,9 +7,6 @@
     let totalPages = 0;
     let pageRendering = false;
     let pageNumPending = null;
-    let sessionStartTime = new Date();
-    let totalReadingSeconds = 0;
-    let sessionInterval;
     
     // got from database table
     const bookKey = `{{ $book->book_title }}_{{ $book->author_name }}`.replace(/[^a-zA-Z0-9]/g, '_');
@@ -21,7 +18,6 @@
     // i want this to load from database table
     document.addEventListener('DOMContentLoaded', function() {
       loadPDF(); 
-      loadProgress();
     });
 
     // Load PDF Document
@@ -86,13 +82,6 @@
       }
     }
 
-    // Update Page Information
-    function updatePageInfo() {
-      document.getElementById('pageInfo').textContent = `Page ${pageNum} of ${totalPages}`;
-      document.getElementById('prevBtn').disabled = (pageNum <= 1);
-      document.getElementById('nextBtn').disabled = (pageNum >= totalPages);
-    }
-
     // Update Progress Display
     function updateProgress() {
       if (totalPages > 0) {
@@ -101,45 +90,8 @@
         document.getElementById('progressPercentage').textContent = percentage + '%';
         document.getElementById('currentPageStat').textContent = pageNum;
         document.getElementById('totalPagesStat').textContent = totalPages;
-        document.getElementById('remainingPagesStat').textContent = Math.max(0, totalPages - pageNum);
         document.getElementById('currentPageInput').value = pageNum;
       }
-    }
-
-    // Load Progress from Storage
-    function loadProgress() {
-      const saved = JSON.parse(localStorage.getItem(`${bookKey}_progress`) || '{}');
-      if (saved.currentPage) {
-        totalReadingSeconds = saved.totalReadingSeconds || 0;
-        
-        if (saved.lastUpdated) {
-          document.getElementById('lastUpdated').textContent = 
-            new Date(saved.lastUpdated).toLocaleDateString();
-        }
-      }
-    }
-
-    // Save Progress to Storage
-    function saveProgress() {
-      const sessionSeconds = Math.floor((new Date() - sessionStartTime) / 1000);
-      const newTotalSeconds = totalReadingSeconds + sessionSeconds;
-      
-      const progress = {
-        currentPage: pageNum,
-        totalPages: totalPages,
-        totalReadingSeconds: newTotalSeconds,
-        lastUpdated: new Date().toISOString()
-      };
-      
-      localStorage.setItem(`${bookKey}_progress`, JSON.stringify(progress));
-      
-      // Update display
-      totalReadingSeconds = newTotalSeconds;
-      updateTotalReadingTime();
-      document.getElementById('lastUpdated').textContent = new Date().toLocaleDateString();
-      
-      // Reset session timer
-      sessionStartTime = new Date();
     }
 
     // Navigation Functions
@@ -151,22 +103,6 @@
     function nextPage() {
       if (pageNum >= totalPages) return;
       queueRenderPage(pageNum + 1);
-    }
-
-    // Mark Current Page and Save
-    function markCurrentPage() {
-      saveProgress();
-      
-      // Visual feedback
-      const button = event.target;
-      const originalText = button.textContent;
-      button.textContent = '✅ Saved!';
-      button.style.background = 'linear-gradient(135deg, #27ae60, #229954)';
-      
-      setTimeout(() => {
-        button.textContent = originalText;
-        button.style.background = 'linear-gradient(135deg, #27ae60, #229954)';
-      }, 1500);
     }
 
 
@@ -191,15 +127,3 @@
           break;
       }
     });
-
-    // Auto-save Progress
-    setInterval(() => {
-      saveProgress();
-    }, 60000); // Auto-save every minute
-
-    // Save Progress on Page Unload
-    window.addEventListener('beforeunload', function() {
-      saveProgress();
-    });
-
-    console.log('PDF Reader with Progress Tracking initialized');

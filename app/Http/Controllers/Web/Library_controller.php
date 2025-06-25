@@ -87,6 +87,11 @@ class Library_controller extends Controller
         $readingProgress->user_id = $request->user_id;
         $readingProgress->save();
 
+        return view('frontend-pages\readbook', [
+            'book' => DB::table('books')->where('book_id', $request->book_id)->first(),
+            'reading_progress' => $reading_progress
+        ]);
+
     }
 
 
