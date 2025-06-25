@@ -23,7 +23,7 @@
         <!-- about books: cover, author name, rating, etc -->
         <div class="book-detail">
             <div class="book-cover">
-                <img src="{{ asset($book->book_cover) }}" alt="{{ $book->book_title }} Cover">
+                <img src="{{ asset($book->book_cover) }}" alt="{{ $book->book_title }}">
             </div>
 
             <div class="book-info">

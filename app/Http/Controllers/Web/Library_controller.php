@@ -13,14 +13,24 @@ class Library_controller extends Controller
 {   
     public function homepage() 
     {
-        $TrendingBook = DB::table('books')->get();
-        $Author_pic_name = DB::table('authors')->get();
 
-        return view('frontend-pages\homepage', [
+        $trending_books = DB::select("select * from `books` where `book_categories` = 'trending' order by `book_id` desc limit 3;");
+        $best_selling_books = DB::select("select * from `books` where `book_categories` = 'best-selling' order by `book_id` desc limit 3;");
+        $newly_added_books = DB::select("select * from `books` where `book_categories` = 'newly-added' order by `book_id` desc limit 3;");
 
-            'v_TrendingBook' => $TrendingBook,
-            'v_authors' => $Author_pic_name
-        ]); 
+        $popular_authors = DB::select("select * from `authors` where `author_categories` = 'popular-author' order by `author_id` desc limit 3;");
+
+        $digitales_news = DB::select("select * from `digitales_news` order by `news_id` desc limit 3;");
+
+        return view('frontend-pages\homepage', 
+        [
+            'v_trending_books' => $trending_books,
+            'v_best_selling_books' => $best_selling_books,
+            'v_newly_added_books' => $newly_added_books,
+            'v_popular_authors' => $popular_authors,
+            'v_digitales_news' => $digitales_news
+        ]
+        );
     }
 
     public function profile() 
@@ -35,26 +45,32 @@ class Library_controller extends Controller
 
     public function viewbook(Request $request) 
     {
-        // return view('frontend-pages\viewbook');
         
-        $bookId = $request->query('id');
+        $bookId = $request->route('book_id');
 
-        $book = DB::table('books')
-            ->join('authors', 'books.author_id', '=', 'authors.author_id')
-            ->select('books.*', 'authors.author_name')
-            ->where('books.book_id', $bookId)
-            ->first();
-
-        if (!$book) {
-            abort(404, 'Book not found');
-        }
-
-        return view('frontend-pages.viewbook', ['book' => $book]);
+        // Fetch the book details from the database
+        $book = DB::table('books')->where('book_id', $bookId)->first();
+        $book->author_bio_link = DB::table('authors')
+            ->where('author_name', $book->author_name)
+            ->value('author_bio_link');
+        return view('frontend-pages\viewbook', ['book' => $book]);
     }
+     public function readbook(Request $request)
+    {
+        // return view('frontend-pages\readbook');
+        
+        $bookId = $request->route('book_id');
+
+        // Fetch the book details from the database
+        $book = DB::table('books')->where('book_id', $bookId)->first();
+        
+        return view('frontend-pages\readbook', ['book' => $book]);
+    }
+    
 
     public function aboutus() 
     {
-         return view('frontend-pages/aboutus');
+         return view('frontend-pages\aboutus');
     }
 
     public function faq() 
@@ -79,21 +95,5 @@ class Library_controller extends Controller
             'terms' => $terms
         ]);
     }
-
-
-    public function pick_genre() 
-    {
-        // actions
-         return view('frontend-pages/pick_genre');
-    }
-
-
-    public function login_signup_page() 
-    {
-        //actions
-         return view('frontend-pages/login_signup_page');
-    }
-
-    }
-
-
+    
+}
