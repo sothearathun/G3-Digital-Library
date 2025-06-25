@@ -151,11 +151,6 @@
             font-size: 1.5rem;
         }
 
-        .under-divider{
-            display: flex;
-            gap: 30px;
-        }
-
         .related-books {
             margin-bottom: 50px;
         }
@@ -322,3 +317,89 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        /* Dark Mode Styles */
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+body.dark-mode .back-button {
+    color: #aaa;
+}
+body.dark-mode .back-button:hover {
+    color: #fff;
+}
+
+body.dark-mode .book-info h1,
+body.dark-mode .book-info .author,
+body.dark-mode .book-description,
+body.dark-mode .publication-date,
+body.dark-mode .genre-tag,
+body.dark-mode .rating-text,
+body.dark-mode .book-stats,
+body.dark-mode .rec-book-info h4,
+body.dark-mode .rec-book-info .rec-author,
+body.dark-mode .about-author,
+body.dark-mode .comment-author,
+body.dark-mode .comment-text {
+    color: #e0e0e0;
+}
+
+body.dark-mode .book-info h1 {
+    color: #f1f1f1;
+}
+
+body.dark-mode .book-description {
+    color: #ccc;
+}
+
+body.dark-mode .btn-primary {
+    background-color: #34495e;
+    color: white;
+}
+body.dark-mode .btn-primary:hover {
+    background-color: #3d5a73;
+}
+
+body.dark-mode .btn-secondary {
+    background-color: transparent;
+    color: #f1f1f1;
+    border-color: #f1f1f1;
+}
+body.dark-mode .btn-secondary:hover {
+    background-color: #f1f1f1;
+    color: #121212;
+}
+
+body.dark-mode .divider {
+    color: #777;
+}
+
+body.dark-mode .recommendation-item,
+body.dark-mode .comments-section {
+    background-color: #1f1f1f;
+    box-shadow: 0 2px 10px rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode .rec-book-info h4 {
+    color: #ddd;
+}
+
+body.dark-mode .tag {
+    background-color: #2c2c2c;
+    border-color: #3a3a3a;
+    color: #bbb;
+}
+
+body.dark-mode .comment-avatar {
+    background-color: #555;
+    color: #fff;
+}
+
+body.dark-mode .comment-meta {
+    color: #888;
+}
+body.dark-mode h3 {
+    color: #f1f1f1;
+}
