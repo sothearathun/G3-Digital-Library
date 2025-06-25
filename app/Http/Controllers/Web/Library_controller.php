@@ -91,7 +91,7 @@ class Library_controller extends Controller
     public function login_signup_page() 
     {
         //actions
-         return view('frontend-pages/login_signup_page');
+         return view('auth/login_signup_page');
     }
 
     }
