@@ -96,6 +96,24 @@ class Library_controller extends Controller
         ]);
     }
 
+
+    public function pick_genre() 
+    {
+        // actions
+         return view('frontend-pages/pick_genre');
+    }
+
+
+    public function login_signup_page() 
+    {
+        //actions
+         return view('auth/login_signup_page');
+    }
+
+    }
+
+
+
     
     
 }

@@ -1,3 +1,10 @@
+
+<!-- 
+i saw in git that u split every parts like: loginm signup, forget ps 
+but i already conbined everything..... but feel free to split it apart
+-->
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,22 +16,35 @@
     
     <style>
         /* Login Modal CSS */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(74, 85, 104, 0.95), rgba(45, 55, 72, 0.98));
-            backdrop-filter: blur(10px);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            opacity: 1;
-            visibility: visible;
-            transition: all 0.3s ease;
-        }
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('img/login_signup_bg/login_signup_bg.jpg');
+    /* background-size: cover; */
+    background-position: center;
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* z-index: 1000; */
+    opacity: 1;
+    visibility: visible;
+    transition: all 0.3s ease;
+}
+
+.modal-overlay::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Black overlay with 50% opacity */
+    /* z-index: -1; */
+}
 
         .modal-overlay.hidden {
             opacity: 0;
@@ -50,28 +70,29 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .modal-close {
-            position: absolute;
-            top: 20px;
-            right: 25px;
-            background: none;
-            border: none;
-            color: #A0AEC0;
-            font-size: 24px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    background: none;
+    border: none;
+    color: #A0AEC0;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
 
-        .modal-close:hover {
-            color: #fff;
-            background: rgba(255, 255, 255, 0.1);
-        }
+.modal-close:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+}
 
         .modal-tabs {
             display: flex;
@@ -382,9 +403,13 @@
     <!-- Login Modal HTML -->
     <div class="modal-overlay" id="loginModal">
         <div class="modal-container">
-            <button class="modal-close" onclick="closeModal()">
-                <i class="fas fa-times"></i>
-            </button>
+
+            <!-- cancel "X" button -->
+<a href="http://127.0.0.1:8000/homepage" class="modal-close">
+    <i class="fas fa-times"></i>
+</a>
+            <!-- cancel "X" button -->
+             
             
             <div class="modal-header">
                 <div class="modal-tabs">
@@ -393,6 +418,13 @@
                     </button>
                     <button class="tab-button" onclick="switchTab('signup')">
                         <i class="fas fa-user-plus"></i> Sign up to DIGITALES
+
+                        <!-- redicrecting to homepage after signed up -->
+                        <a href="http://127.0.0.1:8000/homepage" style="color: #fff; text-decoration: none;">
+                            Sign up to DIGITALES
+                        </a>
+                        <!-- redicrecting to homepage after signed up -->
+
                     </button>
                 </div>
             </div>
@@ -424,19 +456,31 @@
                         
                         <button type="submit" class="submit-button">
                             <i class="fas fa-sign-in-alt"></i>
-                            Sign in
+
+                            <!-- redirecting to homepage -->
+                            <a href="http://127.0.0.1:8000/homepage" style="color: #fff; text-decoration: none;">
+                                Sign in
+                            </a>
+                            <!-- redirecting to homepage -->
+                            
                         </button>
                         
                         <button type="button" class="guest-button" onclick="loginAsGuest()">
                             <i class="fas fa-user-secret"></i>
-                            Continue as Guest
+
+                            <!-- redictiing to homepage -->
+                            <a href="http://127.0.0.1:8000/homepage" style="color: #fff; text-decoration: none;">
+                                Continue as Guest
+                            </a>
+                            <!-- redirecting to homepage -->
+                            
                         </button>
                         
                         <div class="forgot-password">
                             <a href="#" onclick="showForgotPassword()">Forgot your password?</a>
                         </div>
                         
-                        <div class="divider">
+                        <!-- <div class="divider">
                             <span>or sign in with</span>
                         </div>
                         
@@ -451,7 +495,7 @@
                                     Facebook
                                 </button>
                             </div>
-                        </div>
+                        </div> -->
                     </form>
                 </div>
                 
@@ -505,7 +549,7 @@
                             Continue as Guest
                         </button>
                         
-                        <div class="divider">
+                        <!-- <div class="divider">
                             <span>or sign up with</span>
                         </div>
                         
@@ -520,7 +564,7 @@
                                     Facebook
                                 </button>
                             </div>
-                        </div>
+                        </div> -->
                     </form>
                 </div>
             </div>

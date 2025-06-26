@@ -507,3 +507,290 @@ body {
 .carousel-arrow:hover {
     background-color: #ddd;
 }
+/* dakr mode */
+.dark-mode {
+  --bg-color: #121212;
+  --container-bg: #1e1e1e;
+  --text-color: #e0e0e0;
+  --text-secondary: #aaaaaa;
+  --accent-color: #3399ff;
+  --border-color: #333333;
+  --shadow-light: rgba(0, 0, 0, 0.7);
+  --shadow-dark: rgba(0, 0, 0, 0.9);
+  --input-bg: #2a2a2a;
+  --input-placeholder: #666666;
+  --button-bg: #2a2a2a;
+  --button-hover-bg: #3b78e7;
+  --tag-bg: #2a2a2a;
+  --tag-hover-bg: #3399ff;
+  --progress-bg: #444444;
+  --progress-fill: #4caf50;
+}
+
+/* Apply dark mode colors */
+.dark-mode body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: 'Roboto', sans-serif;
+}
+
+.dark-mode .container {
+  background-color: var(--container-bg);
+  padding: 20px;
+  border-radius: 8px;
+}
+
+/* Hero Section */
+.dark-mode .hero-section {
+  background-color: var(--container-bg);
+  box-shadow: 0 4px 8px var(--shadow-light);
+}
+
+.dark-mode .hero-quote {
+  color: var(--text-secondary);
+}
+
+.dark-mode .hero-quote strong {
+  color: var(--text-color);
+}
+
+.dark-mode .hero-quote small,
+.dark-mode .hero-image small {
+  color: #888;
+}
+
+.dark-mode .explore-button {
+  background-color: var(--button-bg);
+  color: var(--text-color);
+  transition: background-color 0.3s ease;
+}
+
+.dark-mode .explore-button:hover {
+  background-color: var(--button-hover-bg);
+  color: #fff;
+}
+
+/* Search Bar Section */
+.dark-mode .search-bar-section {
+  color: var(--text-color);
+}
+
+.dark-mode .search-form {
+  border: 1px solid var(--border-color);
+  background-color: var(--input-bg);
+  box-shadow: 0 2px 5px var(--shadow-dark);
+}
+
+.dark-mode .search-form input[type="text"] {
+  background-color: transparent;
+  color: var(--text-color);
+  border: none;
+}
+
+.dark-mode .search-form input[type="text"]::placeholder {
+  color: var(--input-placeholder);
+}
+
+.dark-mode .search-form button {
+  background-color: var(--button-bg);
+  color: var(--text-secondary);
+  transition: background-color 0.3s ease;
+}
+
+.dark-mode .search-form button:hover {
+  background-color: var(--button-hover-bg);
+  color: #fff;
+}
+
+/* Section Header */
+.dark-mode .section-header {
+  color: var(--text-color);
+}
+
+.dark-mode .section-header::before,
+.dark-mode .section-header::after {
+  background-color: var(--border-color);
+}
+
+/* Book Shelf & Items */
+.dark-mode .book-shelf {
+  /* container bg handled above */
+}
+
+.dark-mode .book-item {
+  background-color: var(--container-bg);
+  box-shadow: 0 2px 4px var(--shadow-dark);
+  color: var(--text-color);
+}
+
+.dark-mode .book-item:hover {
+  box-shadow: 0 4px 12px var(--shadow-dark);
+}
+
+.dark-mode .book-item img {
+  filter: brightness(0.9);
+  border-color: var(--border-color);
+}
+
+.dark-mode .book-details h3 {
+  color: var(--text-color);
+}
+
+.dark-mode .book-details p,
+.dark-mode .book-meta {
+  color: var(--text-secondary);
+}
+
+.dark-mode .book-meta span {
+  color: var(--text-secondary);
+}
+
+/* Popular Authors */
+.dark-mode .popular-authors {
+  /* container bg handled above */
+}
+
+.dark-mode .author-card img {
+  border-color: var(--border-color);
+  filter: brightness(0.9);
+}
+
+.dark-mode .author-card p {
+  color: var(--text-color);
+}
+
+/* Digitales News */
+.dark-mode .digitales-news {
+  /* container bg handled above */
+}
+
+.dark-mode .news-card {
+  background-color: var(--container-bg);
+  box-shadow: 0 2px 4px var(--shadow-dark);
+  color: var(--text-color);
+}
+
+.dark-mode .news-card h4 {
+  color: var(--text-color);
+}
+
+.dark-mode .news-card p {
+  color: var(--text-secondary);
+}
+
+.dark-mode .news-card img {
+  filter: brightness(0.9);
+}
+
+/* User Profile/Dashboard */
+.dark-mode .user-profile-page-wrapper {
+  background-color: var(--container-bg);
+  box-shadow: 0 4px 8px var(--shadow-dark);
+  color: var(--text-color);
+}
+
+.dark-mode .user-profile-card {
+  color: var(--text-color);
+}
+
+.dark-mode .profile-avatar {
+  background-color: #2a2a2a;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+}
+
+.dark-mode .profile-info h2 {
+  color: var(--text-color);
+}
+
+.dark-mode .profile-info p,
+.dark-mode .profile-info .tag-badge {
+  color: var(--text-secondary);
+  background-color: #223322;
+}
+
+/* Decorative Line Break */
+.dark-mode .decorative-line-break {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><path fill="none" stroke="%2377aaff" stroke-width="1" d="M0,10 C20,0 30,20 50,10 C70,0 80,20 100,10" /></svg>');
+  opacity: 0.4;
+}
+
+/* Section Titles */
+.dark-mode .section-title {
+  color: var(--text-color);
+  border-color: #333;
+}
+
+/* Activity Log */
+.dark-mode .activity-log li {
+  color: var(--text-secondary);
+}
+
+.dark-mode .activity-log li span {
+  color: #555;
+}
+
+/* Genre Tags */
+.dark-mode .genre-tag {
+  background-color: var(--tag-bg);
+  color: var(--text-secondary);
+  transition: background-color 0.2s ease;
+}
+
+.dark-mode .genre-tag:hover {
+  background-color: var(--tag-hover-bg);
+  color: #fff;
+}
+
+/* Continue Reading Shelf */
+.dark-mode .continue-reading-shelf {
+  /* container bg handled above */
+}
+
+.dark-mode .continue-reading-item {
+  background-color: #222;
+  box-shadow: 0 2px 4px var(--shadow-dark);
+  color: var(--text-color);
+}
+
+.dark-mode .continue-reading-item img {
+  filter: brightness(0.9);
+}
+
+/* Progress Bar */
+.dark-mode .progress-bar-container {
+  background-color: var(--progress-bg);
+}
+
+.dark-mode .progress-bar {
+  background-color: var(--progress-fill);
+}
+
+/* Progress Text */
+.dark-mode .progress-text {
+  color: var(--text-secondary);
+}
+
+/* Favorite Books Carousel */
+.dark-mode .favorite-books-carousel {
+  /* container bg handled above */
+}
+
+.dark-mode .favorite-book-item img {
+  filter: brightness(0.9);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px var(--shadow-dark);
+}
+
+/* Carousel Arrows */
+.dark-mode .carousel-arrow {
+  background-color: var(--button-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  transition: background-color 0.2s ease;
+}
+
+.dark-mode .carousel-arrow:hover {
+  background-color: var(--button-hover-bg);
+  color: #fff;
+}
