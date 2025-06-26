@@ -48,13 +48,6 @@
                 </div>
             </div>
 
-            <div class="comment">
-                <div class="comment-avatar">F</div>
-                <div class="comment-content">
-                    <div class="comment-author">Long Time Fan</div>
-                    <div class="comment-text">Rick Warren's best work in my opinion. Life-changing content delivered in an accessible way.</div>
-                    <div class="comment-meta">1 month ago • 👍 15 likes</div>
-                </div>
-            </div>
+           
         </div>
     </div>
