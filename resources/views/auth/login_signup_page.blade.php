@@ -19,7 +19,7 @@ but i already conbined everything..... but feel free to split it apart
     <x-navigation.header/> -->
 
     <!-- login page -->
-    <x-login_signup.log_sign/>
+    <x-auth-page.login-signup/>
 
     <!-- footer page
     <x-navigation.footer/> -->

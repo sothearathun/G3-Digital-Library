@@ -111,9 +111,3 @@ class Library_controller extends Controller
     }
 
     }
-
-
-
-    
-    
-}

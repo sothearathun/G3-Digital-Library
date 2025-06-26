@@ -4,8 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\Library_controller;
 
 
-// http://127.0.0.1:8000
-// Route::get('/', [Library_controller::class, 'login_signup_page']);
+http://127.0.0.1:8000
+Route::get('/', [Library_controller::class, 'login_signup_page']);
 
 // http://127.0.0.1:8000/homepage
 Route::get('/homepage', [Library_controller::class, 'homepage'])->name('homepage');
