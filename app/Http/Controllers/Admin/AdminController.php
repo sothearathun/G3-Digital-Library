@@ -33,6 +33,7 @@ public function processPublish(Request $request){
         $publish_book = new Book();              
         $publish_book->book_title = $request->book_title;
         $publish_book->description = $request->description;
+        $publish_book->prologue = $request->prologue;
         $publish_book->total_pages = $request->total_pages;
         $publish_book->book_categories = $request->book_categories;
         $publish_book->author_name = $author->author_name;
@@ -76,6 +77,7 @@ public function processPublish(Request $request){
         
         $publish_book->book_title = $request->book_title;
         $publish_book->description = $request->description;
+        $publish_book->prologue = $request->prologue;
         $publish_book->total_pages = $request->total_pages;
         $publish_book->book_categories = $request->book_categories;
         $publish_book->author_name = $author->author_name;
