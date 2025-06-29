@@ -1,19 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Detail Page</title>
+<!-- resources/views/frontend-pages/homepage.blade.php -->
 
+@extends('layouts.app')
 
-
-    <!-- style sheet -->
+@section('title', 'Digitales - Homepage')
+@push('styles')
     <link rel="stylesheet" href="{{ asset('css/web/viewbook.css') }}">
-</head>
-<body>
+@endpush
 
-    <!-- header -->
-    <x-navigation.header/>
+@section('content')
 
     <div class="container">
         <a href="" class="back-button" onclick="history.back(); return false;">
@@ -105,8 +99,4 @@
     <!-- comment section -->
     <x-books.comment-section/> 
 
-
-    <!-- footer -->
-    <x-navigation.footer/>
-</body>
-</html>
+@endsection

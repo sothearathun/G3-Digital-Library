@@ -192,3 +192,27 @@
     flex: 1;
     min-width: 180px;
 }
+.profile-greeting {
+    font-size: 15px;
+    position: absolute;
+    right: 10.5rem;
+}
+.guest-login{
+    font-size: 15px;
+    position: absolute;
+    right: 10.5rem;
+    text-decoration: none;
+    bottom: 5px;
+}
+
+/* responsive */
+ @media (max-width: 768px) {
+    .profile-greeting {
+        font-size: 15px;
+        right: 20px;
+    }
+    .guest-login {
+        font-size: 15px;
+        right: 20px;
+    }
+ }

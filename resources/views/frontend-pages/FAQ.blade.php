@@ -1,22 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Help Center - Digitales</title>
+<!-- resources/views/frontend-pages/homepage.blade.php -->
 
+@extends('layouts.app')
 
-
-    <!-- style sheet -->
+@section('title', 'Digitales - Homepage')
+@push('styles')
     <link rel="stylesheet" href="{{ asset('css/web/FAQ.css') }}">
-</head>
-<body>
+@endpush
 
-
-    <!-- header -->
-    <x-navigation.header/>
-
-
+@section('content')
 
 
     <div class="container">
@@ -68,66 +59,4 @@
     </div>
 
 
-
-    <!-- footer -->
-    <x-navigation.footer/>
-
-
-    <!-- <script>
-        // Search functionality
-        const searchInput = document.getElementById('searchInput');
-        const searchResults = document.getElementById('searchResults');
-        const faqItems = document.querySelectorAll('.faq-item');
-
-        searchInput.addEventListener('focus', function() {
-            searchResults.style.display = 'block';
-        });
-
-        searchInput.addEventListener('blur', function() {
-            setTimeout(() => {
-                searchResults.style.display = 'none';
-            }, 200);
-        });
-
-        searchInput.addEventListener('input', function() {
-            const query = this.value.toLowerCase();
-            
-            // Filter FAQ items based on search
-            faqItems.forEach(item => {
-                const question = item.querySelector('.faq-question').textContent.toLowerCase();
-                const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
-                
-                if (question.includes(query) || answer.includes(query) || query === '') {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
-            
-            // Show/hide search results dropdown
-            if (query.length > 0) {
-                searchResults.style.display = 'block';
-            } else {
-                searchResults.style.display = 'none';
-            }
-        });
-
-        // Handle search result clicks
-        document.querySelectorAll('.search-result-item').forEach(item => {
-            item.addEventListener('click', function() {
-                searchInput.value = this.textContent;
-                searchResults.style.display = 'none';
-                
-                // Filter FAQ items based on selected result
-                const query = this.textContent.toLowerCase();
-                faqItems.forEach(faqItem => {
-                    const question = faqItem.querySelector('.faq-question').textContent.toLowerCase();
-                    if (question.includes(query)) {
-                        faqItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    }
-                });
-            });
-        });
-    </script> -->
-</body>
-</html>
+@endsection

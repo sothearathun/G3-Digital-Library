@@ -1,25 +1,14 @@
+<!-- resources/views/frontend-pages/homepage.blade.php -->
 
-<!-- 
-this page will be static since we wont really be editing much or often 
--->
+@extends('layouts.app')
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - Digitales</title>
-
-
-
-    <!-- style sheet -->
+@section('title', 'Digitales - About Us')
+@push('styles')
     <link rel="stylesheet" href="{{ asset('css/web/aboutus.css') }}">
-</head>
-<body>
+@endpush
 
-    <!-- header -->
-     <x-navigation.header/>
-
+@section('content')
+    
 
     <div class="container">
         <!-- About Us Section -->
@@ -57,8 +46,6 @@ this page will be static since we wont really be editing much or often
 
         <!-- Contributors Section -->
         <section class="section team-section">
-           
-
             <div class="team-role">
                 <h3>Developer Team</h3>
                 <div class="team-grid">
@@ -81,11 +68,4 @@ this page will be static since we wont really be editing much or often
         <div class="divider"></div>
     </div>
 
-
-
-    <!-- footer -->
-     <x-navigation.footer/>
-
-    
-</body>
-</html>
+@endsection

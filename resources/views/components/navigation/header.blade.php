@@ -33,6 +33,19 @@
                 <li><a href="#">Mode</a></li>
             </ul>
         </nav>
-        <div class="profile-icon">👤</div>
+
+       <div class="profile-icon">
+            <i class="fa-solid fa-user"></i>
+
+            @guest
+                <a href="{{ route('login') }}" class="guest-login">login/signup</a>
+            @endguest
+
+            @auth
+                <p class="profile-greeting">Hello, {{ Auth::user()->name }}</p>
+                <x-home.profile-menu/>
+            @endauth
+        </div>
+
     </div>
 </header>

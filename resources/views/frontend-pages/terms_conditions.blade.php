@@ -1,18 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>Terms and Conditions</title>
+<!-- resources/views/frontend-pages/homepage.blade.php -->
 
-    <!-- Stylesheet -->
+@extends('layouts.app')
+
+@section('title', 'Digitales - Homepage')
+@push('styles')
     <link rel="stylesheet" href="{{ asset('css/web/terms.css') }}">
-</head>
-<body>
+@endpush
 
-    <!-- Header -->
-    <x-navigation.header />
+@section('content')
 
     <main class="terms-wrapper container" role="main" aria-labelledby="terms-title">
         <h1 class="terms-title" id="terms-title">Terms and Conditions</h1>
@@ -33,8 +28,4 @@
 
     </main>
 
-    <!-- Footer -->
-    <x-navigation.footer />
-
-</body>
-</html>
+@endsection

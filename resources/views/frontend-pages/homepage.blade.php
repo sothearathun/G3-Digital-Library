@@ -1,33 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digitales - Homepage</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    
+<!-- resources/views/frontend-pages/homepage.blade.php -->
 
+@extends('layouts.app')
 
-    <!-- css sheet -->
-    <link rel="stylesheet" href="{{ asset('css/web/css_homepage.css') }}">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+@section('title', 'Digitales - Homepage')
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('css/web/homepage.css') }}">
+@endpush
 
-
-
-</head>
-<body>
-
-    <!-- login page -->
-    <x-login_signup.log_sign/>
-
-    
-    <!-- Header page -->
-    <x-navigation.header/>
-
-    <div class="container">
-        
+@section('content')    
     <!-- Hero Section Component -->
     <x-home.hero-section/>
 
@@ -37,8 +17,6 @@
     <div id="search-section">
         <x-home.search-bar/>
     </div>
-
-
 
     <!-- Trending Books  -->
     <h2 class="section-header" style="font-size: 30px;">TRENDING BOOKS</h2>
@@ -74,11 +52,5 @@
         </div>
     </div>
 
-    <!-- footer page -->
-    <x-navigation.footer/>
 
-
-    <!-- js for swiping book functions -->
-    <script src="{{ asset('js/web/homepage.js') }}"></script>
-</body>
-</html>
+@endsection  

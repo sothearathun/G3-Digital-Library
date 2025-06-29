@@ -26,10 +26,11 @@ class Reading_Progress extends Model
         return $this->belongsToMany(Book::class);
     }
 
-    public function users()
-    {
-        return $this->belongsToMany(User::class);
-    }
+    // public function users()
+    // {
+    //     return $this->belongsToMany(User::class);
+    // }
+
 
     public static function findOrCreateByID($progress_id)
     {

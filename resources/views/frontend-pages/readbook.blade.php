@@ -1,13 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ $book->book_title }}</title>
-  <link rel="stylesheet" href="{{ asset('css/web/readbook.css') }}">
-  <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.7.570/build/pdf.min.js"></script>
-  <link rel="stylesheet" href="{{ asset('css/web/readbook.css') }}">
-</head>
+@extends('layouts.app')
+
+@section('title', 'Digitales - Homepage')
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('css/web/readbook.css') }}">
+@endpush
+@section('content')
+
 <body>
   <div class="container">
     <div class="book-header">
@@ -34,7 +32,7 @@
           
           <div class="controls-grid">
 
-         <button class="btn btn-success" onclick="window.location.href=`{{ URL::to(route('storeReadingProgress')) }}`">Save Progress</button>
+         <button class="btn btn-success" >Save Progress</button>
 
           </div>
         </div>
@@ -49,7 +47,7 @@
             <div class="stat-card">
               <div class="stat-label">Current Page</div>
               <!-- load current page from database, then js handles track page -->
-              <div class="stat-value" id="currentPageStat">{{ $reading_progress->current_page }}</div>
+              <div class="stat-value" id="currentPageStat"></div>
             </div>
             <div class="stat-card">
               <div class="stat-label">Total Pages</div>
@@ -78,8 +76,8 @@
     </div>
   </div>
 
+@push('scripts')
   <script src="{{ asset('js/web/readbook.js') }}"></script>
-   
-  </script>
-</body>
-</html>
+  <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.7.570/build/pdf.min.js"></script>
+@endpush
+@endsection

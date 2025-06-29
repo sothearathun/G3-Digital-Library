@@ -6,7 +6,7 @@
 
     <h1 class="visually-hidden">Book Search</h1> {{-- Hidden heading for accessibility --}}
 
-    <form action="{{ route('books.search') }}" method="GET" class="main-search-form" role="search">
+    <form action="{{ route('search_page') }}" method="GET" class="main-search-form" role="search">
 
         <label for="main-search-input" class="visually-hidden">Search for books, authors, genres</label>
         <input type="text" id="main-search-input" name="query" placeholder="Explore Your Fantasy" aria-label="Search for books, authors, or genres" value="{{ request('query') }}">

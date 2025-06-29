@@ -1,21 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
+<!-- resources/views/frontend-pages/homepage.blade.php -->
 
-    <!-- style sheet -->
+@extends('layouts.app')
+
+@section('title', 'Digitales - Homepage')
+@push('styles')
     <link rel="stylesheet" href="{{ asset('css/web/profile.css') }}">
-</head>
-<body>
-    <!-- header -->
-    @include('components.navigation.header')
+@endpush
+
+@section('content')
 
     <div class="user-profile-page-wrapper">
         <div class="user-profile-card">
             <div class="profile-avatar">
-                <span class="placeholder-avatar">👤</span> </div>
+                <span class="placeholder-avatar">
+                    <i class="fas fa-user"></i>
+                </span> </div>
             <div class="profile-info">
                 <h2>Username_123</h2>
                 <p>User ID: <span>123456789</span></p>
@@ -128,7 +127,4 @@
 
     </div>
 
-    <!-- footer -->
-    @include('components.navigation.footer')
-</body>
-</html>
+@endsection
