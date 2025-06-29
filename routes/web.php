@@ -26,8 +26,11 @@ Route::get('/BooksPublished', [AdminController::class, 'booksPublished'])->name(
 Route::get('/UsersRecords', [AdminController::class, 'usersRecords'])->name('UsersRecords');
 // http://127.0.0.1:8000/Statistics
 Route::get('/Statistics', [AdminController::class, 'statistics'])->name('Statistics');
+
 // http://127.0.0.1:8000/Guidelines
 Route::get('/Guidelines', [AdminController::class, 'guidelines'])->name('Guidelines');
+// Route::post('/updateTermsConditions', [AdminController::class, 'updateTermsConditions'])->name('updateTermsConditions');
+
 // http://127.0.0.1:8000/Author
 Route::get('/Authors', [AdminController::class, 'authors'])->name('Authors');
 

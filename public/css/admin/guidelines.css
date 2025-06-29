@@ -9,7 +9,7 @@
     html, body {
       margin: 0;
       height: 100%;
-      overflow: hidden;
+      
     }
 
     .container {
@@ -48,6 +48,7 @@
 
     .actions {
       margin-top: 20px;
+      display: block;
       /* width: ; */
     }
 

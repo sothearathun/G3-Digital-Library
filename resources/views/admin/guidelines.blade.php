@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Guidelines</title>
   <link rel="stylesheet" href="{{ asset('css/admin/guidelines.css') }}"> 
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script> 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script> 
 </head>
 
 <body>
@@ -16,42 +20,38 @@
 
       <h3>Terms & Conditions</h3>
       <ol>
-        <li>You must be at least 13 years old to use this service. If you are under 18, you must have permission from a parent or guardian.</li>
-        <li>To access certain features, you may need to register an account. You must provide accurate and complete information. You are responsible for maintaining the security of your account and for any activity under your account.</li>
-        <li>The content on the website is for personal, non-commercial use only. You may not copy, share, download, or distribute any materials unless explicitly allowed. All content is the intellectual property of [Your Online Library Name] or its licensors.</li>
-        <li>You agree not to use the service for unlawful purposes or in a way that could harm the platform or other users. Prohibited actions include unauthorized access, distribution of malicious software, and harassment.</li>
-        <li>Some features may require payment or a subscription. Fees are non-refundable unless otherwise stated. We may change prices or features at any time with prior notice.</li>
+        @foreach ($v_terms_conditions->terms_conditions_points as $point)
+            <li>{{ $point }}</li>
+        @endforeach
       </ol>
 
-      <div class="actions">
-        <button class="btn">Edit</button>
-        <button class="btn">Add</button>
-      </div>
 
-      <h3>FAQ Management</h3>
+
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Edit Terms & Conditions
+      </button>
+      <x-forms.guidelinesform :v_terms_conditions="$v_terms_conditions" />
+
+      <h3>FAQ</h3>
       <ol>
-        <li><strong>What is [Your Online Library Name]?</strong><br>
-          [Your Online Library Name] is a digital platform where users can access a wide range of books, articles, and other reading materials online.
-        </li>
-        <li><strong>How do I create an account?</strong><br>
-          Click on the "Sign Up" or "Register" button on the homepage and fill in the required information. You’ll need a valid email address to complete registration.
-        </li>
-        <li><strong>Is it free to use?</strong><br>
-          Some content is available for free. However, premium materials may require a paid subscription or a one-time fee.
-        </li>
-        <li><strong>What types of materials are available?</strong><br>
-          We offer e-books, academic journals, magazines, audiobooks, and other educational resources.
-        </li>
-        <li><strong>Can I download books?</strong><br>
-          This depends on the material. Some books are available for offline reading, while others can only be accessed online.
-        </li>
+          @foreach ($v_faq->questions as $index => $question)
+              <li>
+                  <strong>{{ $question }}</strong><br>
+                  <p>{{ $v_faq->answers[$index] ?? 'No answer provided.' }}</p>
+              </li>
+          @endforeach
       </ol>
 
-      <div class="actions">
-        <button class="btn">Edit</button>
-        <button class="btn">Add</button>
-      </div>
+
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Edit FAQ
+      </button>
+      <x-forms.guidelinesform/>
+
+
     </div>
   </div>
 </body>
+<script src="{{ asset('js/admin/guidelines.js') }}"></script>
 </html>

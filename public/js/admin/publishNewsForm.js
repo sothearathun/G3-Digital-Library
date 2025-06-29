@@ -11,3 +11,9 @@
 
     reader.readAsDataURL(file);
   });
+
+  const cancelButton = document.getElementById('cancel-button');
+  cancelButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.location.href = '/DigitalesNews';
+  });

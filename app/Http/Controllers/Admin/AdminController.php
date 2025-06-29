@@ -5,6 +5,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Book;
 use App\Models\Author;
 use App\Models\Digitales_News;
+use App\Models\terms_conditions;
+use App\Models\faq;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -27,39 +29,40 @@ class AdminController extends Controller
     ]);     
 }     
 
-public function processPublish(Request $request){           
+// stores to uploads for now
+public function processPublish(Request $request){
     if ($request->input('action') == 'publish') {
-        // Code to publish a new book              
-        $author = Author::findOrCreateByName($request->author_name);              
-        $publish_book = new Book();              
+        // Code to publish a new book
+        $author = Author::findOrCreateByName($request->author_name);
+        
+        $publish_book = new Book();
         $publish_book->book_title = $request->book_title;
         $publish_book->description = $request->description;
+        $publish_book->prologue = $request->prologue;
         $publish_book->total_pages = $request->total_pages;
         $publish_book->book_categories = $request->book_categories;
         $publish_book->author_name = $author->author_name;
-        $publish_book->released_date = $request->released_date;              
-
+        $publish_book->released_date = $request->released_date;
+        
         if ($request->hasFile('book_cover')) {
             $bookCover = $request->file('book_cover');
             $coverName = time() . '_cover.' . $bookCover->getClientOriginalExtension();
             
-            // Store in cloud storage
-            $coverPath = $bookCover->storeAs('book_covers', $coverName, 's3');
-            Storage::disk('s3')->setVisibility($coverPath, 'public');
-            $publish_book->book_cover = $coverPath;
-        }              
-
+            // Store in local uploads folder
+            $coverPath = $bookCover->move(public_path('uploads/book_covers'), $coverName);
+            $publish_book->book_cover = 'uploads/book_covers/' . $coverName;
+        }
+        
         if ($request->hasFile('file_path')) {
             $bookFile = $request->file('file_path');
             $fileName = time() . '_book.' . $bookFile->getClientOriginalExtension();
             
-            // Store in cloud storage
-            $filePath = $bookFile->storeAs('book_files', $fileName, 's3');
-            Storage::disk('s3')->setVisibility($filePath, 'public');
-            $publish_book->file_path = $filePath;
+            // Store in local uploads folder
+            $filePath = $bookFile->move(public_path('uploads/book_files'), $fileName);
+            $publish_book->file_path = 'uploads/book_files/' . $fileName;
             $publish_book->file_format = $bookFile->getClientOriginalExtension();
-        }                            
-
+        }
+        
         // Handle genres
         $chooseGenres = $request->input('book_genres');
         if ($chooseGenres && is_array($chooseGenres)) {
@@ -67,35 +70,34 @@ public function processPublish(Request $request){
         } else {
             $publish_book->book_genres = '';
         }
-
+        
         $publish_book->save();
-
     } elseif ($request->input('action') == 'edit') {
         // Similar updates for edit functionality
-        // ... (edit code with cloud storage)
-    }                   
-
-    return redirect('/BooksPublished');     
+        // ... (edit code with local storage)
+    }
+    
+    return redirect('/BooksPublished');
 }
 
 // In your frontend, access files like this:
 // <img src="{{ Storage::disk('s3')->url($book->book_cover) }}" alt="Book Cover">   
 
-    public function editBookForm($book_id)     
-    {         
-        $book = Book::find($book_id);
-        $genres = DB::table('genres')->get(); // Add this line!
+    // public function editBookForm($book_id)     
+    // {         
+    //     $book = Book::find($book_id);
+    //     $genres = DB::table('genres')->get(); // Add this line!
         
-        if (!$book) {
-            return redirect('/BooksPublished')->with('error', 'Book not found');
-        }
+    //     if (!$book) {
+    //         return redirect('/BooksPublished')->with('error', 'Book not found');
+    //     }
         
-        return view('admin.publishForm', [ // Use same view as publishBookForm
-            'book' => $book,
-            'v_genres' => $genres, // Pass genres for dropdown
-            'action' => 'edit'
-        ]);     
-    }
+    //     return view('admin.publishForm', [ // Use same view as publishBookForm
+    //         'book' => $book,
+    //         'v_genres' => $genres, // Pass genres for dropdown
+    //         'action' => 'edit'
+    //     ]);     
+    // }
 
     public function booksPublished(){
 
@@ -127,9 +129,42 @@ public function processPublish(Request $request){
     public function statistics(){
         return view('admin.statistics');
     }
-    public function guidelines(){
-        return view('admin.guidelines');
+
+
+    public function guidelines()
+    {
+        $v_terms_conditions = terms_conditions::where('status', 1)
+            ->orderByDesc('tc_id')
+            ->latest()
+            ->first();
+        
+        $v_faq = faq::where('status', 1)
+            ->orderByDesc('faq_id')
+            ->latest()
+            ->first();
+
+
+        return view('admin.guidelines', compact('v_terms_conditions', 'v_faq'));
     }
+    // public function updateTermsConditions(Request $request, $id)
+    // {
+    //     $validated = $request->validate([
+    //         'bullet_points' => 'required|array',
+    //         'bullet_points.*' => 'required|string|max:1000',
+    //     ]);
+
+    //     // Deactivate old version
+    //     terms_conditions::where('status', 1)->update(['status' => 0]);
+
+    //     // Create new version
+    //     $new = new terms_conditions();
+    //     $new->terms_conditions_points = $validated['bullet_points'];
+    //     $new->status = 1;
+    //     $new->save();
+
+    //     return redirect()->back();
+    // }
+
     public function authors(){
 
         $authors = DB::table('authors')

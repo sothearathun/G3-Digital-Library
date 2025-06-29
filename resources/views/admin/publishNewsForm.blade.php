@@ -31,6 +31,7 @@
 
     
     <button type="submit">Publish News</button>
+    <button id="cancel-button">Cancel</button>
   </form>
 </div>
 </body>
