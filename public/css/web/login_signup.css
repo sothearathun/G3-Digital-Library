@@ -5,7 +5,7 @@
     width: 100%;
     height: 100%;
     background-color: #1a1a1a; /* Dark fallback color */
-    background-image: url('/uploads/backgrounds/login_bg.png');
+    background-image: url('/uploads-static/backgrounds/login_bg.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

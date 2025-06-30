@@ -5,7 +5,7 @@
         @foreach($books as $book) 
         <div class="book-item" onclick="location.href=`{{ route('viewbook', ['book_id' => $book->book_id]) }}`" style="cursor: pointer;">
             {{-- Book Cover Image --}}
-            <img src="{{ asset($book->book_cover) }}" alt="Book Cover">
+            <img src="{{ asset('uploads/' . $book->book_cover) }}" alt="{{ $book->book_title }}">
             <div class="book-details">
                 <h3>{{ $book->book_title }}</h3>
                 <p>{{ $book->description }}</p>

@@ -7,7 +7,7 @@
         <a href="{{ route('search_page') }}" class="explore-button">Explore New Fantasy</a>
     </div>
     <div class="hero-image">
-        <img src="{{ asset('uploads/hero_image/hero_image.jpg') }}" alt="">
+        <img src="{{ asset('uploads-static/hero_image/hero_image.jpg') }}" alt="">
         <small>Image credits: Wikimedia Commons</small>
     </div>
 </section>
