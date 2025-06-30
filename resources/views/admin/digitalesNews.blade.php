@@ -32,7 +32,7 @@
           <tr>
             <td>{{ $news->news_id }}</td>
             <td>
-              <img src="{{ asset($news->news_cover) }}" class="book-cover" alt="Book Cover" style="width: 100px; height: 100px;">
+              <img src="{{ asset('uploads/' . $news->news_cover) }}" class="book-cover" alt="Book Cover" style="width: 100px; height: 100px;">
             </td>
             <td>{{ $news->news_title }}</td>
             <td>{{ $news->news_des }}</td>
@@ -40,8 +40,8 @@
               <a href="{{ $news->news_link }}" target="_blank">{{ $news->news_link }}</a>
             </td>
             <td>
-              <a href="" class="edit-button">Edit</a>
-              <a href="" class="delete-button">Delete</a>
+              <a href="{{ route('editNewsForm', ['news_id' => $news->news_id]) }}" class="edit-button">Edit</a>
+               <a href="{{ route('deleteNews', ['news_id' => $news->news_id]) }}" class="delete-button">Delete</a>
             </td>
           </tr>
           @endforeach

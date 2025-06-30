@@ -14,13 +14,22 @@
 <x-navigation.admin-sidebar/>
 
 <div class="content-area">
-  <h3>Publish Books</h3>
+
+  
+    @if($action == "edit")
+      <h3>Edit Book</h3>
+    @else
+      <h3>Publish Book</h3>
+    @endif
+
   <form action="/processPublish" method="post" enctype="multipart/form-data">
     @csrf
 
+    <input type="hidden" name="action" value="{{ $action ?? 'publish' }}">
+
     <!-- $book variable is to deal with edit form, $genre is to deal with publishform -->
 
-    <input type="hidden" name="action" value="{{ $action ?? 'publish' }}">
+
     @if($action == "edit")
       <input type="hidden" name="book_id" value="{{ $book->book_id }}">
     @endif
@@ -66,15 +75,38 @@
       </div>
 
 
-    <label for="file_path">File Path</label>
-    <input type="file" name="file_path" id="file_path" accept=".pdf" value="{{ $book->file_path ?? '' }}" required>
+    <label for="file_path">File Path (pdf)</label>
+    @if(isset($book) && $book->file_path)
+        <p>
+            <p>Current File:</p>
+            <a href="{{ asset('uploads/' . $book->file_path) }}" target="_blank">
+                {{ basename($book->file_path) }}
+            </a>
+        </p>
+    @endif
+    <p>Upload New File:</p>
+    <input type="file" name="file_path" id="file_path" accept=".pdf"
+    @if(!isset($book)) required @endif>
 
     <label for="book_cover">Book Cover</label>
-      <input type="file" name="book_cover" id="book_cover" accept="image/*" value="{{ $book->book_cover ?? '' }}" required>
+     @if(isset($book) && $book->book_cover)
+        <p>Current Cover:</p>
+        <div style="margin-bottom: 10px;">
+            <img src="{{ asset('uploads/' . $book->book_cover) }}" alt="Book Cover" width="200">
+        </div>
+    @endif
+    <p>Upload New Cover:</p>
+    <input type="file" name="book_cover" id="book_cover" accept="image/*"  @if(!isset($book)) required @endif >
 
-      <div id="book_cover_preview" style="width: 200px; height: 200px; border: 1px solid #ccc; margin-top: 10px;" ></div>
 
-    <button type="submit">{{ $action == 'Update Book' ? 'Update' : 'Publish Book' }}</button>
+    <div id="book_cover_preview" style="width: 200px; height: 200px; border: 1px solid #ccc; margin-top: 10px;" ></div>
+
+    @if($action == "edit")
+      <button type="submit">Update Book</button>
+    @else
+      <button type="submit">Publish Book</button>
+    @endif
+
   </form>
 </div>
 

@@ -34,7 +34,7 @@
                       @forelse ($v_bookPublished as $book)
                         <tr>
                             <td>
-                                <img src="{{ asset($book->book_cover) }}" class="book-cover" alt="Book Cover">
+                                <img src="{{ asset('uploads/' . $book->book_cover) }}" alt="{{ $book->book_title }}">
                             </td>
                             <td>{{ $book->book_title }}</td>
                             <td>{{ $book->author_name }}</td>
@@ -50,7 +50,7 @@
                             </td>
                             <td>{{ $book->released_date }}</td>
                             <td>
-                                <a href="{{ asset($book->file_path) }}" class="btn btn-sm btn-primary">View</a>
+                                <a href="{{ asset('uploads/' . $book->file_path) }}" class="btn btn-sm btn-primary" target="_blank">View</a>
                                 <a href="{{ route('editBookForm', ['book_id' => $book->book_id]) }}" class="btn btn-sm btn-warning">Edit</a>
                                 <a href="{{ route('processDeleteBook', ['book_id' => $book->book_id]) }}" class="btn btn-sm btn-danger">Delete</a>
                             </td>

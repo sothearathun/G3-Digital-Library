@@ -1,19 +1,20 @@
-  const newsCoverInput = document.getElementById('news_cover');
-  const newsCoverPreview = document.getElementById('news_cover_preview');
+document.addEventListener('DOMContentLoaded', function () {
+    const input = document.getElementById('news_cover');
+    const preview = document.getElementById('news_cover_preview');
 
-  newsCoverInput.addEventListener('change', (e) => {
-    const file = e.target.files[0];
-    const reader = new FileReader();
+    input.addEventListener('change', function () {
+        const file = this.files[0];
 
-    reader.onload = (event) => {
-      newsCoverPreview.style.backgroundImage = `url(${event.target.result})`;
-    };
+        if (file && file.type.startsWith('image/')) {
+            const reader = new FileReader();
 
-    reader.readAsDataURL(file);
-  });
+            reader.onload = function (e) {
+                preview.innerHTML = `<img src="${e.target.result}" style="width: 100%; height: 100%; object-fit: cover;">`;
+            };
 
-  const cancelButton = document.getElementById('cancel-button');
-  cancelButton.addEventListener('click', (e) => {
-    e.preventDefault();
-    window.location.href = '/DigitalesNews';
-  });
+            reader.readAsDataURL(file);
+        } else {
+            preview.innerHTML = '';
+        }
+    });
+});

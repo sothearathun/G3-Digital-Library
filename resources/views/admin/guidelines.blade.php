@@ -13,6 +13,8 @@
 
 <body>
 
+<!-- guidelines blade -->
+
 <x-navigation.admin-sidebar/>
 
     <div class="content">
@@ -27,10 +29,11 @@
 
 
 
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#terms_conditions_Modal">
         Edit Terms & Conditions
       </button>
-      <x-forms.guidelinesform :v_terms_conditions="$v_terms_conditions" />
+      <x-forms.terms_conditions_form/>
+
 
       <h3>FAQ</h3>
       <ol>
@@ -44,10 +47,10 @@
 
 
       <!-- Button trigger modal -->
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#faq_Modal">
         Edit FAQ
       </button>
-      <x-forms.guidelinesform/>
+      <x-forms.faq_form/>
 
 
     </div>

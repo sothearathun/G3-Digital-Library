@@ -7,7 +7,7 @@ use App\Http\Controllers\Admin\AdminController;
 // BACKEND
 // //analytics
 // http://127.0.0.1:8000/toAnalytics
-Route::get('/Analytics', [AdminController::class, 'analytics'])->name('Analytics');
+Route::get('/', [AdminController::class, 'analytics'])->name('Analytics');
 
 // http://127.0.0.1:8000/publishBookForm
 Route::get('/publishBookForm', [AdminController::class, 'publishBookForm'])->name('publishBookForm');
@@ -41,3 +41,6 @@ Route::get('/publishNewsForm', [AdminController::class, 'publishNewsForm'])->nam
 Route::post('/processPublishNews', [AdminController::class, 'processPublishNews']);
 // http://127.0.0.1:8000/DigitalNews
 Route::get('/DigitalesNews', [AdminController::class, 'digitalesNews'])->name('DigitalesNews');
+
+Route::match(['get', 'post'],'/deleteNews/{news_id}', [AdminController::class, 'deleteNews'])->name('deleteNews');
+Route::get('/editNewsForm/{news_id}', [AdminController::class, 'editNewsForm'])->name('editNewsForm');

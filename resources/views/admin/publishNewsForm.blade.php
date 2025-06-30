@@ -12,25 +12,47 @@
   <x-navigation.admin-sidebar/>
   <!-- form -->
   <div class="content-area">
-  <h3>Publish Books</h3>
+
+  @if(isset($news) && $action == "edit")
+    <h3>Edit News</h3>
+  @else
+    <h3>Publish Books</h3>
+  @endif
   <form action="/processPublishNews" method="post" enctype="multipart/form-data">
     @csrf
+    <!-- hidden action input -->
+     <input type="hidden" name="action" value="{{ $action ?? 'publish' }}">
+
+    @if(isset($news) && $action == "edit")
+      <input type="hidden" name="news_id" value="{{ $news->news_id }}">
+    @endif
 
     <label for="news_title">News Title</label>
-    <input type="text" name="news_title" id="news_title" placeholder="Enter News Title">
+    <input type="text" name="news_title" id="news_title" placeholder="Enter News Title" value="{{ $news->news_title ?? '' }}" required>
 
     <label for="news_des">News Description</label>
-    <input type="text" name="news_des" id="news_des" placeholder="Enter News Description">
+    <input type="text" name="news_des" id="news_des" placeholder="Enter News Description" value="{{ $news->news_des ?? '' }}" required>
 
     <label for="news_link">News Link</label>
-    <input type="text" name="news_link" id="news_link" placeholder="Enter News Link">
+    <input type="text" name="news_link" id="news_link" placeholder="Enter News Link" value="{{ $news->news_link ?? '' }}" required>
 
     <label for="news_cover">News Cover</label>
-    <input type="file" name="news_cover" id="news_cover" accept="image/*">
+
+     @if(isset($news) && $news->news_cover)
+        <p>Current Cover:</p>
+        <div style="margin-bottom: 10px;">
+            <img src="{{ asset('uploads/' . $news->news_cover) }}" alt="News Cover" width="200">
+        </div>
+    @endif
+    <p>Upload New Cover:</p>
+    <input type="file" name="news_cover" id="news_cover" accept="image/*"  @if(!isset($news)) required @endif >
     <div id="news_cover_preview" style="width: 200px; height: 200px; border: 1px solid #ccc; margin-top: 10px;"></div>
 
-    
-    <button type="submit">Publish News</button>
+    @if(isset($news) && $action == "edit")
+      <button type="submit">Update News</button>
+    @else
+      <button type="submit">Publish News</button>
+    @endif
     <button id="cancel-button">Cancel</button>
   </form>
 </div>
