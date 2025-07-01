@@ -20,10 +20,12 @@
 
     <div class="content">
       <h2>📖 Guidelines</h2>
-
+      
       <h3>Terms & Conditions</h3>
       <ol>
-        
+        @foreach($v_terms_conditions as $terms_conditions)
+          <li>{{$terms_conditions->tc_des}}</li>
+        @endforeach
       </ol>
 
 
@@ -36,7 +38,10 @@
 
       <h3>FAQ</h3>
       <ol>
-          
+          @foreach($v_faq as $faq)
+          <li>{{$faq->questions}}</li>
+          <p>{{$faq -> answers}}</p>
+          @endforeach
       </ol>
 
 
