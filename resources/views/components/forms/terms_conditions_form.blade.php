@@ -1,5 +1,6 @@
-
 <!-- Terms & Conditions Edit Modal -->
+<script src="{{ asset('js/admin/tc_form.js') }}"></script>
+
 <div class="modal fade" id="terms_conditions_Modal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-lg">
     <div class="modal-content">
@@ -11,26 +12,7 @@
 
         <form id="termsForm">
 
-        <!-- populate old one first -->
-          <div class="mb-3">
-            <label class="form-label">Terms & Conditions Points</label>
-            <div id="termsContainer">
-              @if(isset($v_terms_conditions->terms_conditions_points))
-                @foreach ($v_terms_conditions->terms_conditions_points as $index => $point)
-                  <div class="input-group mb-2">
-                    <span class="input-group-text">{{ $index + 1 }}.</span>
-                    <textarea class="form-control terms-point" rows="2" name="terms_points[]">{{ $point }}</textarea>
-                    <button class="btn btn-outline-danger remove-term" type="button">
-                      <i class="fas fa-trash"></i>
-                    </button>
-                  </div>
-                @endforeach
-              @endif
-            </div>
-            <button type="button" class="btn btn-outline-primary btn-sm" id="addTermPoint">
-              <i class="fas fa-plus"></i> Add Term
-            </button>
-          </div>
+          ...
         </form>
 
       </div>

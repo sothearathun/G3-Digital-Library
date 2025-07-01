@@ -12,9 +12,7 @@ class terms_conditions extends Model
     protected $table = 'terms_conditions';
     protected $primaryKey = 'tc_id';
     protected $fillable = [
+        'tc_des',
         'status'
-    ];
-    protected $casts = [
-        'terms_conditions_points' => 'array'// Assuming terms_conditions_points is stored as a JSON array
     ];
 }

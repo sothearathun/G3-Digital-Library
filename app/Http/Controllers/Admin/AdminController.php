@@ -6,7 +6,7 @@ use App\Models\Book;
 use App\Models\Author;
 use App\Models\Digitales_News;
 use App\Models\terms_conditions;
-use App\Models\faq;
+use App\Models\faqs;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -203,36 +203,20 @@ public function editBookForm(Request $request){
     public function guidelines()
     {
         $v_terms_conditions = terms_conditions::where('status', 1)
-            ->orderByDesc('tc_id')
-            ->latest()
-            ->first();
+            ->orderByDesc('tc_id');
         
-        $v_faq = faq::where('status', 1)
-            ->orderByDesc('faq_id')
-            ->latest()
-            ->first();
+        $v_faq = faqs::where('status', 1)
+            ->orderByDesc('faq_id');
 
 
         return view('admin.guidelines', compact('v_terms_conditions', 'v_faq'));
     }
-    // public function updateTermsConditions(Request $request, $id)
-    // {
-    //     $validated = $request->validate([
-    //         'bullet_points' => 'required|array',
-    //         'bullet_points.*' => 'required|string|max:1000',
-    //     ]);
+    // terms and conditions
+    // add terms and conditions
+    
 
-    //     // Deactivate old version
-    //     terms_conditions::where('status', 1)->update(['status' => 0]);
 
-    //     // Create new version
-    //     $new = new terms_conditions();
-    //     $new->terms_conditions_points = $validated['bullet_points'];
-    //     $new->status = 1;
-    //     $new->save();
 
-    //     return redirect()->back();
-    // }
 
     public function authors(){
 
