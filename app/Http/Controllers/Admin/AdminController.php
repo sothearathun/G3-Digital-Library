@@ -202,16 +202,18 @@ public function editBookForm(Request $request){
 
     public function guidelines()
     {
-        $v_terms_conditions = terms_conditions::where('status', 1)
-            ->orderByDesc('tc_id');
-        
-        $v_faq = faqs::where('status', 1)
-            ->orderByDesc('faq_id');
-
+        $v_terms_conditions = terms_conditions::where('status', 1)->get();
+        $v_faq = faqs::where('status', 1)->get();
 
         return view('admin.guidelines', compact('v_terms_conditions', 'v_faq'));
     }
     // terms and conditions
+    // delete tersms and conditions
+    public function deleteTC($tc_id) // Get from route parameter
+    {
+        terms_conditions::where('tc_id', $tc_id)->update(['status' => 0]);
+        return redirect()->back();
+    }
     // add terms and conditions
     
 

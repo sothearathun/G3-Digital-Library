@@ -30,6 +30,9 @@ Route::get('/Statistics', [AdminController::class, 'statistics'])->name('Statist
 // http://127.0.0.1:8000/Guidelines
 Route::get('/Guidelines', [AdminController::class, 'guidelines'])->name('Guidelines');
 // Route::post('/updateTermsConditions', [AdminController::class, 'updateTermsConditions'])->name('updateTermsConditions');
+Route::post('/deleteTC/{tc_id}', [AdminController::class, 'deleteTC'])->name('deleteTC');
+Route::post('/addTC', [AdminController::class, 'addTC'])->name('addTC');
+
 
 // http://127.0.0.1:8000/Author
 Route::get('/Authors', [AdminController::class, 'authors'])->name('Authors');

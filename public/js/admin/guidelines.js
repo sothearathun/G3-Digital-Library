@@ -7,17 +7,13 @@ editActions.forEach(button => {
     });
 });
 
-const myModal = document.getElementById('myModal')
-const myInput = document.getElementById('myInput')
+const addGuidelines = document.getElementById('addGuidelines');
+const addMore = document.getElementById('addMore');
 
-myModal.addEventListener('shown.bs.modal', () => {
-  myInput.focus()
-})
+addMore.forEach(button => {
+    button.addEventListener('click', () => {
+        addGuidelines.style.display = 'block';
+    });
+});
 
 
-function handleEnter(e, input) {
-  if (e.key === 'Enter') {
-    e.preventDefault();
-    addBulletPoint();
-  }
-}

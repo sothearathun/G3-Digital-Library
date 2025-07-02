@@ -22,19 +22,19 @@
       <h2>📖 Guidelines</h2>
       
       <h3>Terms & Conditions</h3>
-      <ol>
-        @foreach($v_terms_conditions as $terms_conditions)
-          <li>{{$terms_conditions->tc_des}}</li>
-        @endforeach
-      </ol>
+        <ol>
+          @foreach($v_terms_conditions as $tc)
+            <li>{{$tc->tc_des}}</li>
+          @endforeach
+        </ol>
 
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#terms_conditions_Modal">
+          Edit Terms & Conditions
+        </button>
+        <button type="button" class="btn btn-primary" id="addMore">Add More</button>
 
-
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#terms_conditions_Modal">
-        Edit Terms & Conditions
-      </button>
-      <x-forms.terms_conditions_form :terms-conditions="$v_terms_conditions" />
-
+        <x-forms.terms_conditions_form :v_terms_conditions="$v_terms_conditions" />
+        <x-forms.add_tc />
 
       <h3>FAQ</h3>
       <ol>
@@ -49,7 +49,9 @@
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#faq_Modal">
         Edit FAQ
       </button>
+      <button type="button" class="btn btn-primary" id="addMore">Add More</button>
       <x-forms.faq_form :faq="$v_faq"/>
+      <x-forms.add_faq />
 
 
     </div>
