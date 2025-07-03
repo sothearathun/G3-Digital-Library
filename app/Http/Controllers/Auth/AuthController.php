@@ -38,22 +38,22 @@ class AuthController extends Controller
         return redirect()->route('homepage');
     }
 
-    public function login(Request $request){
-        // validate the user input
+    public function login(Request $request)
+    {
+        // Validate the user input
         $validated = $request->validate([
             'email' => 'required|string|email|max:255',
             'password' => 'required|string',
         ]);
 
-        $request->session()->put('error', 'Sorry, incorrect credentials provided. Please try again.');
-
-        if  (Auth::attempt($validated)){
+        // Attempt to authenticate the user
+        if (Auth::attempt($validated)) {
             $request->session()->regenerate();
             return redirect()->route('homepage');
-        };
+        }
 
-        return redirect()->route('login');
-
+        // If authentication fails, set error message
+        return redirect()->route('login')->with('error', 'Sorry, incorrect credentials provided. Please try again.');
     }
 
     public function logout(Request $request){

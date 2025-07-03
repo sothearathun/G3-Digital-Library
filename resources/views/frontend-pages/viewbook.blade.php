@@ -17,7 +17,7 @@
         <!-- about books: cover, author name, rating, etc -->
         <div class="book-detail">
             <div class="book-cover">
-                <img src="{{ asset($book->book_cover) }}" alt="{{ $book->book_title }} Cover">
+                <img src="{{ asset('uploads/' . $book->book_cover) }}" alt="{{ $book->book_title }} Cover">
             </div>
 
             <div class="book-info">
@@ -40,7 +40,6 @@
         
                 <div class="book-stats">
                     <span>📖 {{ $book->total_pages }} pages</span>
-                    <span>👁 Like</span>
                     <span>💾 Save</span>
                 </div>
         <!-- about books: cover, author name, rating, etc -->

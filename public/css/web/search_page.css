@@ -26,6 +26,52 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+.back-button {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #666;
+    font-size: 14px;
+    margin: 20px 0;
+}
+
+.back-button:hover {
+    color: #333;
+}
+
+
+.search-form {
+  display: flex;
+  gap: 10px;
+  max-width: 600px;
+  margin-bottom: 20px;
+  margin: auto;
+}
+
+.search-input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1em;
+}
+
+.search-button {
+  padding: 10px 20px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.search-button:hover {
+  background-color: #2980b9;
+}
+
+
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -395,6 +441,16 @@ a:hover {
     position: relative; /* For potential future additions like badges */
 }
 
+.search-result-item img{
+    width: 150px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-right: 30px;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px var(--shadow-light);
+}
+
 .search-result-item:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 25px rgba(0,0,0,0.15);
@@ -415,6 +471,7 @@ a:hover {
     display: flex; /* Use flex for internal layout */
     flex-direction: column;
 }
+
 
 .result-details h3 {
     margin-top: 0;

@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 // for pathing purposes
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class Library_controller extends Controller
 {   
@@ -39,18 +40,66 @@ class Library_controller extends Controller
          return view('frontend-pages\profile');
     }
 
+
+
     public function search_page() 
     {
-
         $filter = [
             'genres' => DB::table('genres')->get()
-        ];  
+        ]; 
 
-         return view('frontend-pages\search_page',
-         [
-            'f_genres' => $filter['genres']
-         ]);
+        $display_results = DB::table('books')->where('book_categories', 'trending')->get();
+
+        return view('frontend-pages.search_page',
+        [
+            'f_genres' => $filter['genres'],
+            'v_display_results' => $display_results,
+            'results' => null, // No search results initially
+            'show_initial' => true // Flag to show initial state
+        ]);
     }
+
+    // Method to process search using GET method
+    public function processSearch(Request $request)
+    {
+        $query = $request->input('query');
+        
+        // Get genres for the filter dropdown (needed for the view)
+        $filter = [
+            'genres' => DB::table('genres')->get()
+        ];
+        
+        // Initialize books variable
+        $books = collect();
+        
+        // If there's a search query, filter the results
+        if ($query && trim($query) != '') {
+            $books = DB::table('books')
+                ->where('book_title', 'like', '%' . $query . '%')
+                ->orWhere('author_name', 'like', '%' . $query . '%')
+                ->get();
+        } else {
+            // If no search query, redirect back to search page
+            return redirect()->route('search.page');
+        }
+        
+        // Create a results object for the view
+        $results = (object) [
+            'total' => function() use ($books) {
+                return $books->count();
+            }
+        ];
+        
+        // Pass all required variables to the view
+        return view('frontend-pages.search_page', [
+            'f_genres' => $filter['genres'],
+            'v_display_results' => $books,
+            'results' => $results,
+            'show_initial' => false // Flag to show search results
+        ]);
+    }
+
+
 
     public function viewbook(Request $request) 
     {
@@ -65,34 +114,65 @@ class Library_controller extends Controller
             ->value('author_bio_link');
         return view('frontend-pages\viewbook', ['book' => $book]);
     }
+
+
+
     public function readbook(Request $request) 
+        {
+            $bookId = $request->route('book_id');
+            
+            // Fetch the book details from the database
+            $book = DB::table('books')->where('book_id', $bookId)->first();
+            
+            if (!$book) {
+                abort(404, 'Book not found');
+            }
+            
+            // Get user's reading progress if exists
+            $readingProgress = null;
+            if (Auth::check()) {
+                $readingProgress = Reading_Progress::where('book_id', $bookId)
+                    ->where('user_id', Auth::id())
+                    ->first();
+            }
+            
+            return view('frontend-pages.readbook', [
+                'book' => $book,
+                'reading_progress' => $readingProgress
+            ]);
+        }
+
+    public function storeReadingProgress(Request $request) 
     {
-        // return view('frontend-pages\readbook');
-        
-        $bookId = $request->route('book_id');
 
-        // Fetch the book details from the database
-        $book = DB::table('books')->where('book_id', $bookId)->first();
-        
-        return view('frontend-pages\readbook', [
-            'book' => $book
+
+        $request->validate([
+            'book_id' => 'required|exists:books,book_id',
+            'current_page' => 'required|integer|min:1',
+            'total_pages' => 'required|integer|min:1'
         ]);
-    }
-    public function storeReadingProgress(Request $request) {
         
-        $readingProgress = new Reading_Progress();
-        $reading_progress = Reading_Progress::findOrCreateByID($request->progress_id);
-
-        $readingProgress->book_id = $request->book_id;
-        $readingProgress->user_id = $request->user_id;
-        $readingProgress->save();
-
-        return view('frontend-pages\readbook', [
-            'book' => DB::table('books')->where('book_id', $request->book_id)->first(),
-            'reading_progress' => $reading_progress
-        ]);
-
+        // Calculate completion percentage and pages remaining
+        $completionPercentage = ($request->current_page / $request->total_pages) * 100;
+        $pageRemaining = $request->total_pages - $request->current_page;
+        
+        // Update or create reading progress using the model
+        Reading_Progress::updateOrCreate(
+            [
+                'book_id' => $request->book_id,
+                'user_id' => Auth::id()
+            ],
+            [
+                'current_page' => $request->current_page,
+                'page_remaining' => $pageRemaining,
+                'completion_percentage' => $completionPercentage,
+                'last_read_at' => now()
+            ]
+        );
+        
+        return redirect()->back();
     }
+
 
 
 

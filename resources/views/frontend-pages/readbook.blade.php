@@ -8,6 +8,7 @@
 
 <body>
   <div class="container">
+
     <div class="book-header">
       <h1>{{ $book->book_title }}</h1>
       <p>Author: {{ $book->author_name }}</p>
@@ -18,10 +19,9 @@
       <div class="progress-sidebar">
 
         <!-- Reading Progress -->
-         <!-- use js -->
         <div class="progress-section">
           <div class="section-title">
-            <div class="section-icon">📊</div>
+            <div class="section-icon"></div>
             Reading Progress
           </div>
           <div class="progress-bar">
@@ -29,12 +29,17 @@
             <div class="progress-percentage" id="progressPercentage">0%</div>
           </div>
           
-          
           <div class="controls-grid">
-
-         <button class="btn btn-success" >Save Progress</button>
-
+            <button class="btn btn-success" id="saveProgressBtn">Save Progress</button>
           </div>
+          
+          @if(session('error'))
+              <div class="alert alert-danger" style="margin-top: 10px;">
+                  {{ session('error') }}
+              </div>
+              {{-- Clear the error message after displaying it --}}
+              @php session()->forget('error'); @endphp
+          @endif
         </div>
 
         <!-- Reading Statistics -->
@@ -46,16 +51,15 @@
           <div class="stats-grid">
             <div class="stat-card">
               <div class="stat-label">Current Page</div>
-              <!-- load current page from database, then js handles track page -->
-              <div class="stat-value" id="currentPageStat"></div>
+              <div class="stat-value" id="currentPageStat">1</div>
             </div>
             <div class="stat-card">
               <div class="stat-label">Total Pages</div>
-              <div class="stat-value" id="totalPagesStat">{{ $book->total_pages }}</div>
+              <div class="stat-value" id="totalPagesStat">{{ $book->total_pages ?? 0 }}</div>
             </div>
           </div>
         </div>
-
+      </div>
 
       <div class="reader-wrapper">
         <div class="reader-controls">
@@ -76,8 +80,23 @@
     </div>
   </div>
 
+  <!-- Pass data to JavaScript -->
+  <script>
+    window.bookData = {
+      id: "{{ $book->book_id }}",
+      filePath: "{{ $book->file_path }}",
+      totalPages: "{{ $book->total_pages ?? 0 }}",
+      currentPage: "{{ $reading_progress->current_page ?? 1 }}",
+      userId: "{{ Auth::id() ?? 'null' }}",
+      csrfToken: "{{ csrf_token() }}"
+    };
+
+    console.log('Book data initialized:', window.bookData);
+  </script>
+
 @push('scripts')
-  <script src="{{ asset('js/web/readbook.js') }}"></script>
   <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.7.570/build/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="{{ asset('js/web/readbook.js') }}"></script>
 @endpush
 @endsection

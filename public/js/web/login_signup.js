@@ -11,5 +11,5 @@ moveToSignup[0].addEventListener('click', function() {
 });
 
 guestBtn[0].addEventListener('click', function() {
-    window.location.href = '/homepage';
+    window.location.href = '/home';
 });
