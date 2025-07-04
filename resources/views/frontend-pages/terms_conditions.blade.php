@@ -17,12 +17,17 @@
 
         <!-- looping terms -->
         <section class="terms-content">
-            @foreach ($terms as $term)
-                <article class="term-section">
-                    <h2 class="term-subtitle">{{ $term->title }}</h2>
-                    <div class="term-text">{!! nl2br(e($term->content)) !!}</div>
-                </article>
-            @endforeach
+            <ol>
+
+                @foreach ($terms as $term)
+                    <article class="term-section">
+                        <li>
+                            <div class="term-text">{!! nl2br(e($term->tc_des)) !!}</div>
+                        </li>
+                    </article>
+                @endforeach
+                
+            </ol>
         </section>
         <!-- looping terms -->
 

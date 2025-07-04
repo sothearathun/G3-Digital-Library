@@ -33,64 +33,19 @@
             <button type="submit" class="search-button">Search</button>
         </form>
 
-        <!-- {{-- Show search results info only when there's a search query --}}
-        @if(isset($results) && request('query'))
-            <div class="search-results mt-4">
-                <h4>Results for "{{ request('query') }}":</h4>
-                <p>Found {{ $results->total() }} book(s)</p>
-            </div>
-        @endif
-
-        {{-- Show initial page info when no search --}}
-        @if(!request('query') && isset($show_initial) && $show_initial)
-            <div class="search-results mt-4">
-                <h4>Trending Books:</h4>
-                <p>Showing {{ $v_display_results->count() }} trending book(s)</p>
-            </div>
-        @endif -->
     </div>
 
     <br>
 
     {{-- Suggested Searches / Popular Searches --}}
     <section class="suggested-searches-section">
-        <h2 class="section-subtitle">Suggested Searches:</h2>
-        <div class="suggested-tags">
-           
+        <h2 class="section-subtitle">Search Result:</h2>
+        <div class="suggested-tags">     
         </div>
     </section>
 
-    {{-- Filter and Sort Options --}}
-    <section class="filter-sort-section" aria-labelledby="filter-sort-heading">
-        <h3 id="filter-sort-heading" class="visually-hidden">Filter and Sort Options</h3>
-        <div class="filter-options">
-            <label for="genre-filter">Genre:</label>
-            <div class="dropdown-checkbox">
-                <button class="dropdown-toggle" type="button" id="genre-filter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    All Genres
-                </button>
-                <div class="dropdown-menu" aria-labelledby="genre-filter">
-                    @foreach($f_genres as $genre)
-                        <label>
-                            <input type="checkbox" name="book_genres[]" value="{{ $genre->genre_name }}">
-                            {{ $genre->genre_name }}
-                        </label>
-                    @endforeach
-                </div>
-            </div>
-
-            <label for="rating-filter">Min. Rating:</label>
-            <select id="rating-filter" name="min_rating" aria-controls="search-results-list">
-                <option value="">Any</option>
-                <option value="5">5 Stars</option>
-                <option value="4">4 Stars</option>
-                <option value="3">3 Stars</option>
-                <option value="2">2 Stars</option>
-                <option value="1">1 Star</option>
-                <option value="0">no rating</option>
-            </select>
-        </div>
-    </section>
+    
+    
 
     {{-- Individual Search Result Items --}}
     <section class="search-results-list" id="search-results-list" aria-live="polite" aria-atomic="true">
@@ -113,7 +68,6 @@
             @if(request('query'))
                 <div class="no-results-found" role="alert">
                     <p>No books found matching "{{ request('query') }}".</p>
-                    <p>Try refining your search or <a href="{{ route('search.page') }}">browse our trending books</a>.</p>
                 </div>
             @endif
         @endif

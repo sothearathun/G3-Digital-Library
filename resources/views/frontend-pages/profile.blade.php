@@ -28,7 +28,6 @@
         <h3 class="section-title">Activity Log</h3>
         <ul class="activity-log">
             <li><span>O</span> Total book read</li>
-            <li><span>O</span> Total read time</li>
             <li><span>O</span> Book reviewed</li>
             <li><span>O</span> Books commented</li>
         </ul>

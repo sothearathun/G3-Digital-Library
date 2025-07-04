@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 use Illuminate\Support\Facades\DB;
 use App\Models\Reading_Progress;  
+use App\Models\Book;
 
 // for pathing purposes
 use App\Http\Controllers\Controller;
@@ -15,6 +16,7 @@ class Library_controller extends Controller
 {   
     public function homepage() 
     {
+
 
         $trending_books = DB::select("select * from `books` where `book_categories` = 'trending' order by `book_id` desc limit 3;");
         $best_selling_books = DB::select("select * from `books` where `book_categories` = 'best-selling' order by `book_id` desc limit 3;");
@@ -30,10 +32,13 @@ class Library_controller extends Controller
             'v_best_selling_books' => $best_selling_books,
             'v_newly_added_books' => $newly_added_books,
             'v_popular_authors' => $popular_authors,
-            'v_digitales_news' => $digitales_news
+            'v_digitales_news' => $digitales_news,
+            
         ]
         );
     }
+
+
 
     public function profile() 
     {
@@ -48,7 +53,7 @@ class Library_controller extends Controller
             'genres' => DB::table('genres')->get()
         ]; 
 
-        $display_results = DB::table('books')->where('book_categories', 'trending')->get();
+        $display_results = DB::table('books')->get();
 
         return view('frontend-pages.search_page',
         [
@@ -58,16 +63,10 @@ class Library_controller extends Controller
             'show_initial' => true // Flag to show initial state
         ]);
     }
-
     // Method to process search using GET method
     public function processSearch(Request $request)
     {
         $query = $request->input('query');
-        
-        // Get genres for the filter dropdown (needed for the view)
-        $filter = [
-            'genres' => DB::table('genres')->get()
-        ];
         
         // Initialize books variable
         $books = collect();
@@ -80,24 +79,17 @@ class Library_controller extends Controller
                 ->get();
         } else {
             // If no search query, redirect back to search page
-            return redirect()->route('search.page');
+            return redirect()->route('search_page');
         }
         
-        // Create a results object for the view
-        $results = (object) [
-            'total' => function() use ($books) {
-                return $books->count();
-            }
-        ];
         
         // Pass all required variables to the view
         return view('frontend-pages.search_page', [
-            'f_genres' => $filter['genres'],
             'v_display_results' => $books,
-            'results' => $results,
             'show_initial' => false // Flag to show search results
         ]);
     }
+
 
 
 
@@ -114,9 +106,6 @@ class Library_controller extends Controller
             ->value('author_bio_link');
         return view('frontend-pages\viewbook', ['book' => $book]);
     }
-
-
-
     public function readbook(Request $request) 
         {
             $bookId = $request->route('book_id');
@@ -141,7 +130,6 @@ class Library_controller extends Controller
                 'reading_progress' => $readingProgress
             ]);
         }
-
     public function storeReadingProgress(Request $request) 
     {
 
@@ -181,19 +169,17 @@ class Library_controller extends Controller
     {
          return view('frontend-pages\aboutus');
     }
-
     public function faq() 
     {
         //  return view('frontend-pages\FAQ');
 
-        $faqs = DB::table('faq')
-            ->where('is_published', 1)
+        $faqs = DB::table('faqs')
+            ->where('status', 1)
             ->orderBy('created_at', 'desc')
             ->get();
 
         return view('frontend-pages\FAQ', ['faqs' => $faqs]);
     }
-
     public function terms_conditions() 
     {
         // return view('frontend-pages\terms_conditions');

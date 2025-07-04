@@ -15,7 +15,21 @@ document.addEventListener('DOMContentLoaded', function() {
     // Set up save progress button
     const saveBtn = document.getElementById('saveProgressBtn');
     if (saveBtn) {
-        saveBtn.addEventListener('click', saveProgressTraditional);
+        saveBtn.addEventListener('click', function() {
+            // Show SweetAlert first
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Your progress has been saved",
+                showConfirmButton: false,
+                timer: 1500
+            });
+            
+            // Delay the save function slightly to let SweetAlert render
+            setTimeout(() => {
+                saveProgressTraditional();
+            }, 1500); // Small delay to ensure SweetAlert shows
+        });
     }
     
     // Auto-save progress every 30 seconds

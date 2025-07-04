@@ -9,12 +9,14 @@
             <div class="book-details">
                 <h3>{{ $book->book_title }}</h3>
                 <p>{{ $book->description }}</p>
+
                 <div class="book-meta">
-                    <span>⭐ 4.5</span>             {{-- TODO: Replace with actual rating --}}
-                    <span>❤️ 120</span>            {{-- TODO: Replace with actual likes --}}
-                    <span>💬 30</span>             {{-- TODO: Replace with actual comments --}}
+                    <span>⭐ </span>             {{-- TODO: Replace with actual rating --}}
+                    <span>❤️ </span>            {{-- TODO: Replace with actual likes --}}
+                    <span>💬 </span>             {{-- TODO: Replace with actual comments --}}
                     <span>📖 {{ $book->total_pages }}</span>
                 </div>
+
             </div>
         </div>
         @endforeach

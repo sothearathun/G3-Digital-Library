@@ -3,6 +3,7 @@
 @section('title', 'Digitales - Homepage')
 @push('styles')
     <link rel="stylesheet" href="{{ asset('css/web/readbook.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 @endpush
 @section('content')
 
@@ -97,6 +98,7 @@
 @push('scripts')
   <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.7.570/build/pdf.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.6.13/sweetalert2.all.min.js"></script>
   <script src="{{ asset('js/web/readbook.js') }}"></script>
 @endpush
 @endsection

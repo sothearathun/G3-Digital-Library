@@ -371,56 +371,6 @@ a:hover {
     transform: translateY(-2px);
 }
 
-/* Filter and Sort Options */
-.filter-sort-section {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap; /* Allow wrapping on smaller screens */
-    gap: 25px; /* Increased gap */
-    margin-bottom: 40px;
-    padding: 25px; /* More padding */
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px var(--shadow-light);
-}
-
-.filter-options, .sort-options {
-    display: flex;
-    align-items: center;
-    gap: 20px; /* Increased gap between labels and selects */
-    flex-wrap: wrap;
-}
-
-.filter-sort-section label {
-    font-size: 1em; /* Slightly larger label */
-    color: var(--dark-grey);
-    font-weight: 600;
-}
-
-.filter-sort-section select {
-    padding: 10px 15px;
-    border: 1px solid var(--border-color);
-    border-radius: 8px; /* More rounded select */
-    font-size: 0.95em;
-    color: var(--primary-color);
-    background-color: var(--light-grey);
-    cursor: pointer;
-    outline: none;
-    appearance: none; /* Remove default arrow */
-    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23666%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13.2-5.4H18.2c-4.1%200-7.9%201.5-10.9%204.6L.8%2082.9c-2.3%202.7-2.3%206.8%200%209.6l128%20128c3.2%203.2%208.5%203.2%2011.7%200l128-128c2.4-2.7%202.4-6.8%200-9.6l-12.6-14z%22%2F%3E%3C%2Fsvg%3E');
-    background-repeat: no-repeat;
-    background-position: right 12px center; /* Center arrow vertically */
-    background-size: 14px; /* Slightly larger arrow */
-    min-width: 150px; /* Ensure a minimum width for selects */
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.filter-sort-section select:hover,
-.filter-sort-section select:focus {
-    border-color: var(--accent-color);
-    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
-}
 
 /* Search Results List */
 .search-results-list {
