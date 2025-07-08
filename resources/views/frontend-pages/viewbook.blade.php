@@ -35,12 +35,12 @@
 
                 <div class="rating">
                     <div class="stars">★★★★★</div>
-                    <div class="rating-text">4.5 (2,341 reviews)</div>
+                    <div class="rating-text">N/A (N/A reviews)</div>
                 </div>
         
                 <div class="book-stats">
                     <span>📖 {{ $book->total_pages }} pages</span>
-                    <span>💾 Save</span>
+                    <span>💾 (N/A) added to favorite</span>
                 </div>
         <!-- about books: cover, author name, rating, etc -->
 
@@ -49,7 +49,15 @@
                 <!-- actions -->
                 <div class="action-buttons">
                     <button class="btn btn-primary" onclick="location.href=`{{ route('readbook', ['book_id' => $book->book_id]) }}`">Read now</button>
-                    <button class="btn btn-secondary">Add to library</button>
+
+                    <form action="{{ route('addfavorite', ['book_id' => $book->book_id]) }}" method="POST">
+                        @csrf
+                        @if(DB::table('book_favorites')->where('book_id', $book->book_id)->where('user_id', auth()->id())->exists())
+                            <button class="btn btn-secondary">Added to Favorites</button>
+                        @else
+                            <button class="btn btn-secondary">Add to Favorites</button>
+                        @endif
+                    </form>
                 </div>
                 <!-- actions -->
             </div>
@@ -78,16 +86,18 @@
             <div class="related-books">
                 <h3>More from {{ $book->author_name }}</h3>
                 
+                @foreach ($relatedBooks as $relatedBook)
                 <div class="book-recommendations">
                     <div class="recommendation-item">
-                        <img src="    " alt="Book 1" class="rec-book-cover">
+                        <img src="{{ asset('uploads/' . $relatedBook->book_cover) }}" class="rec-book-cover">
                         <div class="rec-book-info">
-                            <h4>The Hope Filled Life</h4>
-                            <div class="rec-author">Rick Warren</div>
-                            <div class="rec-rating">★★★★★</div>
+                            <h4>{{ $relatedBook->book_title }}</h4>
+                            <div class="rec-author">{{ $relatedBook->author_name }}</div>
+                            <div class="rec-rating">N/A</div>
                         </div>
                     </div>
                 </div>
+                @endforeach
             </div>
         </div>
 
@@ -96,6 +106,6 @@
 
 
     <!-- comment section -->
-    <x-books.comment-section/> 
+    <x-books.ratings-comments :book="$book" :comments="$comments" averageRating="{{ $averageRating }}" totalRatings="{{ $totalRatings }}"/>
 
 @endsection

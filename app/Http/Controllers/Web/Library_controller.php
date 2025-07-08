@@ -4,9 +4,14 @@ namespace App\Http\Controllers\Web;
 use Illuminate\Support\Facades\DB;
 use App\Models\Reading_Progress;  
 use App\Models\Book;
+use App\Models\User;
 
 // for pathing purposes
 use App\Http\Controllers\Controller;
+use App\Models\Author;
+use App\Models\Book_Comments;
+use App\Models\Book_Favorites;
+use App\Models\Book_Ratings;
 // for pathing purposes
 
 use Illuminate\Http\Request;
@@ -40,9 +45,24 @@ class Library_controller extends Controller
 
 
 
-    public function profile() 
+    public function profile($user_id = null)
     {
-         return view('frontend-pages\profile');
+        $user_id = $user_id ?? auth()->id();
+        
+        // Fetch the actual user object from the database
+        $user = User::where('id', $user_id)->first();
+        $continueReading = Reading_Progress::where('user_id', $user_id)
+        ->join('books', 'reading_progress.book_id', '=', 'books.book_id')
+        ->select('reading_progress.*', 'books.book_title', 'books.book_cover')
+        ->get();
+        
+        // Check if user exists
+        if (!$user) {
+            abort(404, 'User not found');
+        }
+        
+        // Pass the user object to the view
+        return view('frontend-pages.profile', compact('user'), compact('continueReading'));
     }
 
 
@@ -104,8 +124,93 @@ class Library_controller extends Controller
         $book->author_bio_link = DB::table('authors')
             ->where('author_name', $book->author_name)
             ->value('author_bio_link');
-        return view('frontend-pages\viewbook', ['book' => $book]);
+
+        $relatedBooks = DB::table('books')
+            ->where('author_name', $book->author_name)
+            ->where('book_id', '!=', $book->book_id)
+            ->limit(2)
+            ->get();
+
+        $comments = DB::table('book_comments')
+    ->join('users', 'book_comments.user_id', '=', 'users.id')
+    ->where('book_comments.book_id', $bookId)
+    ->select('book_comments.*', 'users.name as username')
+    ->limit(3)
+    ->latest()
+    ->get();
+
+        $averageRating = DB::table('book_ratings')
+    ->where('book_id', $bookId)
+    ->avg('stars_given');
+
+        $totalRatings = DB::table('book_ratings')
+    ->where('book_id', $bookId)
+    ->count();
+
+
+        return view('frontend-pages\viewbook', ['book' => $book, 'relatedBooks' => $relatedBooks, 'comments' => $comments, 'averageRating' => $averageRating,
+        'totalRatings' => $totalRatings
+    ]);
     }
+    public function addfavorite(Request $request)
+    {
+        $bookId = $request->route('book_id');
+        $userId = auth()->id();
+
+        $favorite = DB::table('book_favorites')
+            ->where('book_id', $bookId)
+            ->where('user_id', $userId)
+            ->first();
+
+        if ($favorite) {
+            // If the book is already a favorite, delete the record
+            DB::table('book_favorites')
+                ->where('book_id', $bookId)
+                ->where('user_id', $userId)
+                ->delete();
+        } else {
+            // If the book is not a favorite, insert a new record
+            DB::table('book_favorites')->insert([
+                'book_id' => $bookId,
+                'user_id' => $userId,
+                'is_favorited' => true
+            ]);
+        }
+
+        return redirect('/viewbook/' . $bookId);
+    }
+    public function ratings(Request $request)
+    {
+        $bookID = $request->route('book_id');
+        $userID = auth()->id();
+        $book = Book::find($bookID);
+
+        $rating = new Book_Ratings();
+        $rating->stars_given = $request->rating;
+        $rating->user_id = $userID; // Save the user ID
+        $rating->book_id = $bookID; // Save the book ID
+
+        $rating->save();
+
+       return redirect('/viewbook/' . $bookID);
+    }
+    public function writeComment(Request $request)
+    {
+        $bookID = $request->route('book_id');
+        $userID = auth()->id();
+        $book = Book::find($bookID);
+
+        $comment = new Book_Comments();
+        $comment->comment_title = $request->comment_title;
+        $comment->comment_text = $request->comment_text;
+        $comment->user_id = $userID; // Save the user ID
+        $comment->book_id = $bookID; // Save the book ID
+
+        $comment->save();
+
+       return redirect('/viewbook/' . $bookID);
+    }
+
     public function readbook(Request $request) 
         {
             $bookId = $request->route('book_id');

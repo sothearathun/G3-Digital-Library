@@ -11,7 +11,8 @@ class Book_Comments extends Model
 
     protected $table = 'book_comments';
     protected $primaryKey = 'comment_id';
-    protected $fillable = ['comment_text'];
+    protected $fillable = ['comment_text', 'comment_title'];
+    protected $dates = ['created_at'];
 
     public function book()
     {

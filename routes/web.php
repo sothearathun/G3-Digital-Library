@@ -23,10 +23,13 @@ Route::middleware(['auth'])->group(function () {
     
     // Library controller routes
     Route::controller(Library_controller::class)->group(function () {
-        Route::get('/profile', 'profile')->name('profile');
+        Route::get('/profile/{user_id}', 'profile')->name('profile');
         Route::get('/search_page', 'search_page')->name('search_page');
         Route::get('/search_page/results', 'processSearch')->name('processSearch');
         Route::get('/viewbook/{book_id}', 'viewbook')->name('viewbook');
+        Route::post('/addfavorite/{book_id}', 'addfavorite')->name('addfavorite');
+        Route::post('/writeComment/{book_id}', 'writeComment')->name('writeComment');
+        Route::post('/ratings/{book_id}', 'ratings')->name('ratings');
         Route::get('/readbook/{book_id}', 'readbook')->name('readbook');
         Route::post('/storeReadingProgress', 'storeReadingProgress')->name('storeReadingProgress');
         Route::get('/faq', 'faq')->name('faq');

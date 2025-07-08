@@ -16,10 +16,11 @@
                     <i class="fas fa-user"></i>
                 </span> </div>
             <div class="profile-info">
-                <h2>Username_123</h2>
-                <p>User ID: <span>123456789</span></p>
-                <p>Joined Date: <span>MM/DD/YYYY</span></p>
-                <div class="tag-badge">        Edit        </div>
+               
+                    <h2>{{$user->name}}</h2>
+                    <p>User ID: <span>1230{{$user->id}}</span></p>
+                    <p>Joined Date: <span>{{$user->created_at}}</span></p>
+
             </div>
         </div>
 
@@ -46,50 +47,24 @@
         </div>
 
         <h3 class="section-title">Continue Reading</h3>
-        <div class="continue-reading-shelf">
-            
-            <!-- read books (read before) -->
+       <div class="continue-reading-shelf">
+        @foreach ($continueReading as $continue)
             <div class="continue-reading-item">
-                <img src="  " alt="Book Cover">
+                <img src="{{ asset('uploads/' . $continue->book_cover) }}" alt="{{ $continue->book_title }}">
                 <div class="progress-bar-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="--progress: {{ $continue->completion_percentage }}%"></div>
+                    </div>
+                    <div class="progress-footer">
+                        <span class="progress-text">{{ $continue->completion_percentage }}%</span>
 
-                    <!-- Progress bar and percentage -->
-                    <div class="progress-bar" style="width: 75%;"></div>
-                    <span class="progress-text">75%</span>
-                    <!-- Progress bar and percentage -->
+                        <button class="continue-button" onclick="location.href=`{{ route('readbook', ['book_id' => $continue->book_id]) }}`">Continue Reading</button>
 
+                    </div>
                 </div>
             </div>
-            <!-- read books (read before) -->
-
-            <!-- read books (read before) -->
-            <div class="continue-reading-item">
-                <img src="  " alt="Book Cover">
-                <div class="progress-bar-container">
-
-                    <!-- Progress bar and percentage -->
-                    <div class="progress-bar" style="width: 75%;"></div>
-                    <span class="progress-text">75%</span>
-                    <!-- Progress bar and percentage -->
-
-                </div>
-            </div>
-            <!-- read books (read before) -->
-
-            <!-- read books (read before) -->
-            <div class="continue-reading-item">
-                <img src="  " alt="Book Cover">
-                <div class="progress-bar-container">
-
-                    <!-- Progress bar and percentage -->
-                    <div class="progress-bar" style="width: 75%;"></div>
-                    <span class="progress-text">75%</span>
-                    <!-- Progress bar and percentage -->
-
-                </div>
-            </div>
-            <!-- read books (read before) -->
-        </div>
+        @endforeach
+    </div>
 
         <h3 class="section-title">User's Favorite Book</h3>
         <div class="favorite-books-carousel">

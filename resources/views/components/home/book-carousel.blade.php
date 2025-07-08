@@ -11,9 +11,9 @@
                 <p>{{ $book->description }}</p>
 
                 <div class="book-meta">
-                    <span>⭐ </span>             {{-- TODO: Replace with actual rating --}}
-                    <span>❤️ </span>            {{-- TODO: Replace with actual likes --}}
-                    <span>💬 </span>             {{-- TODO: Replace with actual comments --}}
+                    <span>⭐ N/A</span>             {{-- TODO: Replace with actual rating --}}
+                    <span>❤️ N/A</span>            {{-- TODO: Replace with actual likes --}}
+                    <span>💬 N/A</span>             {{-- TODO: Replace with actual comments --}}
                     <span>📖 {{ $book->total_pages }}</span>
                 </div>
 

@@ -1,0 +1,203 @@
+.comments-section {
+  background: white;
+  border-radius: 8px;
+  padding: 30px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.comments-header {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.comments-header h3 {
+    font-size: 1.2rem;
+    color: #333;
+    margin: 0;
+    text-align: left;
+}
+
+.avgRate {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.avgRateNum {
+    font-size: 2rem;
+    color: #111;
+    font-weight: bold;
+}
+
+.avgRateStars {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.avgRateStars i {
+    color: #ffc107;
+    font-size: 20px;
+}
+
+.comment {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border: 1px solid #eee;
+  padding: 10px 20px;
+  border-radius: 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.comment:last-child {
+  margin-bottom: 0;
+}
+
+.comment-content {
+  flex: 1;
+}
+
+.comment-author {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.comment-text {
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 5px;
+}
+
+.comment-meta {
+  font-size: 0.8rem;
+  color: #999;
+}
+
+.tapToRate {
+    margin-top: 20px;
+    font-size: 1rem;
+    color: #444;
+    text-align: center;
+}
+
+.stars {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    gap: 5px;
+    margin: 10px 0;
+}
+
+.stars input[type="radio"] {
+    display: none;
+}
+
+.stars label {
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: #ccc;
+    transition: color 0.2s;
+}
+
+.stars input[type="radio"]:checked ~ label i,
+.stars label:hover ~ label i,
+.stars label:hover i {
+    color: #FFD700;
+}
+
+.btn-rate {
+    background-color: #FFD700;
+    border: none;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    border-radius: 15px;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+.btn-rate:hover {
+    background-color: #e6c200;
+}
+
+.writeComment{
+  text-align: center;
+}
+
+.writeComment .btn-cmt {
+  padding: 10px 15px;
+  font-size: 1rem;
+  color: navy;
+  background-color: lightgray;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.writeComment button:hover {
+  background-color: #ddd;
+}
+
+.hiddenCmtForm {
+   /* hide the form by default */
+  display: none;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.hiddenCmtForm form {
+  margin: 0;
+  padding: 0;
+}
+
+.hiddenCmtForm label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.hiddenCmtForm input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.hiddenCmtForm input[type="text"]:focus {
+  border-color: #aaa;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn-submit{
+    margin-top: 20px;
+    padding: 10px 15px;
+    font-size: 1rem;
+    color: navy;
+    background-color: lightgray;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+}
+.btn-submit:hover{
+    background-color: #ddd;
+}
+.btn-cancel{
+    margin-top: 20px;
+    padding: 10px 15px;
+    font-size: 1rem;
+    color: white;
+    background-color: rgb(191, 36, 36);
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+}

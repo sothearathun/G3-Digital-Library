@@ -2,7 +2,7 @@
 
 <div class="menu" style="display: none;">
     <ul>
-        <li><a href="{{ route('profile') }}">Profile</a></li>
+        <li><a href="{{ route('profile', ['user_id' => auth()->id()]) }}">Profile</a></li>
         <li><a href="{{ route('faq') }}">FAQ</a></li>
         <li><a href="{{ route('terms_conditions') }}">Terms & Conditions</a></li>
         <li>
