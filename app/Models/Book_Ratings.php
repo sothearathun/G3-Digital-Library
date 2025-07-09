@@ -13,10 +13,6 @@ class Book_Ratings extends Model
     protected $primaryKey = 'rating_id';
     protected $fillable = ['stars_given'];
 
-    public function book()
-    {
-        return $this->belongsToMany(Book::class);
-    }
     public function user()
     {
         return $this->belongsToMany(User::class);
