@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\DB;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,5 +26,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        View::composer('*', function ($view) {
+            $genres = DB::table('genres')->get(); // or however you fetch genres
+            $view->with('v_genres', $genres);
+        });
     }
 }

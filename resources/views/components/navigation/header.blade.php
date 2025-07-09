@@ -10,23 +10,30 @@
                 <!-- drop down menu -->
                 <li class="dropdown">
                     <a href="#">Browse</a>
-                    <div class="mega-menu">
-                        <div class="genres">
-
-                            <!-- do i have to get genre from db? -->
-                            <a href="#">Fantasy</a><a href="#">Science Fiction</a><a href="#">Romance</a>
-                            <a href="#">Historical</a><a href="#">Mystery</a><a href="#">Horror</a>
-                            <a href="#">Adventure</a><a href="#">Thriller</a><a href="#">Drama</a>
-                            <a href="#">Fantasy</a><a href="#">Science Fiction</a><a href="#">Romance</a>
-                            
-                        </div>
-                        <div class="side-menu">
-                            <p>Article</p>  
-                            <p>Newly Added</p>
-                            <p>Trending</p>
-                            <p>Author Quotes</p>
-                        </div>
-                    </div>
+<form action="{{ route('processSearch') }}" method="GET" id="browse-form">
+    <div class="mega-menu">
+        <div class="genres">
+            @foreach($v_genres as $genre)
+                <label>
+                    <input type="checkbox" name="book_genres[]" value="{{ $genre->genre_name }}">
+                    {{ $genre->genre_name }}
+                </label>
+            @endforeach
+        </div>
+        <div class="side-menu">
+            <label>
+                <input type="radio" name="category" value="newly-added"> Newly Added
+            </label>
+            <label>
+                <input type="radio" name="category" value="trending"> Trending
+            </label>
+            <label>
+                <input type="radio" name="category" value="best-selling"> Best-Selling
+            </label>
+        </div>
+        <button type="submit">Apply Filters</button>
+    </div>
+</form>
                 </li>
                 <!-- drop down menu -->
                  

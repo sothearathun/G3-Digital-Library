@@ -44,35 +44,33 @@
         </div>
     </section>
 
-    
-    
+{{-- Individual Search Result Items --}}
+<section class="search-results-list" id="search-results-list" aria-live="polite" aria-atomic="true">
 
-    {{-- Individual Search Result Items --}}
-    <section class="search-results-list" id="search-results-list" aria-live="polite" aria-atomic="true">
-        
-        @if($v_display_results->count() > 0)
-            @foreach($v_display_results as $display_books)
-                <article class="search-result-item">
-                    <img src="{{ asset('uploads/' . $display_books->book_cover) }}" alt="{{ $display_books->book_title }} Cover">
-                    <div class="result-details">
-                        <h3><span class="book-title">{{ $display_books->book_title }}</span></h3>
-                        <p class="author-name">by {{ $display_books->author_name }}</p>
-                        <p class="released-date">Published: {{ \Carbon\Carbon::parse($display_books->released_date)->format('j F Y') }}</p>
-                        <p class="book-description">{{ $display_books->description }}</p>
-                        <a href="{{route('viewbook', ['book_id' => $display_books->book_id])}}" class="view-book-button" aria-label="View details for {{ $display_books->book_title }}">View Book</a>
-                    </div>
-                </article>
-            @endforeach
-        @else
-            {{-- Show this when no results found for a search query --}}
-            @if(request('query'))
-                <div class="no-results-found" role="alert">
-                    <p>No books found matching "{{ request('query') }}".</p>
+    {{-- Display Results --}}
+
+    @if($v_display_results->isEmpty())
+    <p>No books found for your filters.</p>
+@else
+    <h3>Search Results</h3>
+    <div class="book-grid">
+        @foreach($v_display_results as $display_books)
+            <article class="search-result-item">
+                <img src="{{ asset('uploads/' . $display_books->book_cover) }}" alt="{{ $display_books->book_title }} Cover">
+                <div class="result-details">
+                    <h3><span class="book-title">{{ $display_books->book_title }}</span></h3>
+                    <p class="author-name">by {{ $display_books->author_name }}</p>
+                    <p class="released-date">Published: {{ \Carbon\Carbon::parse($display_books->released_date)->format('j F Y') }}</p>
+                    <p class="book-description">{{ $display_books->description }}</p>
+                    <a href="{{ route('viewbook', ['book_id' => $display_books->book_id]) }}" class="view-book-button" aria-label="View details for {{ $display_books->book_title }}">View Book</a>
                 </div>
-            @endif
-        @endif
-        
-    </section>
+            </article>
+        @endforeach
+    </div>
+@endif
+
+
+</section>
 
 </main>
 

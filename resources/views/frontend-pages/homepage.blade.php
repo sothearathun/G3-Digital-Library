@@ -7,7 +7,13 @@
     <link rel="stylesheet" href="{{ asset('css/web/homepage.css') }}">
 @endpush
 
-@section('content')    
+@section('content')
+
+    @if(session('show_genre_modal'))
+    <x-home.pick-genres :genres="$genres" />
+        {{ session()->forget('show_genre_modal') }}
+    @endif
+
     <!-- Hero Section Component -->
     <x-home.hero-section/>
 
@@ -37,7 +43,7 @@
 
         <!-- Authors Section Component -->
         <h2 class="section-header" style="font-size: 30px;">POPULAR AUTHORS OF THE YEAR</h2>
-        <div class="popular-authors">
+        <div class="popular-authors-grid">
             <x-home.popular-author :authors="$v_popular_authors"/>
         </div>
 

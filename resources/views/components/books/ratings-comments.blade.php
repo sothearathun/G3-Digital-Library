@@ -15,31 +15,37 @@
                         @endif
                     </div>
                     <div class="avgRateStars">
-    @php
-        $fullStars = floor($averageRating);
-        $halfStar = ($averageRating - $fullStars) >= 0.5;
-        $emptyStars = 5 - $fullStars - ($halfStar ? 1 : 0);
-    @endphp
+                    @php
+                        if ($averageRating) {
+                            $fullStars = floor((float) $averageRating);
+                            $halfStar = ($averageRating - $fullStars) >= 0.5;
+                            $emptyStars = 5 - $fullStars - ($halfStar ? 1 : 0);
+                        } else {
+                            $fullStars = 0;
+                            $halfStar = false;
+                            $emptyStars = 5;
+                        }
+                    @endphp
 
-    {{-- Full stars --}}
-    @for ($i = 0; $i < $fullStars; $i++)
-        <i class="fas fa-star" style="color: #FFD700;"></i>
-    @endfor
+                    {{-- Full stars --}}
+                    @for ($i = 0; $i < $fullStars; $i++)
+                        <i class="fas fa-star" style="color: #FFD700;"></i>
+                    @endfor
 
-    {{-- Half star --}}
-    @if ($halfStar)
-        <i class="fas fa-star-half-alt" style="color: #FFD700;"></i>
-    @endif
+                    {{-- Half star --}}
+                    @if ($halfStar)
+                        <i class="fas fa-star-half-alt" style="color: #FFD700;"></i>
+                    @endif
 
-    {{-- Empty stars --}}
-    @for ($i = 0; $i < $emptyStars; $i++)
-        <i class="far fa-star" style="color: #FFD700;"></i>
-    @endfor
+                    {{-- Empty stars --}}
+                    @for ($i = 0; $i < $emptyStars; $i++)
+                        <i class="far fa-star" style="color: #FFD700;"></i>
+                    @endfor
 
-    <span id="total-ratings" style="margin-left: 8px; color: #666;">
-        {{ $totalRatings > 0 ? $totalRatings . ' Ratings' : 'No Ratings Yet' }}
-    </span>
-</div>
+                    <span id="total-ratings" style="margin-left: 8px; color: #666;">
+                        {{ $totalRatings > 0 ? $totalRatings . ' Ratings' : 'No Ratings Yet' }}
+                    </span>
+                </div>
 
                 </div>
             </div>

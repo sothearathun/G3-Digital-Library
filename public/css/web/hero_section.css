@@ -29,6 +29,8 @@
             padding-right: 40px;
             position: relative;
             z-index: 2;
+            float: left;
+            text-align: left;
         }
 
         .hero-quote strong {

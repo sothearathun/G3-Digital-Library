@@ -5,15 +5,17 @@ body {
 .menu {
   width: 150px;
   max-width: calc(100vw - 40px); /* Ensure 20px margin on both sides */
-  border: 2px solid black;
+  border: 2px solid white;
   border-radius: 20px;
-  background: grey;
+  background: white;
   font-size: 15px;
   position: absolute;
   right: 30px;
-  margin: 10px; /* Adds top/left spacing too */
+  margin: 25px 0; /* Adds top/left spacing too */
   overflow-wrap: break-word;
   z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  padding: 10px 10px;
 }
 
 ul li {
@@ -30,10 +32,23 @@ ul li a:hover {
   color: white;
   border-radius: 10px;
 }
+.logout-button{
+  margin-top: 5px;
+  padding: 10px 15px;
+  font-size: 1rem;
+  color: maroon;
+  background-color: lightgray;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+}
+.logout-button:hover{
+  background-color: #ddd;
+}
 
  @media (max-width: 768px) {
   .menu {
-    width: 100px;
+    width: 120px;
     font-size: 15px;
   
   }

@@ -29,18 +29,20 @@
                 </div>
 
                 <div class="book-meta">
-                    <div class="publication-date">Published {{ \Carbon\Carbon::parse($book->released_date)->format('j F Y') }}</div>
-                    <div class="genre-tag">{{ $book->book_categories }}</div>
+                    <div class="publication-date">Published: {{ \Carbon\Carbon::parse($book->released_date)->format('j F Y') }}</div>
+                    <div class="genre-tag">({{ $book->book_categories }})</div>
                 </div>
 
-                <div class="rating">
-                    <div class="stars">★★★★★</div>
-                    <div class="rating-text">N/A (N/A reviews)</div>
-                </div>
         
                 <div class="book-stats">
-                    <span>📖 {{ $book->total_pages }} pages</span>
-                    <span>💾 (N/A) added to favorite</span>
+                    <span>
+                        <i class="fa-brands fa-readme"></i>
+                        {{ $book->total_pages }} pages
+                    </span>
+                    <span>
+                        <i class="fa-solid fa-bookmark"></i>    
+                        {{ $totalFavorites->total_favorite }} added to favorite
+                </span>
                 </div>
         <!-- about books: cover, author name, rating, etc -->
 
@@ -93,7 +95,8 @@
                         <div class="rec-book-info">
                             <h4>{{ $relatedBook->book_title }}</h4>
                             <div class="rec-author">{{ $relatedBook->author_name }}</div>
-                            <div class="rec-rating">N/A</div>
+                            <div class="rec-category">({{ $relatedBook->book_categories }})</div>
+                            <button class="rec-view-button" onclick="location.href=`{{ route('viewbook', ['book_id' => $relatedBook->book_id]) }}`">view book</button>
                         </div>
                     </div>
                 </div>

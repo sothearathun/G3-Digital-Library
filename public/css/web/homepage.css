@@ -23,6 +23,111 @@
         html {
             scroll-behavior: smooth;
         }
+/* Add to your homepage.css or a global CSS file */
+.genre-modal-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(30, 41, 59, 0.75);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.genre-modal-content {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+    padding: 40px 32px;
+    max-width: 480px;
+    width: 95vw;
+    position: relative;
+}
+
+.hero-section {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.hero-title {
+    font-size: 25px;
+    font-weight: 700;
+    color: #3730a3;
+    margin-bottom: 8px;
+}
+
+.hero-subtitle {
+    font-size: 15px;
+    color: #555;
+    margin-bottom: 0;
+}
+
+.genre-card {
+    background: #f3f4f6;
+    border-radius: 14px;
+    padding: 24px 18px;
+    margin-top: 10px;
+}
+
+.genre-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin: 18px 0 20px 0;
+}
+
+.genre-item {
+    background: gray;
+    border-radius: 16px;
+    padding: 8px 18px;
+    color: black;
+    font-weight: 500;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.2s;
+    box-shadow: 0 2px 8px rgba(99,102,241,0.08);
+}
+
+.genre-item:hover {
+    background: #4338ca;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.btn {
+    border: none;
+    border-radius: 8px;
+    padding: 8px 22px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-primary {
+    background: #4338ca;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: #4338ca;
+}
+
+.btn-secondary {
+    background: #f3f4f6;
+    color: #3730a3;
+}
+
+.btn-secondary:hover {
+    background: #c7d2fe;
+}
 
 /* Book Carousel */
         .book-carousel-container {
@@ -103,6 +208,15 @@
             color: #888;
             flex-wrap: wrap;
         }
+        .book-meta .fa-star{
+            color: #fbbf24; /* gold for star */
+            margin-right: 4px;
+        }
+        .book-meta .fa-bookmark{
+            color: navy; 
+            margin-right: 4px;
+        }
+
 
         .book-meta span {
             display: flex;
@@ -112,6 +226,10 @@
             background-color: #f0f0f0;
             border-radius: 15px;
         }
+        .tag{
+            color: darkblue;
+        }
+
 /* Book Carousel  */
 
 /* Carousel Navigation */
@@ -167,38 +285,51 @@
 /* Carousel Navigation */
 
 /* Authors Section  */
-        .popular-authors {
-            display: flex;
-            justify-content: center;
-            gap: 80px;
-            margin-bottom: 80px;
-            flex-wrap: wrap;
-        }
+.popular-authors-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+    padding: 20px 0;
+}
 
-        .author-card {
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
+.author-card {
+    background: linear-gradient(to bottom right, #f9fafb, #f3f4f6);
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    padding: 24px 18px;
+    text-align: center;
+    color: #1f2937;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
 
-        .author-card:hover {
-            transform: translateY(-5px);
-        }
+.author-card:hover {
+    background: #e0e7ff;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(60, 60, 120, 0.15);
+}
 
-        .author-card img {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid #fff;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-            margin-bottom: 15px;
-        }
+.author-icon {
+    font-size: 1.8em;
+    color: #6366f1;
+    margin-bottom: 12px;
+}
 
-        .author-card p {
-            font-weight: 600;
-            font-size: 1.1em;
-            color: #333;
-        }
+.author-name {
+    display: block;
+    font-size: 1.1em;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: #111827;
+}
+
+.author-badge {
+    font-size: 0.85em;
+    color: #6b7280;
+}
+
 /* Authors Section  */
 
 /* News Section  */

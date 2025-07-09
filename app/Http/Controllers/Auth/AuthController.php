@@ -35,6 +35,7 @@ class AuthController extends Controller
 
         Auth::login($user);
 
+        session()->put('show_genre_modal', true);
         return redirect()->route('homepage');
     }
 
@@ -51,7 +52,6 @@ class AuthController extends Controller
             $request->session()->regenerate();
             return redirect()->route('homepage');
         }
-
         // If authentication fails, set error message
         return redirect()->route('login')->with('error', 'Sorry, incorrect credentials provided. Please try again.');
     }

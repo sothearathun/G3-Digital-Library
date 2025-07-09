@@ -9,12 +9,20 @@
             <div class="book-details">
                 <h3>{{ $book->book_title }}</h3>
                 <p>{{ $book->description }}</p>
+                <div class="genres">
+                       <span class="tag">( {{$book->book_genres}} )</span>
+                </div>
 
                 <div class="book-meta">
-                    <span>⭐ N/A</span>             {{-- TODO: Replace with actual rating --}}
-                    <span>❤️ N/A</span>            {{-- TODO: Replace with actual likes --}}
-                    <span>💬 N/A</span>             {{-- TODO: Replace with actual comments --}}
-                    <span>📖 {{ $book->total_pages }}</span>
+                    <span>
+                        <i class="fas fa-star"></i>
+                        {{ number_format($book->average_rating, 2) }}
+                    </span>            
+                    <span>
+                        <i class="fa-solid fa-bookmark"></i>
+                        {{$book -> total_favorites}}
+                    </span>            
+                    
                 </div>
 
             </div>

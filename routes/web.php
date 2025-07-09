@@ -23,6 +23,7 @@ Route::middleware(['auth'])->group(function () {
     
     // Library controller routes
     Route::controller(Library_controller::class)->group(function () {
+        Route::post('/saveGenres', 'saveGenres')->name('saveGenres');
         Route::get('/profile/{user_id}', 'profile')->name('profile');
         Route::get('/search_page', 'search_page')->name('search_page');
         Route::get('/search_page/results', 'processSearch')->name('processSearch');
