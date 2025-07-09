@@ -9,7 +9,7 @@ body {
 
 /* Content area that will be next to sidebar */
 .content-area {
-  margin-left: 200px; /* Same width as sidebar */
+  margin-left: 250px; /* Same width as sidebar */
   padding: 30px;
   width: calc(100% - 200px);
   min-height: 100vh;

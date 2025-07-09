@@ -24,6 +24,7 @@ Route::get('/BooksPublished', [AdminController::class, 'booksPublished'])->name(
 
 // http://127.0.0.1:8000/UserRecords
 Route::get('/UsersRecords', [AdminController::class, 'usersRecords'])->name('UsersRecords');
+Route::get('/UsersRecords/{id}', [AdminController::class, 'viewUsersRecords'])->name('viewUsersRecords');
 // http://127.0.0.1:8000/Statistics
 Route::get('/Statistics', [AdminController::class, 'statistics'])->name('Statistics');
 
@@ -31,11 +32,16 @@ Route::get('/Statistics', [AdminController::class, 'statistics'])->name('Statist
 Route::get('/Guidelines', [AdminController::class, 'guidelines'])->name('Guidelines');
 // Route::post('/updateTermsConditions', [AdminController::class, 'updateTermsConditions'])->name('updateTermsConditions');
 Route::post('/deleteTC/{tc_id}', [AdminController::class, 'deleteTC'])->name('deleteTC');
-Route::post('/addTC', [AdminController::class, 'addTC'])->name('addTC');
+Route::post('/addTC', [AdminController::class, 'addTC'])->name('writeTC');
+
+Route::post('/deleteFAQ/{faq_id}', [AdminController::class, 'deleteFAQ'])->name('deleteFAQ');
+Route::post('/addFAQ', [AdminController::class, 'addFAQ'])->name('writeFAQ');
 
 
 // http://127.0.0.1:8000/Author
 Route::get('/Authors', [AdminController::class, 'authors'])->name('Authors');
+// Add this route
+Route::patch('/Authors/{author_id}', [AdminController::class, 'updateAuthorCategory'])->name('updateAuthorCategory');
 
 
 // http://127.0.0.1:8000/publishBookForm

@@ -31,27 +31,68 @@
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#terms_conditions_Modal">
           Edit Terms & Conditions
         </button>
-        <button type="button" class="btn btn-primary" id="addMore">Add More</button>
+        <!-- Add More Terms & Conditions Button and Collapsible Form -->
+        <div class="addTC my-2">
+          <button class="btn btn-success" type="button" data-bs-toggle="collapse" data-bs-target="#addTCForm" aria-expanded="false" aria-controls="addTCForm">
+            <i class="fa-solid fa-pen-to-square"></i> Add More
+          </button>
+        </div>
+        <div class="collapse" id="addTCForm">
+          <div class="card card-body">
+            <form action="{{ route('writeTC') }}" method="post">
+              @csrf
+              <div class="mb-2">
+                <label for="tc_des" class="form-label">Description</label>
+                <input type="text" name="tc_des" class="form-control" required>
+              </div>
+              <button type="submit" class="btn btn-primary">Add</button>
+              <button type="cancel" class="btn btn-danger">Cancel</button>
+            </form>
+          </div>
+        </div> 
 
         <x-forms.terms_conditions_form :v_terms_conditions="$v_terms_conditions" />
-        <x-forms.add_tc />
+        
 
-      <h3>FAQ</h3>
-      <ol>
-          @foreach($v_faq as $faq)
-          <li>{{$faq->questions}}</li>
-          <p>{{$faq -> answers}}</p>
-          @endforeach
-      </ol>
+     <!-- FAQ Section -->
+<h3>FAQ</h3>
+<ol>
+    @foreach($v_faq as $faq)
+    <li>{{$faq->questions}}</li>
+    <p>{{$faq -> answers}}</p>
+    @endforeach
+</ol>
 
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#faq_Modal">
+    Edit FAQ
+</button>
+<!-- Add More FAQ Button and Collapsible Form -->
+<div class="addFAQ my-2">
+    <button class="btn btn-success" type="button" data-bs-toggle="collapse" data-bs-target="#addFAQForm" aria-expanded="false" aria-controls="addFAQForm" id="addFAQButton">
+        <i class="fa-solid fa-pen-to-square"></i>
+        Add More
+    </button>
+</div>
+<div class="collapse" id="addFAQForm">
+    <div class="card card-body">
+        <form action="{{ route ('writeFAQ') }}" method="post">
+            @csrf
+            <div class="mb-2">
+                <label for="questions" class="form-label">Question</label>
+                <input type="text" name="questions" class="form-control" required>
+            </div>
+            <div class="mb-2">
+                <label for="answers" class="form-label">Answer</label>
+                <input type="text" name="answers" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Add</button>
+            <button type="button" class="btn btn-danger">Cancel</button>
+        </form>
+    </div>
+</div>
 
-      <!-- Button trigger modal -->
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#faq_Modal">
-        Edit FAQ
-      </button>
-      <button type="button" class="btn btn-primary" id="addMore">Add More</button>
-      <x-forms.faq_form :faq="$v_faq"/>
-      <x-forms.add_faq />
+<x-forms.faq_form :v_faq="$v_faq" />
 
 
     </div>

@@ -1,36 +1,58 @@
 .sidebar {
-  width: 200px;
-  background-color: #f4f4f4;
-  padding: 10px;
+  width: 220px;
+  background: linear-gradient(135deg, #f4f4f4 80%, #e0e7ff 100%);
+  padding: 18px 10px 10px 10px;
   height: 100vh;
-  position: fixed; /* Make it fixed */
+  position: fixed;
   left: 0;
   top: 0;
-  overflow-y: auto; /* Allow scrolling if content is too long */
+  overflow-y: auto;
   z-index: 1000;
-  font-family: Arial, sans-serif; /* Ensure it stays on top */
-}
-
-.sidebar a {
-  text-decoration: none;
-  color: black;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  border-right: 1px solid #e0e0e0;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.03);
 }
 
 .sidebar h2 {
-  font-size: 16px;
-  margin: 10px 0;
+  font-size: 18px;
+  margin: 0 0 18px 0;
+  font-weight: bold;
+  color: #3a3a3a;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .sidebar ul {
   list-style-type: none;
   padding: 0;
+  margin: 0;
 }
 
 .sidebar ul li {
-  padding: 8px;
-  cursor: pointer;
+  padding: 10px 8px;
+  margin-bottom: 4px;
+  border-radius: 6px;
+  transition: background 0.2s, color 0.2s;
 }
 
-.sidebar ul li:hover {
-  background-color: #ddd;
+.sidebar ul li a {
+  text-decoration: none;
+  color: #222;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: color 0.2s;
+}
+
+.sidebar ul li:hover, .sidebar ul li:focus-within {
+  background-color: #e0e7ff;
+}
+
+.sidebar ul li a i {
+  min-width: 20px;
+  color: #4f46e5;
+  font-size: 16px;
 }

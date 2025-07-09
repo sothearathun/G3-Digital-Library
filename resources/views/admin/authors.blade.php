@@ -33,7 +33,19 @@
             <td>{{ $authors->author_id }}</td>
             <td>{{ $authors->author_image }}</td>
             <td>{{ $authors->author_name }}</td>
-            <td>{{ $authors->author_categories }}</td>
+            <td>
+              <form method="POST" action="{{ route('updateAuthorCategory', $authors->author_id) }}">
+                @csrf
+                @method('PATCH')
+                <select name="author_categories" onchange="this.form.submit()">
+                  @foreach($categories as $category)
+                    <option value="{{ $category }}" {{ $authors->author_categories == $category ? 'selected' : '' }}>
+                        {{ $category }}
+                    </option>
+                  @endforeach
+                </select>
+              </form>
+            </td>
             <!-- how to count books associated with an author -->
             <td> {{ $authors->books_count }} </td>
           </tr>

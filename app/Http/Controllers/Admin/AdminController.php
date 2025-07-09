@@ -7,9 +7,17 @@ use App\Models\Author;
 use App\Models\Digitales_News;
 use App\Models\terms_conditions;
 use App\Models\faqs;
+use App\Models\Genres;
+use App\Models\Genre_Preferences;
+use App\Models\User;
+use App\Models\Reading_Progress;
+use App\Models\Book_Ratings;
+use App\Models\Book_Comments;
+use App\Models\Book_Favorites;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+
 
 class AdminController extends Controller
 {
@@ -189,9 +197,43 @@ public function editBookForm(Request $request){
 
 
 
-    public function usersRecords(){
-        return view('admin.usersRecords');
+
+public function usersRecords()
+{
+    // Fetch all users
+    $users = User::all();
+
+    // Pass the users to the view
+    return view('admin.usersRecords', compact('users'));
+}
+public function viewUserRecords($id)
+{
+    // Fetch the actual user object from the database
+    $user = User::where('id', $id)->first();
+
+    // Fetch the user's reading progress
+    $continueReading = Reading_Progress::where('user_id', $id)
+        ->join('books', 'reading_progress.book_id', '=', 'books.book_id')
+        ->select('reading_progress.*', 'books.book_title', 'books.book_cover')
+        ->get();
+
+    // Fetch the user's favorite books
+    $favoriteBooks = Book_Favorites::where('user_id', $id)
+        ->join('books', 'book_favorites.book_id', '=', 'books.book_id')
+        ->select('book_favorites.*', 'books.book_title', 'books.book_cover')
+        ->get();
+
+    // Fetch the user's genre preferences
+    $genre_preferences = Genre_Preferences::where('user_id', $id)->get();
+
+    // Check if user exists
+    if (!$user) {
+        abort(404, 'User not found');
     }
+
+    // Pass the user object to the view
+    return view('admin.userRecords', compact('user', 'continueReading', 'favoriteBooks', 'genre_preferences'));
+}
     public function statistics(){
         return view('admin.statistics');
     }
@@ -215,27 +257,61 @@ public function editBookForm(Request $request){
         return redirect()->back();
     }
     // add terms and conditions
-    
+    public function addTC(Request $request) 
+    {
+        $addTC = new terms_conditions;
+        $addTC->tc_des = $request->tc_des;
+        $addTC->status = 1;
+
+        $addTC->save();
+        return redirect()->back();
+    }
+
+    public function deleteFAQ($faq_id) // Get from route parameter
+    {
+        faqs::where('faq_id', $faq_id)->update(['status' => 0]);
+        return redirect()->back();
+    }
+    public function addFAQ(Request $request) 
+    {
+        $addFAQ = new faqs;
+        $addFAQ->questions = $request->questions;
+        $addFAQ->answers = $request->answers;
+        $addFAQ->status = 1;
+
+        $addFAQ->save();
+        return redirect()->back();
+    }
 
 
 
 
-    public function authors(){
-
+    public function authors()
+    {
         $authors = DB::table('authors')
         ->select('authors.*', DB::raw('(SELECT COUNT(*) FROM books WHERE books.author_name = authors.author_name) as books_count'))
         ->orderBy('author_id', 'desc')
         ->get();
 
+        $categories = Author::distinct('author_categories')->pluck('author_categories')->toArray();
+
         return view('admin.authors',
         [
-            'v_authors' => $authors
+            'v_authors' => $authors,
+            'categories' => $categories
         ]
-    );
+        );
     }
+    public function updateAuthorCategory(Request $request, $authorId)
+    {
+        $author = Author::findOrFail($authorId);
+        $author->author_categories = $request->input('author_categories');
+        $author->save();
 
-
-
+        $categories = Author::distinct('author_categories')->pluck('author_categories')->toArray();
+        $v_authors = Author::all(); // or whatever query you need to get the authors
+        return view('admin.authors', compact('v_authors', 'categories'));
+    }
 
 
     public function publishNewsForm(){
