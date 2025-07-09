@@ -21,9 +21,54 @@ use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
-    public function analytics(){
-        return view('admin.analytics');
-    }
+    public function analytics()
+{
+    // user charts
+    $users = User::all();
+    $user = User::find(1);
+    $user->totalUser = $users->count();
+
+    $user->activeUsers = DB::table('users')
+    ->join('reading_progress', 'users.id', '=', 'reading_progress.user_id')
+    ->leftJoin('book_ratings', 'users.id', '=', 'book_ratings.user_id')
+    ->leftJoin('book_comments', 'users.id', '=', 'book_comments.user_id')
+    ->where(function ($query) {
+        $query->where('reading_progress.last_read_at', '!=', null)
+            ->orWhere('book_ratings.stars_given', '!=', null)
+            ->orWhere('book_comments.created_at', '!=', null);
+    })
+    ->distinct('users.id')
+    ->count();
+
+    $user->noneActiveUsers = $user->totalUser - $user->activeUsers;
+
+   $mostRatedBook = DB::table('books')
+    ->leftJoin('book_ratings', 'books.book_id', '=', 'book_ratings.book_id')
+    ->select('books.book_title', DB::raw('COUNT(book_ratings.rating_id) as total_ratings'))
+    ->groupBy('books.book_id', 'books.book_title')
+    ->orderByDesc('total_ratings')
+    ->get();
+
+    $topGenres = DB::table('genres')
+    ->select('genres.genre_name', DB::raw('COUNT(*) as total_ratings'))
+    ->join('books', DB::raw("FIND_IN_SET(genres.genre_name, books.book_genres)"), '>', DB::raw('0'))
+    ->join('book_ratings', 'books.book_id', '=', 'book_ratings.book_id')
+    ->groupBy('genres.genre_name')
+    ->orderByDesc('total_ratings')
+    ->limit(3)
+    ->get();
+
+    // Calculate total for percentage
+    $totalRatings = $topGenres->sum('total_ratings');
+
+    // Add percentage to each genre
+    $genreStats = $topGenres->map(function ($genre) use ($totalRatings) {
+        $genre->percentage = $totalRatings > 0 ? round(($genre->total_ratings / $totalRatings) * 100) : 0;
+        return $genre;
+    });
+
+    return view('admin.analytics', compact('users', 'user', 'mostRatedBook', 'topGenres', 'genreStats'));
+}
 
 
 
@@ -193,50 +238,32 @@ public function editBookForm(Request $request){
 
 
 
-
-
-
-
-
-public function usersRecords()
-{
-    // Fetch all users
-    $users = User::all();
-
-    // Pass the users to the view
-    return view('admin.usersRecords', compact('users'));
-}
-public function viewUserRecords($id)
-{
-    // Fetch the actual user object from the database
-    $user = User::where('id', $id)->first();
-
-    // Fetch the user's reading progress
-    $continueReading = Reading_Progress::where('user_id', $id)
-        ->join('books', 'reading_progress.book_id', '=', 'books.book_id')
-        ->select('reading_progress.*', 'books.book_title', 'books.book_cover')
-        ->get();
-
-    // Fetch the user's favorite books
-    $favoriteBooks = Book_Favorites::where('user_id', $id)
-        ->join('books', 'book_favorites.book_id', '=', 'books.book_id')
-        ->select('book_favorites.*', 'books.book_title', 'books.book_cover')
-        ->get();
-
-    // Fetch the user's genre preferences
-    $genre_preferences = Genre_Preferences::where('user_id', $id)->get();
-
-    // Check if user exists
-    if (!$user) {
-        abort(404, 'User not found');
-    }
-
-    // Pass the user object to the view
-    return view('admin.userRecords', compact('user', 'continueReading', 'favoriteBooks', 'genre_preferences'));
-}
     public function statistics(){
-        return view('admin.statistics');
-    }
+    $v_books = Book::all();
+
+    // Fetch book details
+    $v_books = $v_books->map(function ($book) {
+        $book->total_comments = DB::table('book_comments')
+            ->where('book_id', $book->book_id)
+            ->count();
+
+        $book->avg_rating = DB::table('book_ratings')
+            ->where('book_id', $book->book_id)
+            ->avg('stars_given');
+
+        $book->total_favorites = DB::table('book_favorites')
+            ->where('book_id', $book->book_id)
+            ->count();
+
+        $book->total_reading = DB::table('reading_progress')
+            ->where('book_id', $book->book_id)
+            ->count();
+
+        return $book;
+    });
+
+    return view('admin.statistics', compact('v_books'));
+}
 
 
 

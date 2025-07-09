@@ -10,7 +10,6 @@
       <li><a href="{{ route('Authors') }}"><i class="fa-solid fa-user-pen"></i> Authors</a></li>
       <li><a href="{{ route('publishBookForm') }}"><i class="fa-solid fa-upload"></i> Publish Books</a></li>
       <li><a href="{{ route('BooksPublished') }}"><i class="fa-solid fa-book"></i> Books Published</a></li>
-      <li><a href="{{ route('UsersRecords') }}"><i class="fa-solid fa-users"></i> Users Records</a></li>
       <li><a href="{{ route('DigitalesNews') }}"><i class="fa-solid fa-newspaper"></i> Digital News</a></li>
       <li><a href="{{ route('Guidelines') }}"><i class="fa-solid fa-lightbulb"></i> Guidelines</a></li>
     </ul>

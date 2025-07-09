@@ -13,7 +13,9 @@
 <x-navigation.admin-sidebar/>
 
    <div class="content">
-    <h2>📖 Book Statistics</h2>
+    <h2>
+      <i class="fa-solid fa-book"></i>
+    Book Statistics</h2>
     <table class="book-table">
       <thead>
         <tr>
@@ -22,29 +24,26 @@
           <th>Titles</th>
           <th>Avg. Ratings</th>
           <th>Total Favs</th>
-          <th>Total Read</th>
-          <th>Total Finished</th>
+          <th>Total Reading</th>
           <th>Comments</th>
-          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
         <!-- Repeat this row -->
        
+            @foreach($v_books as $book)
               <tr>
 
-                <td>001</td>
-                <td><img src="https://covers.openlibrary.org/b/id/10958362-L.jpg" class="book_cover" alt="book_cover" style="width: 100px;"></td>
-                <td>Before the coffee gets cold</td>
+                <td>{{ $book->book_id }}</td>
+                <td><img src="{{ asset('uploads/' . $book->book_cover) }}" class="book_cover" alt="book_cover" style="width: 100px;"></td>
+                <td>{{ $book->book_title }}</td>
+                <td>{{ number_format($book->avg_rating, 2) }}</td>
+                <td> {{ $book->total_favorites }} </td>
+                <td>{{ $book->total_reading }}</td>
+                <td>{{ $book->total_comments }}</td>
 
-                <td>5/5</td>
-                <td>100</td>
-                <td>233</td>
-                <td>98</td>
-                <td>98</td>
-                <td><button class="see-btn">See all</button></td>
               </tr>
-            
+            @endforeach
       </tbody>
     </table>
   </div>
