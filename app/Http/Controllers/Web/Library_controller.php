@@ -308,6 +308,7 @@ public function processSearch(Request $request)
 
        return redirect('/viewbook/' . $bookID);
     }
+    
     public function writeComment(Request $request)
     {
         $bookID = $request->route('book_id');

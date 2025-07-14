@@ -91,7 +91,7 @@
                 @foreach ($relatedBooks as $relatedBook)
                 <div class="book-recommendations">
                     <div class="recommendation-item">
-                        <img src="{{ asset('uploads/' . $relatedBook->book_cover) }}" class="rec-book-cover">
+                        <img src="{{ asset('storage/' . $relatedBook->book_cover) }}" class="rec-book-cover">
                         <div class="rec-book-info">
                             <h4>{{ $relatedBook->book_title }}</h4>
                             <div class="rec-author">{{ $relatedBook->author_name }}</div>

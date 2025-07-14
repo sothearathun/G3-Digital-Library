@@ -56,7 +56,7 @@
     <div class="book-grid">
         @foreach($v_display_results as $display_books)
             <article class="search-result-item">
-                <img src="{{ asset('uploads/' . $display_books->book_cover) }}" alt="{{ $display_books->book_title }} Cover">
+                <img src="{{ asset('storage/' . $display_books->book_cover) }}" alt="{{ $display_books->book_title }} Cover">
                 <div class="result-details">
                     <h3><span class="book-title">{{ $display_books->book_title }}</span></h3>
                     <p class="author-name">by {{ $display_books->author_name }}</p>

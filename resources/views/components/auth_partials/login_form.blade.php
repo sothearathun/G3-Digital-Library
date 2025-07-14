@@ -33,10 +33,6 @@
             <i class="fas fa-user-secret"></i> Continue as Guest
         </button>
 
-        <div class="forgot-password">
-            <a href="#" >Forgot your password?</a>
-        </div>
-
      @if ($errors -> any())
       <ul class="px-4 py-2 bg-red-100">
         @foreach ($errors -> all() as $error)

@@ -44,8 +44,7 @@ async function loadPDF() {
         }
         
         // Make sure the path is correct - remove any leading slashes from filePath
-        const cleanFilePath = window.bookData.filePath.replace(/^\/+/, '');
-        const pdfUrl = `/uploads/${cleanFilePath}`;
+        const pdfUrl = window.bookData.filePath;
         
         console.log('Loading PDF from:', pdfUrl); // Debug log
         

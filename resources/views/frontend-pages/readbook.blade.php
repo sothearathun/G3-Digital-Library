@@ -85,7 +85,7 @@
   <script>
     window.bookData = {
       id: "{{ $book->book_id }}",
-      filePath: "{{ $book->file_path }}",
+      filePath: "{{ asset('uploads/' . $book->file_path) }}",
       totalPages: "{{ $book->total_pages ?? 0 }}",
       currentPage: "{{ $reading_progress->current_page ?? 1 }}",
       userId: "{{ Auth::id() ?? 'null' }}",

@@ -37,7 +37,7 @@
                 </li>
                 <!-- drop down menu -->
                  
-                <li><a href="#">Mode</a></li>
+                
             </ul>
         </nav>
 
