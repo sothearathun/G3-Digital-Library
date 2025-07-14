@@ -9,7 +9,7 @@ class AdminUser extends Authenticatable
 {
     use HasApiTokens;
 
-    protected $table = 'admin_user';
+    protected $table = 'admins';
 
     protected $fillable = ['name', 'email', 'password'];
     protected $hidden = ['password', 'remember_token'];

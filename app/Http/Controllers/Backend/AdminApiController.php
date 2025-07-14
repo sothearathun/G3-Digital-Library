@@ -11,42 +11,45 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-
-
-
+use Illuminate\Support\Facades\Hash;
+use App\Models\AdminUser;
 
 class AdminApiController extends Controller
 {
+    // Define the shared path constant
+    private $sharedPath = 'C:/wamp64/www/PHP_paragon_y2/Mission1-G3-Digital Library/shared-uploads';
 
-     public function login(Request $request)
+    public function login(Request $request)
     {
-        $credentials = $request->only('email', 'password');
+        $admin = AdminUser::where('email', $request->email)->first();
 
-        if (Auth::guard('admin')->attempt($credentials)) {
-            $user = Auth::guard('admin')->user();
-
-            return [
-                'status' => 'success',
-                'message' => 'Login successful',
-                'user' => $user
-            ];
+        if (! $admin || ! Hash::check($request->password, $admin->password)) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Invalid credentials'
+            ], 401);
         }
 
-        return [
-            'status' => 'error',
-            'message' => 'Invalid credentials'
-        ];
+        $token = $admin->createToken('admin-token')->plainTextToken;
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Login successful',
+            'token' => $token,
+            'admin' => $admin
+        ]);
     }
 
     public function logout()
     {
-        Auth::guard('admin')->logout();
+        Auth::guard('admin_api')->logout();
 
         return [
             'status' => 'success',
             'message' => 'Logout successful'
         ];
     }
+
     public function getAllBooks()
     {
         return response()->json(Book::orderBy('book_id', 'desc')->get());
@@ -61,77 +64,65 @@ class AdminApiController extends Controller
         return response()->json($book);
     }
 
-    // public function createBook(Request $request)
-    // {
-    //     $validated = $request->validate([
-    //         'book_title' => 'required|string',
-    //         'author_name' => 'required|string',
-    //         'description' => 'nullable|string',
-    //         'prologue' => 'nullable|string',
-    //         'total_pages' => 'required|integer',
-    //         'book_categories' => 'required|string',
-    //         'released_date' => 'required|date',
-    //         'book_genres' => 'array',
-    //         'file_path' => 'required|file|mimes:pdf,doc,docx',
-    //         'book_cover' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048'
-    //     ]);
-
-    //     $author = Author::firstOrCreate(['author_name' => $validated['author_name']]);
-
-    //     // Upload files
-    //     $filePath = $request->file('file_path')->store('books', 'public');
-    //     $bookCoverPath = $request->file('book_cover')->store('book_covers', 'public');
-
-    //     // Create book manually instead of mass-assigning everything
-    //     $book = new Book();
-    //     $book->book_title = $validated['book_title'];
-    //     $book->author_name = $author->author_name;
-    //     $book->description = $validated['description'];
-    //     $book->prologue = $validated['prologue'];
-    //     $book->total_pages = $validated['total_pages'];
-    //     $book->book_categories = $validated['book_categories'];
-    //     $book->released_date = $validated['released_date'];
-    //     $book->book_genres = implode(',', $validated['book_genres']);
-    //     $book->file_path = $filePath;
-    //     $book->book_cover = $bookCoverPath;
-        
-    //     $book->save();
-
-    //     return response()->json(['message' => 'Book published successfully', 'book' => $book]);
-    // }
-
     public function createBook(Request $request)
     {
-    $validated = $request->validate([
-        'book_title' => 'required|string',
-        'author_name' => 'required|string',
-        'description' => 'nullable|string',
-        'prologue' => 'nullable|string',
-        'total_pages' => 'required|integer',
-        'book_categories' => 'required|string',
-        'released_date' => 'required|date',
-        'book_genres' => 'sometimes|array',
-        'file_path' => 'required|file|mimes:pdf,doc,docx',
-        'book_cover' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048'
-    ]);
+        $validated = $request->validate([
+            'book_title' => 'required|string',
+            'author_name' => 'required|string',
+            'description' => 'nullable|string',
+            'prologue' => 'nullable|string',
+            'total_pages' => 'required|integer',
+            'book_categories' => 'required|string',
+            'released_date' => 'required|date',
+            'book_genres' => 'sometimes|array',
+            'file_path' => 'required|file|mimes:pdf,doc,docx',
+            'book_cover' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048'
+        ]);
 
-    // Ensure Author exists
-    $author = Author::firstOrCreate([
-        'author_name' => $validated['author_name']
-    ]);
+        // Ensure Author exists
+        $author = Author::firstOrCreate([
+            'author_name' => $validated['author_name']
+        ]);
 
-    // Store files safely
-    if (!$request->hasFile('file_path') || !$request->hasFile('book_cover')) {
-        return response()->json(['error' => 'File upload failed'], 422);
-    }
+        // Check if files are uploaded
+        if (!$request->hasFile('file_path') || !$request->hasFile('book_cover')) {
+            return response()->json(['error' => 'File upload failed'], 422);
+        }
 
-    $filePath = $request->file('file_path')->store('books', 'public');
-    $bookCoverPath = $request->file('book_cover')->store('book_covers', 'public');
+        // Handle book cover upload to shared path
+        $bookCoverPath = null;
+        if ($request->hasFile('book_cover')) {
+            $bookCover = $request->file('book_cover');
+            $coverName = time() . '_cover.' . $bookCover->getClientOriginalExtension();
+            
+            // Ensure directory exists
+            if (!file_exists($this->sharedPath . '/book_covers')) {
+                mkdir($this->sharedPath . '/book_covers', 0755, true);
+            }
+            
+            $bookCover->move($this->sharedPath . '/book_covers', $coverName);
+            $bookCoverPath = 'book_covers/' . $coverName;
+        }
 
-    // Normalize genres
-    $genres = $validated['book_genres'] ?? [];
+        // Handle book file upload to shared path
+        $filePath = null;
+        if ($request->hasFile('file_path')) {
+            $bookFile = $request->file('file_path');
+            $fileName = time() . '_book.' . $bookFile->getClientOriginalExtension();
+            
+            // Ensure directory exists
+            if (!file_exists($this->sharedPath . '/book_files')) {
+                mkdir($this->sharedPath . '/book_files', 0755, true);
+            }
+            
+            $bookFile->move($this->sharedPath . '/book_files', $fileName);
+            $filePath = 'book_files/' . $fileName;
+        }
+
+        // Normalize genres
+        $genres = $validated['book_genres'] ?? [];
         if (is_string($genres)) {
-            $genres = [$genres]; // in case user submitted a string
+            $genres = [$genres];
         }
 
         $book = new Book();
@@ -145,43 +136,24 @@ class AdminApiController extends Controller
         $book->book_genres = implode(',', $genres);
         $book->file_path = $filePath;
         $book->book_cover = $bookCoverPath;
+        $book->file_format = $request->file('file_path')->getClientOriginalExtension();
 
         $book->save();
 
         return response()->json([
             'message' => 'Book published successfully',
-            'book' => $book
+            'book' => [
+                'id' => $book->book_id,
+                'title' => $book->book_title,
+                'author' => $book->author_name,
+                'cover_path' => $book->book_cover,
+                'file_path' => $book->file_path,
+                'genres' => explode(',', $book->book_genres),
+                'released' => $book->released_date,
+                'pages' => $book->total_pages,
+            ],
         ]);
     }
-
-
-    // public function updateBook(Request $request, $id)
-    // {
-    //     $book = Book::find($id);
-    //     if (!$book) {
-    //         return response()->json(['message' => 'Book not found'], 404);
-    //     }
-
-    //     $validated = $request->validate([
-    //         'book_title' => 'required|string',
-    //         'author_name' => 'required|string',
-    //         'description' => 'nullable|string',
-    //         'prologue' => 'nullable|string',
-    //         'total_pages' => 'required|integer',
-    //         'book_categories' => 'required|string',
-    //         'released_date' => 'required|date',
-    //         'book_genres' => 'array'
-    //     ]);
-
-    //     $author = Author::firstOrCreate(['author_name' => $validated['author_name']]);
-
-    //     $book->fill($validated);
-    //     $book->author_name = $author->author_name;
-    //     $book->book_genres = isset($validated['book_genres']) ? implode(',', $validated['book_genres']) : '';
-    //     $book->save();
-
-    //     return response()->json(['message' => 'Book updated successfully', 'book' => $book]);
-    // }
 
     public function updateBook(Request $request, $id)
     {
@@ -206,21 +178,44 @@ class AdminApiController extends Controller
         $author = Author::firstOrCreate(['author_name' => $validated['author_name']]);
 
         // Update basic info
-        $book->fill($validated);
+        $book->book_title = $validated['book_title'];
         $book->author_name = $author->author_name;
+        $book->description = $validated['description'];
+        $book->prologue = $validated['prologue'];
+        $book->total_pages = $validated['total_pages'];
+        $book->book_categories = $validated['book_categories'];
+        $book->released_date = $validated['released_date'];
         $book->book_genres = isset($validated['book_genres']) ? implode(',', $validated['book_genres']) : $book->book_genres;
 
         // Replace file_path if new file uploaded
         if ($request->hasFile('file_path')) {
-            $filePath = $request->file('file_path')->store('books', 'public');
-            $book->file_path = $filePath;
+            $bookFile = $request->file('file_path');
+            $fileName = time() . '_book.' . $bookFile->getClientOriginalExtension();
+            
+            // Ensure directory exists
+            if (!file_exists($this->sharedPath . '/book_files')) {
+                mkdir($this->sharedPath . '/book_files', 0755, true);
+            }
+            
+            $bookFile->move($this->sharedPath . '/book_files', $fileName);
+            $book->file_path = 'book_files/' . $fileName;
+            $book->file_format = $bookFile->getClientOriginalExtension();
         }
 
         // Replace book_cover if new image uploaded
         if ($request->hasFile('book_cover')) {
-            $bookCoverPath = $request->file('book_cover')->store('book_covers', 'public');
-            $book->book_cover = $bookCoverPath;
+            $bookCover = $request->file('book_cover');
+            $coverName = time() . '_cover.' . $bookCover->getClientOriginalExtension();
+            
+            // Ensure directory exists
+            if (!file_exists($this->sharedPath . '/book_covers')) {
+                mkdir($this->sharedPath . '/book_covers', 0755, true);
+            }
+            
+            $bookCover->move($this->sharedPath . '/book_covers', $coverName);
+            $book->book_cover = 'book_covers/' . $coverName;
         }
+
         $book->save();
         return response()->json(['message' => 'Book updated successfully', 'book' => $book]);
     }
@@ -238,21 +233,18 @@ class AdminApiController extends Controller
         $book->ratings()->delete();
         $book->readingProgress()->delete();
 
-        // Delete files if stored
-        if ($book->file_path && Storage::disk('public')->exists($book->file_path)) {
-            Storage::disk('public')->delete($book->file_path);
+        // Delete files from shared path
+        if ($book->file_path && file_exists($this->sharedPath . '/' . $book->file_path)) {
+            unlink($this->sharedPath . '/' . $book->file_path);
         }
-        if ($book->book_cover && Storage::disk('public')->exists($book->book_cover)) {
-            Storage::disk('public')->delete($book->book_cover);
+        if ($book->book_cover && file_exists($this->sharedPath . '/' . $book->book_cover)) {
+            unlink($this->sharedPath . '/' . $book->book_cover);
         }
 
         $book->delete();
 
         return response()->json(['message' => 'Book deleted successfully']);
     }
-
-
-
 
     // NEWS
     public function getAllNews()
@@ -269,11 +261,19 @@ class AdminApiController extends Controller
             'news_cover' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
-        // Safely handle file upload
+        // Handle news cover upload to shared path
+        $newsCoverPath = null;
         if ($request->hasFile('news_cover')) {
-            $newsCoverPath = $request->file('news_cover')->store('news_covers', 'public');
-        } else {
-            $newsCoverPath = null;
+            $newsCover = $request->file('news_cover');
+            $coverName = time() . '_cover.' . $newsCover->getClientOriginalExtension();
+            
+            // Ensure directory exists
+            if (!file_exists($this->sharedPath . '/news_covers')) {
+                mkdir($this->sharedPath . '/news_covers', 0755, true);
+            }
+            
+            $newsCover->move($this->sharedPath . '/news_covers', $coverName);
+            $newsCoverPath = 'news_covers/' . $coverName;
         }
 
         // Create the news record manually (safer than mass-assign)
@@ -290,8 +290,6 @@ class AdminApiController extends Controller
         ]);
     }
 
-
-
     public function updateNews(Request $request, $id)
     {
         $news = Digitales_News::find($id);
@@ -303,9 +301,28 @@ class AdminApiController extends Controller
             'news_title' => 'required|string',
             'news_des' => 'nullable|string',
             'news_link' => 'nullable|string',
+            'news_cover' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048'
         ]);
 
-        $news->update($validated);
+        $news->news_title = $validated['news_title'];
+        $news->news_des = $validated['news_des'];
+        $news->news_link = $validated['news_link'];
+
+        // Handle news cover upload if provided
+        if ($request->hasFile('news_cover')) {
+            $newsCover = $request->file('news_cover');
+            $coverName = time() . '_cover.' . $newsCover->getClientOriginalExtension();
+            
+            // Ensure directory exists
+            if (!file_exists($this->sharedPath . '/news_covers')) {
+                mkdir($this->sharedPath . '/news_covers', 0755, true);
+            }
+            
+            $newsCover->move($this->sharedPath . '/news_covers', $coverName);
+            $news->news_cover = 'news_covers/' . $coverName;
+        }
+
+        $news->save();
 
         return response()->json(['message' => 'News updated successfully', 'news' => $news]);
     }
@@ -315,6 +332,11 @@ class AdminApiController extends Controller
         $news = Digitales_News::find($id);
         if (!$news) {
             return response()->json(['message' => 'News not found'], 404);
+        }
+
+        // Delete file from shared path
+        if ($news->news_cover && file_exists($this->sharedPath . '/' . $news->news_cover)) {
+            unlink($this->sharedPath . '/' . $news->news_cover);
         }
 
         $news->delete();
@@ -379,7 +401,6 @@ class AdminApiController extends Controller
         ]);
     }
 
-
     public function bookStatistics()
     {
         $books = Book::withCount([
@@ -391,7 +412,6 @@ class AdminApiController extends Controller
 
         return response()->json($books);
     }
-
 
     public function addFaq(Request $request)
     {
@@ -447,7 +467,6 @@ class AdminApiController extends Controller
         ]);
     }
 
-
     public function deleteTerms($id)
     {
         $deleted = DB::table('terms_conditions')->where('tc_id', $id)->delete();
@@ -458,5 +477,4 @@ class AdminApiController extends Controller
             return response()->json(['message' => 'T&C entry not found'], 404);
         }
     }
-
 }

@@ -142,21 +142,16 @@ class LibraryApiController extends Controller
     public function saveGenres(Request $request)
     {
         $userId = Auth::id();
-
         if (!$userId) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
-        $genre_name = $request->input('genre_name'); // expecting an array of genre names or ids
+        $chooseGenres = $request->input('genre_name'); // or 'book_genres'
+        $genresToStore = is_array($chooseGenres) ? implode(',', $chooseGenres) : '';
 
-        if (!is_array($genre_name) || empty($genre_name)) {
-            return response()->json(['error' => 'Genres must be a non-empty array'], 422);
-        }
-
-        $preferredGenres = implode(',', $genre_name);
         $preference = Genre_Preferences::updateOrCreate(
             ['user_id' => $userId],
-            ['prefered_genres' => $preferredGenres]
+            ['prefered_genres' => $genresToStore]
         );
 
         return response()->json([
@@ -164,4 +159,5 @@ class LibraryApiController extends Controller
             'data' => $preference
         ]);
     }
+
 }
