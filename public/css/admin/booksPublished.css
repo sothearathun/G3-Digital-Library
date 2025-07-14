@@ -107,3 +107,26 @@ img{
 .add-book-btn:hover {
     background-color: #45a049;
 }
+
+td a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease-in-out;
+    border: 1px solid #4CAF50;
+    padding: 4px 8px;
+    border-radius: 4px;
+    background-color: #f0fdf4; /* light green background */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    display: inline-block;
+    text-align: center;
+}
+
+td a:hover {
+    color: #ffffff;
+    background-color: #4CAF50;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+}

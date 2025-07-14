@@ -7,12 +7,12 @@ use App\Http\Controllers\Admin\Auth\LoginController;
 
 // Admin Auth
 Route::get('/', [LoginController::class, 'showLoginForm'])->name('admin.login.form');
-Route::post('/admin/login', [LoginController::class, 'login'])->name('admin.login');
-Route::post('/admin/logout', [LoginController::class, 'logout'])->name('admin.logout');
+Route::post('/admin/login', [LoginController::class, 'login'])->name('login');
 
 
 Route::middleware('auth:admin')->group(function () {
     Route::get('/analytics', [AdminController::class, 'analytics'])->name('Analytics');
+    Route::post('/admin/logout', [LoginController::class, 'logout'])->name('logout');
     Route::get('/publishBookForm', [AdminController::class, 'publishBookForm'])->name('publishBookForm');
     Route::post('/processPublish', [AdminController::class, 'processPublish'])->name('processPublish');
     Route::match(['get', 'post'], '/processDeleteBook/{book_id}', [AdminController::class, 'processDeleteBook'])->name('processDeleteBook');

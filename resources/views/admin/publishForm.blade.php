@@ -50,7 +50,7 @@
         <label for="book_cover">Book Cover</label>
         @if(isset($book) && $book->book_cover)
           <div class="cover-preview" style="margin-bottom: 10px;">
-            <img src="{{ asset('uploads/' . $book->book_cover) }}" alt="Book Cover" width="180">
+            <img src="{{ asset('storage/' . $book->book_cover) }}" alt="Book Cover" width="180">
           </div>
         @endif
         <input type="file" name="book_cover" id="book_cover" accept="image/*" @if(!isset($book)) required @endif>
@@ -60,7 +60,7 @@
         <label for="file_path">PDF File</label>
         @if(isset($book) && $book->file_path)
           <div style="margin-bottom: 10px;">
-            <a href="{{ asset('uploads/' . $book->file_path) }}" target="_blank">
+            <a href="{{ asset('storage/' . $book->file_path) }}" target="_blank">
               {{ basename($book->file_path) }}
             </a>
           </div>

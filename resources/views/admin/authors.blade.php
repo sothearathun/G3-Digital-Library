@@ -21,7 +21,6 @@
       <thead>
         <tr>
           <th>ID</th>
-          <th>Author Image</th>
           <th>Name</th>
           <th>Category</th>
           <th>Total Books</th>
@@ -31,9 +30,7 @@
         @foreach($v_authors as $authors)
         <tr>
           <td>{{ $authors->author_id }}</td>
-          <td>
-            <img class="author-pic" src="{{ asset($authors->author_image) }}" alt="Author Image">
-          </td>
+          
           <td>{{ $authors->author_name }}</td>
           <td>
             <form method="POST" action="{{ route('updateAuthorCategory', $authors->author_id) }}">

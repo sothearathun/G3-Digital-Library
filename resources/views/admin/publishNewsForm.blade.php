@@ -41,7 +41,7 @@
      @if(isset($news) && $news->news_cover)
         <p>Current Cover:</p>
         <div style="margin-bottom: 10px;">
-            <img src="{{ asset('uploads/' . $news->news_cover) }}" alt="News Cover" width="200">
+            <img src="{{ asset('storage/' . $news->news_cover) }}" alt="News Cover" width="200">
         </div>
     @endif
     <p>Upload New Cover:</p>
@@ -53,7 +53,7 @@
     @else
       <button type="submit">Publish News</button>
     @endif
-    <button id="cancel-button">Cancel</button>
+    <button id="cancel-button" onclick="window.location.href='/DigitalesNews'">Cancel</button>
   </form>
 </div>
 </body>

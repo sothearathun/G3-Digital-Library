@@ -35,7 +35,7 @@
               <tr>
 
                 <td>{{ $book->book_id }}</td>
-                <td><img src="{{ asset('uploads/' . $book->book_cover) }}" class="book_cover" alt="book_cover" style="width: 100px;"></td>
+                <td><img src="{{ asset('storage/' . $book->book_cover) }}" class="book_cover" alt="book_cover" style="width: 100px;"></td>
                 <td>{{ $book->book_title }}</td>
                 <td>{{ number_format($book->avg_rating, 2) }}</td>
                 <td> {{ $book->total_favorites }} </td>

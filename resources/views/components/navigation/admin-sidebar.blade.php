@@ -12,5 +12,15 @@
       <li><a href="{{ route('BooksPublished') }}"><i class="fa-solid fa-book"></i> Books Published</a></li>
       <li><a href="{{ route('DigitalesNews') }}"><i class="fa-solid fa-newspaper"></i> Digital News</a></li>
       <li><a href="{{ route('Guidelines') }}"><i class="fa-solid fa-lightbulb"></i> Guidelines</a></li>
+
+       <li>
+        <form method="POST" action="{{ route('logout') }}" style="display: inline">
+          @csrf
+          <button type="submit" class="logout-btn">
+            <i class="fa-solid fa-right-from-bracket"></i> Logout
+          </button>
+        </form>
+      </li>
+
     </ul>
 </div>

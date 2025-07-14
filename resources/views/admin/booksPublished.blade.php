@@ -34,7 +34,7 @@
                       @forelse ($v_bookPublished as $book)
                         <tr>
                             <td>
-                                <img src="{{ asset('uploads/' . $book->book_cover) }}" alt="{{ $book->book_title }}">
+                                <img src="{{ asset('uploads/' . $book->book_cover) }}">
                             </td>
                             <td>{{ $book->book_title }}</td>
                             <td>{{ $book->author_name }}</td>

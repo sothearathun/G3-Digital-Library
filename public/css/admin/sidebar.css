@@ -56,3 +56,22 @@
   color: #4f46e5;
   font-size: 16px;
 }
+
+.logout-btn {
+  background: #4f46e5;
+  border: none;
+  color: #fff;
+  padding: 10px;
+  text-align: left;
+  width: 100%;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.logout-btn i {
+  margin-right: 10px;
+}
+
+.logout-btn:hover {
+  background-color: #4f46e5;
+}
